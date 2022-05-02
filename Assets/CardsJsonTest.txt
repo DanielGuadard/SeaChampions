@@ -1,0 +1,2 @@
+{"Deck":[{"id":1,"name":"Sirilo the Marbled Swim Crab","image":"https://cdn.seachampions.com/sirilo.webp","tribe":"Clawbeasts","rarity":"Common","elite":0},{"id":2,"name":"Danilo the Piercing Tatuí","image":"https://cdn.seachampions.com/danilo.webp","tribe":"Shellbearers","rarity":"Common","elite":0}
+,{"id":3,"name":"Hanis the Menacing Flatfish","image":"https://cdn.seachampions.com/hanis.webp","tribe":"Scalefins","rarity":"Uncommon","elite":0}]}
