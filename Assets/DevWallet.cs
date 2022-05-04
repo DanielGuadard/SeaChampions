@@ -24,15 +24,4 @@ public class DevWallet : MonoBehaviour
         }
         GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().UrlAPIfinal = UrlAPIfinal;
         GameObject.Find("ScriptHolder").GetComponent<ChampionsCheck>().UrlAPIfinal = UrlAPIfinal;
-
-    }
-    void Start()
-    {
-        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
