@@ -8,33 +8,27 @@ public class Item : MonoBehaviour
     
 
     // Start is called before the first frame update
-    public GameObject Mainslot, ChampiomObj;
-    public GameObject[] Slotlist ;
-    public Color Slotcolor;
+    public GameObject mainSlot, championObj;
+    public GameObject[] slotList;
+    public Color slotColor;
     
     void Start()
     {
-        ChampiomObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        championObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().champiomObj;
     }
     
     void OnMouseDown()
     {
-        if (GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot != null)
+        if (GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot != null)
         {
-            //get the game objects to show the champion
-            GameObject Remove = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Remove;
-            GameObject TeamSlot = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot;
-            GameObject TeamImage = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamImage;
-            GameObject Team = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Team;
-            int Crew = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Crew;
+            // Get the game objects to show the champion
+            GameObject Remove = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().remove;
+            GameObject TeamSlot = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot;
+            GameObject TeamImage = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamImage;
+            GameObject Team = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().team;
+            int Crew = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().crew;
 
-            //Configure the Gameobjects to show the champion
+            // Configure the Gameobjects to show the champion
             Remove.SetActive(true);
             TeamImage.GetComponent<Button>().interactable = false;
             TeamSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 170);
@@ -61,34 +55,18 @@ public class Item : MonoBehaviour
                     break;
             }
 
-            // reset
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot = null;
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamImage = null;
+            // Reset
+            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot = null;
+            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamImage = null;
 
         }
 
-
-        Slotlist = GameObject.FindGameObjectsWithTag("slot");
+        slotList = GameObject.FindGameObjectsWithTag("slot");
         
-        foreach(GameObject x in Slotlist)
+        foreach(GameObject gameObject in slotList)
         {
-            
-        x.GetComponent<Image>().color = new Color(1, 1, 1,1);
-            
+            gameObject.GetComponent<Image>().color = new Color(1, 1, 1,1);   
         }
-        /*
-        //transform.parent.parent.parent.parent.parent.parent.GetComponent<TeamSetItem>().Item = this.gameObject;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().item = GetComponent<Image>().sprite;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj = this.gameObject;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().slot = Mainslot.gameObject;
-        Mainslot.GetComponent<Image>().color = new Color (0,0.666f,1,1);
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot = null;
-
-       */
-
-       
-
     }
-
 
 }

@@ -630,7 +630,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7810796346037291640}
         m_TargetAssemblyTypeName: TeamSetItem, Assembly-CSharp
-        m_MethodName: Setcrew2
+        m_MethodName: SetCrew2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1014,8 +1014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0b792e239049745bfc8015e998a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyteamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  AudioSourMyteamsSound: {fileID: 286636810}
+  myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
+  audioSourMyTeamsSound: {fileID: 286636810}
 --- !u!114 &6424851706290984130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,17 +1030,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: {fileID: 354744880325694935}
   teamsContent: {fileID: 0}
-  vazio: {fileID: 129549711577178673, guid: ec7a2c7b38ccdc245a0567f2660f8f22, type: 3}
+  empty: {fileID: 129549711577178673, guid: ec7a2c7b38ccdc245a0567f2660f8f22, type: 3}
   arrow: {fileID: 3990380981349526591}
-  ImputField: {fileID: 4570450445893514633}
-  TeamHolder: {fileID: 8917680491670930709}
-  imagem: {fileID: 4336593082509837395}
-  ImputFieldImage: {fileID: 3756159615202416791}
-  ArrowClose: {fileID: 21300000, guid: 7ba9609d7a0bb6241a19efa20963fa86, type: 3}
-  ArrowOpen: {fileID: 21300000, guid: ab111f20fbe502d459928d0a26d9df9c, type: 3}
-  aberto: 0
-  MyteamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  AudioSourMyteamsSound: {fileID: 286636810}
+  inputField: {fileID: 4570450445893514633}
+  teamHolder: {fileID: 8917680491670930709}
+  image: {fileID: 4336593082509837395}
+  inputFieldImage: {fileID: 3756159615202416791}
+  arrowClose: {fileID: 21300000, guid: 7ba9609d7a0bb6241a19efa20963fa86, type: 3}
+  arrowOpen: {fileID: 21300000, guid: ab111f20fbe502d459928d0a26d9df9c, type: 3}
+  open: 0
+  myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
+  audioSourMyTeamsSound: {fileID: 286636810}
 --- !u!114 &7810796346037291640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slot: {fileID: 0}
-  ChampiomObj: {fileID: 0}
+  championObj: {fileID: 0}
   commander: {fileID: 0}
   crew1: {fileID: 0}
   crew2: {fileID: 0}
@@ -1070,20 +1070,20 @@ MonoBehaviour:
   remove2: {fileID: 6045447392436400186}
   remove3: {fileID: 666816855247835279}
   remove4: {fileID: 8949371958024756888}
-  InputField: {fileID: 4570450445893514633}
-  TeamName: {fileID: 9219296663546870167}
-  NameHolder: {fileID: 4864183730893385683}
-  Incomplete: {fileID: 1612439987266897937}
+  inputField: {fileID: 4570450445893514633}
+  teamName: {fileID: 9219296663546870167}
+  nameHolder: {fileID: 4864183730893385683}
+  incomplete: {fileID: 1612439987266897937}
   imageC: {fileID: 4773722977938858352}
   image1: {fileID: 5940256000198788406}
   image2: {fileID: 338885902496443029}
   image3: {fileID: 2437101466282079631}
   image4: {fileID: 4199102114364702608}
-  MinusCommander: {fileID: 2800000, guid: aba33c3a7badd0849b78eab2f4b4c740, type: 3}
-  Plus: {fileID: 2800000, guid: 3564b4d75543e9b45a6ae7e8ed8b66a6, type: 3}
-  Minus: {fileID: 2800000, guid: 1bb1623ca6962d346897d7724adb4594, type: 3}
-  PlusCommander: {fileID: 21300000, guid: bc33b4b198bcc0243b5cedd6578f763f, type: 3}
-  Completo: 0
+  minusCommander: {fileID: 2800000, guid: e2a44d6825be14f41a3c0bd3c2fa0ede, type: 3}
+  plus: {fileID: 2800000, guid: 3564b4d75543e9b45a6ae7e8ed8b66a6, type: 3}
+  minus: {fileID: 2800000, guid: 881739bb5b946b3499d614090057f425, type: 3}
+  plusCommander: {fileID: 21300000, guid: bc33b4b198bcc0243b5cedd6578f763f, type: 3}
+  completed: 0
 --- !u!1 &1612439987266897937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,15 +1313,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666e1162624ee4a42bb45a0368cee05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThisTeam: {fileID: 1463171282403319805}
+  thisTeam: {fileID: 1463171282403319805}
   commander: {fileID: 0}
   crew1: {fileID: 0}
   crew2: {fileID: 0}
   crew3: {fileID: 0}
   crew4: {fileID: 0}
   image: {fileID: 884316841057229435}
-  MySound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  AudioSour: {fileID: 286636810}
+  mySound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
+  audioSource: {fileID: 286636810}
 --- !u!114 &2514805187646411544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1645,7 +1645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7810796346037291640}
         m_TargetAssemblyTypeName: TeamSetItem, Assembly-CSharp
-        m_MethodName: Setcrew3
+        m_MethodName: SetCrew3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2007,7 +2007,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7810796346037291640}
         m_TargetAssemblyTypeName: TeamSetItem, Assembly-CSharp
-        m_MethodName: Setcrew4
+        m_MethodName: SetCrew4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2704,7 +2704,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7810796346037291640}
         m_TargetAssemblyTypeName: TeamSetItem, Assembly-CSharp
-        m_MethodName: Setcrew1
+        m_MethodName: SetCrew1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

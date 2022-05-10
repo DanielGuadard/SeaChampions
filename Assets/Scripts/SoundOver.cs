@@ -1,25 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundOver : MonoBehaviour
 {
 
-    public AudioClip MyteamsSound;
-    public AudioSource AudioSourMyteamsSound;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public AudioClip myTeamsSound;
+    public AudioSource audioSourMyTeamsSound;
 
-    // Update is called once per frame
-    void Update()
+    public void MyTeam()
     {
-        
-    }
-    public void Myteam()
-    {
-        AudioSourMyteamsSound.PlayOneShot(MyteamsSound);
+        audioSourMyTeamsSound.PlayOneShot(myTeamsSound);
     }
 }
