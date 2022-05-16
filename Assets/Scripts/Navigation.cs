@@ -6,7 +6,7 @@ public class Navigation : MonoBehaviour
     public GameObject menuMiddle, menuSide;
 
     // Navigation windows
-    public GameObject buildYourTeamWindow, compendiumWindow;
+    public GameObject buildYourTeamWindow, compendiumWindow, optionsWindow;
 
     // Buttons
     public GameObject idlePVEButton, championsButton, compendiumButton,
@@ -44,8 +44,9 @@ public class Navigation : MonoBehaviour
     {
         if (menuSide.activeInHierarchy == true && menuMiddle.activeInHierarchy == false)
         {
-            compendiumWindow.SetActive(true);
+            optionsWindow.SetActive(false);
             buildYourTeamWindow.SetActive(false);
+            compendiumWindow.SetActive(true);    
         }
     }
     public void BuildYourTeamClick()
@@ -53,8 +54,24 @@ public class Navigation : MonoBehaviour
         if (menuSide.activeInHierarchy == true && menuMiddle.activeInHierarchy == false)
         {
             compendiumWindow.SetActive(false);
+            optionsWindow.SetActive(false);
             buildYourTeamWindow.SetActive(true);
         }
     }
+
+    public void OptionsClick()
+    {
+        if (menuMiddle.activeInHierarchy == true)
+        {
+            menuMiddle.SetActive(false);
+            menuSide.SetActive(true);
+            optionsButton.SetActive(true);
+        }
+
+        compendiumWindow.SetActive(false);
+        buildYourTeamWindow.SetActive(false);
+        optionsWindow.SetActive(true);
+    }
+
 
 }
