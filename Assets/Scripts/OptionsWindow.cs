@@ -51,6 +51,20 @@ public class OptionsWindow : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+
+        if (isFullscreen)
+        {
+            textFullscreen.text = "On";
+        }
+        else
+        {
+            textFullscreen.text = "Off";
+        }
+    }
+
     public void SetVolumeMusic(float volume)
     {
         audioSourceMusicBubbles.volume = volume / 100;
@@ -85,20 +99,6 @@ public class OptionsWindow : MonoBehaviour
         {
             muteSoundButton.SetActive(true);
             unmuteSoundButton.SetActive(false);
-        }
-    }
-
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-
-        if (isFullscreen)
-        {
-            textFullscreen.text = "On";
-        }
-        else
-        {
-            textFullscreen.text = "Off";
         }
     }
 

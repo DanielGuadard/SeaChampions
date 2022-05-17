@@ -4,10 +4,10 @@ public class SoundOver : MonoBehaviour
 {
 
     public AudioClip myTeamsSound;
-    public AudioSource audioSourMyTeamsSound;
+    public AudioSource audioSourceMyTeamsSound;
 
     public void MyTeam()
     {
-        audioSourMyTeamsSound.PlayOneShot(myTeamsSound);
+        audioSourceMyTeamsSound.PlayOneShot(myTeamsSound);
     }
 }

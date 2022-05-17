@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class MouseOver : MonoBehaviour
 {
-    public AudioClip menuSound;
-    public AudioSource audioSourceMenuSound;
+    public AudioClip onMouseOverSound;
+    public AudioSource audioSourceOnMouseOverSound;
 
-    public void Menu()
+    public void PlaySound()
     {
-        audioSourceMenuSound.PlayOneShot(menuSound);
+        audioSourceOnMouseOverSound.PlayOneShot(onMouseOverSound);
     }
     
 }
