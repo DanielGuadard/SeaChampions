@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +9,6 @@ public class TeamScript : MonoBehaviour
     public Sprite arrowClose, arrowOpen;
     public bool open;
     public AudioClip myTeamsSound;
-    public AudioSource audioSourMyTeamsSound;
 
     void Start()
     {               
@@ -48,7 +45,7 @@ public class TeamScript : MonoBehaviour
     public void Enter()
     {
         inputFieldImage.color= new Color(1, 1, 1, .5f);
-        audioSourMyTeamsSound.PlayOneShot(myTeamsSound);
+        GameObject.Find("AudioKey").GetComponent<AudioSource>().PlayOneShot(myTeamsSound);
     }
 
     public void Exit()

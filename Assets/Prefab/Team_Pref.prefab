@@ -1015,7 +1015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  audioSourMyTeamsSound: {fileID: 286636810}
+  audioSourceMyTeamsSound: {fileID: 286636810}
 --- !u!114 &6424851706290984130
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,10 +4,10 @@ public class SoundOver : MonoBehaviour
 {
 
     public AudioClip myTeamsSound;
-    public AudioSource audioSourceMyTeamsSound;
 
     public void MyTeam()
     {
-        audioSourceMyTeamsSound.PlayOneShot(myTeamsSound);
+        GameObject.Find("AudioKey").GetComponent<AudioSource>().PlayOneShot(myTeamsSound);
     }
+
 }

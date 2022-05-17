@@ -6,7 +6,6 @@ public class DeleteTeam : MonoBehaviour
     public GameObject thisTeam, commander, crew1, crew2, crew3, crew4;
     public Image image;
     public AudioClip mySound;
-    public AudioSource audioSource;
 
    public void DeleteThisTeam()
     {
@@ -24,7 +23,7 @@ public class DeleteTeam : MonoBehaviour
     public void Enter()
     {
         image.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
-        audioSource.PlayOneShot(mySound);
+        GameObject.Find("AudioKey").GetComponent<AudioSource>().PlayOneShot(mySound);
     }
 
     public void Exit()
