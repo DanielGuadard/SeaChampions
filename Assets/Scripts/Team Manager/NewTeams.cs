@@ -3,18 +3,22 @@ using UnityEngine.UI;
 
 public class NewTeams : MonoBehaviour
 {
-    public GameObject teamsContent,teamPref;    
+    [SerializeField]
+    private GameObject teamsContent, teamPref;    
+    [SerializeField]
+    private AudioClip mySound;
+    [SerializeField]
+    private AudioSource audioSource;
+
     public int teamLimit, teamCreated;
-    public AudioClip mySound;
-    public AudioSource audioSource;
 
     public void NewTeam()
     {
-        teamCreated = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamsCreated;
+        teamCreated = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated;
         if (teamCreated <  teamLimit)
         {
             GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamsCreated++;
+            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated++;
         }
     }
 

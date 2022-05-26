@@ -2,12 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CardCostructor : MonoBehaviour
+public class CardConstructor : MonoBehaviour
 {
-    public GameObject myTeamContent, champiomObj, slot, remove, teamSlot, teamImage, team;
-    public Sprite item;
+    public GameObject championObj, teamSlot, remove, slot, teamImage, team;
     public int teamsCreated, crew;
     public string URL, urlAPIFinal;
+
+    [SerializeField]
+    private GameObject myTeamContent;
+    [SerializeField]
+    private Sprite item;
 
     [System.Serializable]
     public class CardList

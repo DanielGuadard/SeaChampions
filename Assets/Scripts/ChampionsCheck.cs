@@ -3,9 +3,12 @@ using UnityEngine;
 public class ChampionsCheck : MonoBehaviour
 {
 
-    public GameObject Mark_JOHN_FANGO, Mark_CAPTAIN, Mark_Ted, Mark_NENRUNG, Mark_REZAUL, Mark_GARRINCHA, Mark_LUKE, Mark_RAY, Mark_SIR_WESTLEY, Mark_LIZA, Mark_HANIS, Mark_SARGEANT_HARTMAN, Mark_RIDLEY, Mark_ARSELLA,
-        Mark_ROCUS, Mark_AARON, Mark_WANDERLEY, Marck_LOLA, Mark_TODD, Mark_JOHNNY, Mark_SOORYA, Mark_IRFAN, mark_DANILO, Mark_ZEPEREIRA, Mark_BOB_SAW, Mark_TISYA, Mark_SASHA, Mark_MEDHANSH, Mark_SIRILO, Mark_MAHESH,
-        Mark_RICHARD, Mark_ED, Mark_ADAM;
+    [SerializeField]
+    private GameObject Mark_JOHN_FANGO, Mark_CAPTAIN, Mark_Ted, Mark_NENRUNG, Mark_REZAUL,
+        Mark_GARRINCHA, Mark_LUKE, Mark_RAY, Mark_SIR_WESTLEY, Mark_LIZA, Mark_HANIS, Mark_SARGEANT_HARTMAN,
+        Mark_RIDLEY, Mark_ARSELLA, Mark_ROCUS, Mark_AARON, Mark_WANDERLEY, Marck_LOLA, Mark_TODD, Mark_JOHNNY,
+        Mark_SOORYA, Mark_IRFAN, mark_DANILO, Mark_ZEPEREIRA, Mark_BOB_SAW, Mark_TISYA, Mark_SASHA, Mark_MEDHANSH,
+        Mark_SIRILO, Mark_MAHESH, Mark_RICHARD, Mark_ED, Mark_ADAM;
    
     public string urlAPIFinal;
 

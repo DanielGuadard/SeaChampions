@@ -6,11 +6,17 @@ using TMPro;
 public class OptionsWindow : MonoBehaviour
 {
 
-    public AudioSource audioSourceMusicBubbles, audioSourceMusicMelody, audioSourceSound;
-    public Text textMusic, textSound, textFullscreen;
-    public TMP_Dropdown resolutionDropdown;
-    public GameObject muteMusicButton, unmuteMusicButton, muteSoundButton, unmuteSoundButton;
-    public Slider musicSlider, soundSlider;
+    [SerializeField]
+    private AudioSource audioSourceMusicBubbles, audioSourceMusicMelody, audioSourceSound;
+    [SerializeField]
+    private Text textMusic, textSound, textFullscreen;
+    [SerializeField]
+    private TMP_Dropdown resolutionDropdown;
+    [SerializeField]
+    private GameObject muteMusicButton, unmuteMusicButton, muteSoundButton, unmuteSoundButton;
+    [SerializeField]
+    private Slider musicSlider, soundSlider;
+
     Resolution[] resolutions;
     float musicVolumeBeforeMute, soundVolumeBeforeMute;
 

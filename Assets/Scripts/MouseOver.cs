@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class MouseOver : MonoBehaviour
 {
-    public AudioClip onMouseOverSound;
-    public AudioSource audioSourceOnMouseOverSound;
+    [SerializeField]
+    private AudioClip onMouseOverSound;
+    [SerializeField]
+    private AudioSource audioSourceOnMouseOverSound;
 
     public void PlaySound()
     {

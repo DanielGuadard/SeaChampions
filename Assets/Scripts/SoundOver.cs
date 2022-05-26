@@ -3,7 +3,8 @@ using UnityEngine;
 public class SoundOver : MonoBehaviour
 {
 
-    public AudioClip myTeamsSound;
+    [SerializeField]
+    private AudioClip myTeamsSound;
 
     public void MyTeam()
     {

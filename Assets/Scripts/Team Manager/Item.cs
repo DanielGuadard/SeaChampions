@@ -5,28 +5,28 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    
-
-    // Start is called before the first frame update
-    public GameObject mainSlot, championObj;
-    public GameObject[] slotList;
-    public Color slotColor;
+    [SerializeField]
+    private GameObject mainSlot, championObj;
+    [SerializeField]
+    private GameObject[] slotList;
+    [SerializeField]
+    private Color slotColor;
     
     void Start()
     {
-        championObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().champiomObj;
+        championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
     }
     
     void OnMouseDown()
     {
-        if (GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot != null)
+        if (GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot != null)
         {
             // Get the game objects to show the champion
-            GameObject Remove = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().remove;
-            GameObject TeamSlot = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot;
-            GameObject TeamImage = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamImage;
-            GameObject Team = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().team;
-            int Crew = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().crew;
+            GameObject Remove = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove;
+            GameObject TeamSlot = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot;
+            GameObject TeamImage = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage;
+            GameObject Team = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().team;
+            int Crew = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew;
 
             // Configure the Gameobjects to show the champion
             Remove.SetActive(true);
@@ -56,8 +56,8 @@ public class Item : MonoBehaviour
             }
 
             // Reset
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamSlot = null;
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamImage = null;
+            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot = null;
+            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage = null;
 
         }
 

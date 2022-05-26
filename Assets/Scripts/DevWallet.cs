@@ -18,7 +18,7 @@ public class DevWallet : MonoBehaviour
             //Lots ChampsWallet
             //UrlAPIfinal = ("https://metadata.seachampions.com/champion/erc1155/unity/0xA95084FF31E7D9AA96E5451FD8438E2AE27CC093");
         }
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().urlAPIFinal = urlAPIFinal;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().urlAPIFinal = urlAPIFinal;
         GameObject.Find("ScriptHolder").GetComponent<ChampionsCheck>().urlAPIFinal = urlAPIFinal;
     }
 }

@@ -3,12 +3,18 @@ using UnityEngine.UI;
 
 public class TeamScript : MonoBehaviour
 {
-    public GameObject time, teamsContent, empty, arrow, inputField;
-    public RectTransform teamHolder;
-    public Image image, inputFieldImage;
-    public Sprite arrowClose, arrowOpen;
+    [SerializeField]
+    private GameObject time, teamsContent, empty, arrow, inputField;
+    [SerializeField]
+    private RectTransform teamHolder;
+    [SerializeField]
+    private Image image, inputFieldImage;
+    [SerializeField]
+    private Sprite arrowClose, arrowOpen;
+    [SerializeField]
+    private AudioClip myTeamsSound;
+
     public bool open;
-    public AudioClip myTeamsSound;
 
     void Start()
     {               

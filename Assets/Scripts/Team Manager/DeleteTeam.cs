@@ -3,9 +3,12 @@ using UnityEngine.UI;
 
 public class DeleteTeam : MonoBehaviour
 {
-    public GameObject thisTeam, commander, crew1, crew2, crew3, crew4;
-    public Image image;
-    public AudioClip mySound;
+    [SerializeField]
+    private GameObject thisTeam, commander, crew1, crew2, crew3, crew4;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    private AudioClip mySound;
 
    public void DeleteThisTeam()
     {
@@ -17,7 +20,7 @@ public class DeleteTeam : MonoBehaviour
         thisTeam.GetComponent<TeamSetItem>().Remove4();
 
         Destroy(thisTeam);
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().teamsCreated--;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated--;
     }
 
     public void Enter()

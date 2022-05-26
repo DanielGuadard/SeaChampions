@@ -3,13 +3,16 @@ using UnityEngine;
 public class Navigation : MonoBehaviour
 {
     // Main windows
-    public GameObject menuMiddle, menuSide;
+    [SerializeField]
+    private GameObject menuMiddle, menuSide;
 
     // Navigation windows
-    public GameObject buildYourTeamWindow, compendiumWindow, optionsWindow;
+    [SerializeField]
+    private GameObject buildYourTeamWindow, compendiumWindow, optionsWindow;
 
     // Buttons
-    public GameObject idlePVEButton, championsButton, compendiumButton,
+    [SerializeField]
+    private GameObject idlePVEButton, championsButton, compendiumButton,
         buildYourTeamButton, optionsButton, optionsButton2;
 
     public void ChampionsClick()

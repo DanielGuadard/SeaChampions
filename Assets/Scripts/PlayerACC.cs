@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerACC : MonoBehaviour
 {
-    public Text wallet;
+    [SerializeField]
+    private Text wallet;
 
     void Start()
     {
