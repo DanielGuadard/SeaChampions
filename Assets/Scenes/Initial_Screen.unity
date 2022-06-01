@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mark_JOHN_FANGO: {fileID: 783940064}
   Mark_CAPTAIN: {fileID: 731489827}
-  Mark_TED: {fileID: 0}
+  Mark_TED: {fileID: 1500177177}
   Mark_NENRUNG: {fileID: 1465342372}
   Mark_REZAUL: {fileID: 1654258112}
   Mark_GARRINCHA: {fileID: 694909599}
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   myTeamContent: {fileID: 1421546319}
   item: {fileID: 0}
   JsonData:
-    deck: []
+    Deck: []
   JOHN_FANGOPref: {fileID: 5233069108243724646, guid: 0a6780aef085d6844bde4d384d3c3a5d, type: 3}
   CAPTAINPref: {fileID: 5720800910266845238, guid: 5c25763d53d7a924f99de81cb86e5a7a, type: 3}
   TedPref: {fileID: 8019711395687448471, guid: a2b87017779951c4aaefcccc45d2c477, type: 3}
