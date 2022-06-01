@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class OPENAndEXITGame : MonoBehaviour
 {
@@ -13,171 +14,226 @@ public class OPENAndEXITGame : MonoBehaviour
 
     private CardListJSONFile[] teams = new CardListJSONFile[3];
 
-    private bool loaded;
-
-    private void Start()
-    {
-        loaded = false;
-    }
-
     public void LoadTeams()
     {
-        if (!loaded)
+        teams = JSONHandler.ReadTeamsFromJSON(filenameTeams);
+
+        int teamsCount = 0;
+        foreach (CardListJSONFile team in teams)
         {
-            teams = JSONHandler.ReadTeamsFromJSON(filenameTeams);
-
-            int teamsCount = 0;
-            int id = 0;
-
-            foreach (CardListJSONFile team in teams)
+            if (team.name != "")
             {
-                if (team.name != "")
+                // Creating Team Prefab Clone
+                GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
+
+                for (int i = 0; i < 5; i++)
                 {
-                    GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
-
-                    for (int i = 0; i < 5; i++)
+                    GameObject cardObject = new GameObject();
+                    int id = team.deck[i].cardID;
+                    switch (id)
                     {
-                        GameObject cardObject = new GameObject();
-                        id = team.deck[i].cardID;
-                        switch (id)
-                        {
-                            case 1:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "AARON THE RAMMING CRAB");
-                                break;
-                            case 2:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "ADAM RISSO THE DOLPHIN");
-                                break;
-                            case 3:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "ARSELLA THE SEA NETTLE");
-                                break;
-                            case 4:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "BOB SAW THE ANCHOVY");
-                                break;
-                            case 5:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "CAPTAIN COSTA THE MAN O’WAR");
-                                break;
-                            case 6:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "DANILO THE PIERCING TATUI");
-                                break;
-                            case 7:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "ED THE PUNK SALMON");
-                                break;
-                            case 8:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "GARRINCHA THE TOUGH BLUE LOBSTER");
-                                break;
-                            case 9:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "HANIS THE MANACING FLATFISH");
-                                break;
-                            case 10:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "IRFAN THE BLADED LOBSTER");
-                                break;
-                            case 11:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "JOHN FANGO THE TACTICAL");
-                                break;
-                            case 12:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "JOHNNY THE SAILOR SQUID");
-                                break;
-                            case 13:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "LIZA THE CARRIER CRAB");
-                                break;
-                            case 14:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "LOLA THE BUFF BLOWFISH");
-                                break;
-                            case 15:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "LUKE LEATHERBACK THE TURTLE");
-                                break;
-                            case 16:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "MAHESH THE SLASHING MACKEREL");
-                                break;
-                            case 17:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "MEDHANSH THE SWORDSMAN OCTOPUS");
-                                break;
-                            case 18:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "NENRUNG THE DRAGON");
-                                break;
-                            case 19:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "RAY THE WHIPPING MANTA");
-                                break;
-                            case 20:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "REZAUL THE MASTER OCTOPUS");
-                                break;
-                            case 21:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "RICHARD THE OPPORTUNIST COCKLE");
-                                break;
-                            case 22:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "RIDLEY THE OLIVE TURTLE");
-                                break;
-                            case 23:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "ROCUS “SHADES” THE BLUE SHARK");
-                                break;
-                            case 24:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "SARGEANT HARTMAN THE NAVY SEAL");
-                                break;
-                            case 25:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "SASHA THE WRESTLING BELUGA");
-                                break;
-                            case 26:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "SIR WESTLEY THE FENCING DOLPHIN");
-                                break;
-                            case 27:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "SIRILO THE MARBLED SWIM CRAB");
-                                break;
-                            case 28:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "SOORYA THE NEEDLING BOX JELLYFISH");
-                                break;
-                            case 29:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TED RIGHTY THE BOXER WHALE");
-                                break;
-                            case 30:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TISYA THE SPOTTED BLADEMASTER");
-                                break;
-                            case 31:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TODD THE BARBER EEL");
-                                break;
-                            case 32:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "WANDERLEY THE GRAPPLING OCTOPUS");
-                                break;
-                            case 33:
-                                cardObject = FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "ZE PEREIRA THE SANDBAR SHARK");
-                                break;
-                        }
+                        case 1:
+                            cardObject = FindAvailableCard("AARON THE RAMMING CRAB");
+                            break;
+                        case 2:
+                            cardObject = FindAvailableCard("ADAM RISSO THE DOLPHIN");
+                            break;
+                        case 3:
+                            cardObject = FindAvailableCard("ARSELLA THE SEA NETTLE");
+                            break;
+                        case 4:
+                            cardObject = FindAvailableCard("BOB SAW THE ANCHOVY");
+                            break;
+                        case 5:
+                            cardObject = FindAvailableCard("CAPTAIN COSTA THE MAN O’WAR");
+                            break;
+                        case 6:
+                            cardObject = FindAvailableCard("DANILO THE PIERCING TATUI");
+                            break;
+                        case 7:
+                            cardObject = FindAvailableCard("ED THE PUNK SALMON");
+                            break;
+                        case 8:
+                            cardObject = FindAvailableCard("GARRINCHA THE TOUGH BLUE LOBSTER");
+                            break;
+                        case 9:
+                            cardObject = FindAvailableCard("HANIS THE MANACING FLATFISH");
+                            break;
+                        case 10:
+                            cardObject = FindAvailableCard("IRFAN THE BLADED LOBSTER");
+                            break;
+                        case 11:
+                            cardObject = FindAvailableCard("JOHN FANGO THE TACTICAL");
+                            break;
+                        case 12:
+                            cardObject = FindAvailableCard("JOHNNY THE SAILOR SQUID");
+                            break;
+                        case 13:
+                            cardObject = FindAvailableCard("LIZA THE CARRIER CRAB");
+                            break;
+                        case 14:
+                            cardObject = FindAvailableCard("LOLA THE BUFF BLOWFISH");
+                            break;
+                        case 15:
+                            cardObject = FindAvailableCard("LUKE LEATHERBACK THE TURTLE");
+                            break;
+                        case 16:
+                            cardObject = FindAvailableCard("MAHESH THE SLASHING MACKEREL");
+                            break;
+                        case 17:
+                            cardObject = FindAvailableCard("MEDHANSH THE SWORDSMAN OCTOPUS");
+                            break;
+                        case 18:
+                            cardObject = FindAvailableCard("NENRUNG THE DRAGON");
+                            break;
+                        case 19:
+                            cardObject = FindAvailableCard("RAY THE WHIPPING MANTA");
+                            break;
+                        case 20:
+                            cardObject = FindAvailableCard("REZAUL THE MASTER OCTOPUS");
+                            break;
+                        case 21:
+                            cardObject = FindAvailableCard("RICHARD THE OPPORTUNIST COCKLE");
+                            break;
+                        case 22:
+                            cardObject = FindAvailableCard("RIDLEY THE OLIVE TURTLE");
+                            break;
+                        case 23:
+                            cardObject = FindAvailableCard("ROCUS “SHADES” THE BLUE SHARK");
+                            break;
+                        case 24:
+                            cardObject = FindAvailableCard("SARGEANT HARTMAN THE NAVY SEAL");
+                            break;
+                        case 25:
+                            cardObject = FindAvailableCard("SASHA THE WRESTLING BELUGA");
+                            break;
+                        case 26:
+                            cardObject = FindAvailableCard("SIR WESTLEY THE FENCING DOLPHIN");
+                            break;
+                        case 27:
+                            cardObject = FindAvailableCard("SIRILO THE MARBLED SWIM CRAB");
+                            break;
+                        case 28:
+                            cardObject = FindAvailableCard("SOORYA THE NEEDLING BOX JELLYFISH");
+                            break;
+                        case 29:
+                            cardObject = FindAvailableCard("TED RIGHTY THE BOXER WHALE");
+                            break;
+                        case 30:
+                            cardObject = FindAvailableCard("TISYA THE SPOTTED BLADEMASTER");
+                            break;
+                        case 31:
+                            cardObject = FindAvailableCard("TODD THE BARBER EEL");
+                            break;
+                        case 32:
+                            cardObject = FindAvailableCard("WANDERLEY THE GRAPPLING OCTOPUS");
+                            break;
+                        case 33:
+                            cardObject = FindAvailableCard("ZE PEREIRA THE SANDBAR SHARK");
+                            break;
+                    }
 
-                        switch (i)
-                        {
-                            case 0:
-                                // Setting team's commander
-                                
-                                break;
-                            case 1:
-                                // Setting team's crew1
-                                
-                                break;
-                            case 2:
-                                // Setting team's crew2
-                                
-                                break;
-                            case 3:
-                                // Setting team's crew3
-                                
-                                break;
-                            case 4:
-                                // Setting team's crew4
-                                
-                                break;
-                        }
+                    // Filling team with cards
 
-                        FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "TeamName")[teamsCount].GetComponent<Text>().text = team.name;
-                        FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Placeholder_Team")[teamsCount].GetComponent<Text>().text = team.name;
-                        teamsCount++;
+                    GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().team = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount];
+                    GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj = cardObject;
+
+                    switch (i)
+                    {
+                        case 0:
+                            // Setting team's commander
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCommander();
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 0;
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove = 
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Remove_Commander")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_commander")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "ImageC")[teamsCount];
+                            cardObject.GetComponent<Item>().OnMouseDown();
+                            break;
+                        case 1:
+                            // Setting team's crew1
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew1();
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 1;
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Remove_crew (1)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (1)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image1")[teamsCount];
+                            cardObject.GetComponent<Item>().OnMouseDown();
+                            break;
+                        case 2:
+                            // Setting team's crew2
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew2();
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 2;
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Remove_crew (2)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (2)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image2")[teamsCount];
+                            cardObject.GetComponent<Item>().OnMouseDown();
+                            break;
+                        case 3:
+                            // Setting team's crew3
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew3();
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 3;
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Remove_crew (3)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (3)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image3")[teamsCount];
+                            cardObject.GetComponent<Item>().OnMouseDown();
+                            break;
+                        case 4:
+                            // Setting team's crew4
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew4();
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 4;
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Remove_crew (4)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (4)")[teamsCount];
+                            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
+                                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image4")[teamsCount];
+                            cardObject.GetComponent<Item>().OnMouseDown();
+                            break;
                     }
                 }
-            }
+                
+                // Filling team's name
 
-            // Updating teamsCreated counter in scripts
-            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated = teamsCount;
-            teamsContent.GetComponentInChildren<NewTeams>().teamCreated = teamsCount;
-            loaded = true;
+                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Placeholder_Team")[teamsCount].GetComponent<Text>().text = "Enter new name...";
+                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "TeamName")[teamsCount].GetComponent<Text>().text = team.name;
+                FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "InputField_Team")[teamsCount].GetComponent<InputField>().text = team.name;
+                teamsCount++;
+            }
         }
+
+        // Updating teamsCreated counter in scripts
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated = teamsCount;
+        teamsContent.GetComponentInChildren<NewTeams>().teamCreated = teamsCount;
+
+        // Cleaning up the Editor
+        for (int i = 0; i < 15; i++)
+        {
+            Destroy(GameObject.Find("New Game Object"));
+        }
+    }
+
+    public GameObject FindAvailableCard(string cardName)
+    {
+        // Looking for a card in available cards loaded from wallet
+        foreach (GameObject foundObject in FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), cardName))
+        {
+            if (foundObject.GetComponent<Item>() && foundObject.GetComponent<Button>().interactable)
+            {
+                return foundObject;
+            }
+        }
+        return null;
     }
 
     public void ExitGame()
@@ -186,6 +242,7 @@ public class OPENAndEXITGame : MonoBehaviour
         JSONHandler.SaveTeamsToJSON(GetTeams(), filenameTeams);
         JSONHandler.SaveConfigToJSON(GetConfig(), filenameConfig);
 
+        // Closing the game
         Application.Quit();
     }
 
@@ -201,7 +258,14 @@ public class OPENAndEXITGame : MonoBehaviour
 
     public CardListJSONFile[] GetTeams()
     {
+        if (FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team") == null)
+        {
+            return new CardListJSONFile[3];
+        }
+
         int i = 0;
+
+        // Looking for completed teams
         foreach (GameObject team in FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team"))
         {
             if (team.GetComponent<TeamSetItem>().completed)
@@ -209,10 +273,10 @@ public class OPENAndEXITGame : MonoBehaviour
                 GameObject nameObj = team.GetComponent<TeamSetItem>().teamName;
                 teams[i].name = nameObj.GetComponent<Text>().text;
                 teams[i].deck = GetCards(i);
+                i++;
             }
-            i++;
         }
-        if (FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team").Length == 0)
+        if (i == 0)
         {
             return new CardListJSONFile[3];
         }
@@ -227,6 +291,7 @@ public class OPENAndEXITGame : MonoBehaviour
         string cardName = "";
         for (int i = 0; i < 5; i++)
         {
+            // Getting card's name
             switch (i)
             {
                 case 0:
@@ -245,6 +310,8 @@ public class OPENAndEXITGame : MonoBehaviour
                     cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew4.name;
                     break;
             }
+
+            // Assigning card ID according to it's name
             switch (cardName)
             {
                 case "AARON THE RAMMING CRAB":

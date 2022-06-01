@@ -18,11 +18,6 @@ public class TeamSetItem : MonoBehaviour
     void Start()
     {
         slot = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().slot;
-        removeC.SetActive(false);
-        remove1.SetActive(false);
-        remove2.SetActive(false);
-        remove3.SetActive(false);
-        remove4.SetActive(false);
     }
 
     void Update()

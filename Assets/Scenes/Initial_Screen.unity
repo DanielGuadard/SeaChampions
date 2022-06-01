@@ -1154,11 +1154,11 @@ MonoBehaviour:
   myTeamContent: {fileID: 1421546319}
   item: {fileID: 0}
   JsonData:
-    Deck: []
+    deck: []
   JOHN_FANGOPref: {fileID: 5233069108243724646, guid: 0a6780aef085d6844bde4d384d3c3a5d, type: 3}
   CAPTAINPref: {fileID: 5720800910266845238, guid: 5c25763d53d7a924f99de81cb86e5a7a, type: 3}
   TedPref: {fileID: 8019711395687448471, guid: a2b87017779951c4aaefcccc45d2c477, type: 3}
-  NENRUNGPref: {fileID: 0}
+  NENRUNGPref: {fileID: 3981764739298561578, guid: 6eab191ec8a802b4e929f92d05771be0, type: 3}
   REZAULPref: {fileID: 809853964080684355, guid: a4a9613d13d2b384cb8667a5a896dfa6, type: 3}
   GARRINCHAPref: {fileID: 7445019149504814940, guid: 6338243b276ccfa4eb45a99c7ff0af57, type: 3}
   LUKEPref: {fileID: 5087854510873878700, guid: 200efd39cca200a48a7811b8860276df, type: 3}
@@ -1200,9 +1200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605d23a109ac48542b44a4a0ee64bd87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filename: teams.json
+  filenameTeams: teams.json
+  filenameConfig: config.json
   teamsContent: {fileID: 1665278376}
   teamPref: {fileID: 1463171282403319805, guid: 7020362c1a49b064383fa75104885638, type: 3}
+  slotList: []
 --- !u!114 &96492639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5003,7 +5005,7 @@ GameObject:
   - component: {fileID: 323462715}
   - component: {fileID: 323462716}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: Full_Screen_Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29404,7 +29406,7 @@ GameObject:
   - component: {fileID: 1748723164}
   - component: {fileID: 1748723163}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: Dropdown_Resolution
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
