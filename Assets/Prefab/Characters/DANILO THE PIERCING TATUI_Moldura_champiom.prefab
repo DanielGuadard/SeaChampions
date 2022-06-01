@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4715899996834501771}
   - component: {fileID: 4715899996834501770}
   m_Layer: 5
-  m_Name: "DANILO THE PIERCING TATU\xCD_Moldura_champiom"
+  m_Name: DANILO THE PIERCING TATUI_Moldura_champiom
   m_TagString: slot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4566270866995007224}
   - component: {fileID: 1684724585630409179}
   m_Layer: 5
-  m_Name: "DANILO THE PIERCING TATU\xCD"
+  m_Name: DANILO THE PIERCING TATUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,9 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3bfab6fa356e24db8267cd2ec1463b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mainslot: {fileID: 4715899996834501772}
-  Slotlist: []
-  Slotcolor: {r: 0, g: 0, b: 0, a: 0}
+  mainSlot: {fileID: 0}
+  championObj: {fileID: 0}
+  slotList: []
+  slotColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1007763671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4566270866995007224}
           m_TargetAssemblyTypeName: SoundOver, Assembly-CSharp
-          m_MethodName: Myteam
+          m_MethodName: MyTeam
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -270,8 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0b792e239049745bfc8015e998a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyteamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  AudioSourMyteamsSound: {fileID: 1684724585630409179}
+  myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
 --- !u!82 &1684724585630409179
 AudioSource:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - image
   - slot
+  - team
   layers:
   - Default
   - TransparentFX

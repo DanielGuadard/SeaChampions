@@ -46,8 +46,22 @@ public class OptionsWindow : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+        if (!System.IO.File.Exists(Application.persistentDataPath + "/config.json"))
+        {
+            resolutionDropdown.value = currentResolutionIndex;
+            resolutionDropdown.RefreshShownValue();
+        }
+        else
+        {
+            // Loading settings
+            ConfigJSON config = JSONHandler.ReadConfigFromJSON("config.json");
+            FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Music_Slider").GetComponent<Slider>().value = config.musicVolume;
+            FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Sound_Slider").GetComponent<Slider>().value = config.soundVolume;
+            resolutionDropdown.value = config.resolution;
+            resolutionDropdown.RefreshShownValue();
+            SetResolution(config.resolution);
+            FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Full_Screen_Toggle").GetComponent<Toggle>().isOn = config.isFullScreen;
+        }
     }
 
     public void SetResolution(int resolutionIndex)

@@ -14,14 +14,6 @@ public class CardConstructor : MonoBehaviour
     private Sprite item;
 
     [System.Serializable]
-    public class CardList
-    {
-
-        public Card[] Deck;
-
-    }
-
-    [System.Serializable]
     public class Card
     {
         public int id;
@@ -37,8 +29,14 @@ public class CardConstructor : MonoBehaviour
         public int IdealPressure;
     }
 
+    [System.Serializable]
+    public class CardList
+    {
+        public Card[] Deck;
+    }
+
     public CardList JsonData;
-    public GameObject JOHN_FANGOPref, CAPTAINPref,TedPref, NENRUNGPrefg, REZAULPref, GARRINCHAPref, LUKEPref, RAYPref, SIR_WESTLEYPref, LIZAPref, HANISPref, SARGEANT_HARTMANPref, RIDLEYPref, ARSELLAPref,
+    public GameObject JOHN_FANGOPref, CAPTAINPref,TedPref, NENRUNGPref, REZAULPref, GARRINCHAPref, LUKEPref, RAYPref, SIR_WESTLEYPref, LIZAPref, HANISPref, SARGEANT_HARTMANPref, RIDLEYPref, ARSELLAPref,
     ROCUSPref, AARONPref, WANDERLEYPref, LOLAPref, TODDPref, JOHNNYPref, SOORYAPref, IRFANPref, DANILOPref, ZEPEREIRAPref, BOB_SAWPref, TISYAPref, SASHAPref, MEDHANSHPref, SIRILOPref, MAHESHPref,
     RICHARDPref, EDPref, ADAMPref;
 
@@ -105,7 +103,7 @@ public class CardConstructor : MonoBehaviour
 					card.IdealPressure = 2;
                     break;
                 case "Nenrung the Dragon":
-                    GameObject.Instantiate(NENRUNGPrefg).transform.SetParent(myTeamContent.transform, false);
+                    GameObject.Instantiate(NENRUNGPref).transform.SetParent(myTeamContent.transform, false);
 					card.Agility = 247;
 					card.Brawn = 120;
 					card.Cunning = 100;

@@ -44,7 +44,6 @@ public class TeamSetItem : MonoBehaviour
                 new Vector3(0, 0, 0);
             nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
                 new Vector3(0, 0, 0);
-
         }
         
     }

@@ -830,7 +830,7 @@ GameObject:
   - component: {fileID: 7810796346037291640}
   m_Layer: 5
   m_Name: Team_Pref
-  m_TagString: Untagged
+  m_TagString: team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1015,7 +1015,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  audioSourceMyTeamsSound: {fileID: 286636810}
 --- !u!114 &6424851706290984130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,9 +1037,8 @@ MonoBehaviour:
   inputFieldImage: {fileID: 3756159615202416791}
   arrowClose: {fileID: 21300000, guid: 7ba9609d7a0bb6241a19efa20963fa86, type: 3}
   arrowOpen: {fileID: 21300000, guid: ab111f20fbe502d459928d0a26d9df9c, type: 3}
-  open: 0
   myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  audioSourMyTeamsSound: {fileID: 286636810}
+  open: 0
 --- !u!114 &7810796346037291640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,6 +1051,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbcd8d41713d5142a22d85265a688c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minusCommander: {fileID: 2800000, guid: e2a44d6825be14f41a3c0bd3c2fa0ede, type: 3}
+  plus: {fileID: 2800000, guid: 3564b4d75543e9b45a6ae7e8ed8b66a6, type: 3}
+  minus: {fileID: 2800000, guid: 881739bb5b946b3499d614090057f425, type: 3}
+  plusCommander: {fileID: 21300000, guid: bc33b4b198bcc0243b5cedd6578f763f, type: 3}
   slot: {fileID: 0}
   championObj: {fileID: 0}
   commander: {fileID: 0}
@@ -1079,10 +1081,6 @@ MonoBehaviour:
   image2: {fileID: 338885902496443029}
   image3: {fileID: 2437101466282079631}
   image4: {fileID: 4199102114364702608}
-  minusCommander: {fileID: 2800000, guid: e2a44d6825be14f41a3c0bd3c2fa0ede, type: 3}
-  plus: {fileID: 2800000, guid: 3564b4d75543e9b45a6ae7e8ed8b66a6, type: 3}
-  minus: {fileID: 2800000, guid: 881739bb5b946b3499d614090057f425, type: 3}
-  plusCommander: {fileID: 21300000, guid: bc33b4b198bcc0243b5cedd6578f763f, type: 3}
   completed: 0
 --- !u!1 &1612439987266897937
 GameObject:
@@ -1291,7 +1289,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3871773256509815095}
         m_TargetAssemblyTypeName: DeleteTeam, Assembly-CSharp
-        m_MethodName: DeletthisTeam
+        m_MethodName: DeleteThisTeam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1321,7 +1319,6 @@ MonoBehaviour:
   crew4: {fileID: 0}
   image: {fileID: 884316841057229435}
   mySound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  audioSource: {fileID: 286636810}
 --- !u!114 &2514805187646411544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2514,7 +2511,7 @@ GameObject:
   - component: {fileID: 4414762535713099694}
   - component: {fileID: 3916177572558452511}
   m_Layer: 5
-  m_Name: Placeholder
+  m_Name: Placeholder_Team
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
