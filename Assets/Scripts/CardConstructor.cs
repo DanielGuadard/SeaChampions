@@ -314,7 +314,11 @@ public class CardConstructor : MonoBehaviour
                     break;
             }
         }
-        GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
+        try
+        {
+            GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
+        }
+        catch(System.NullReferenceException e) {}
     }
 
 }

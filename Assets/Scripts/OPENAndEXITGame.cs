@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class OPENAndEXITGame : MonoBehaviour
 {
@@ -138,6 +137,12 @@ public class OPENAndEXITGame : MonoBehaviour
                     GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().team = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount];
                     GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj = cardObject;
 
+                    if (cardObject == null)
+                    {
+                        FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().completed = false;
+                        continue;
+                    }
+
                     switch (i)
                     {
                         case 0:
@@ -215,12 +220,6 @@ public class OPENAndEXITGame : MonoBehaviour
         // Updating teamsCreated counter in scripts
         GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated = teamsCount;
         teamsContent.GetComponentInChildren<NewTeams>().teamCreated = teamsCount;
-
-        // Cleaning up the Editor
-        for (int i = 0; i < 15; i++)
-        {
-            Destroy(GameObject.Find("New Game Object"));
-        }
     }
 
     public GameObject FindAvailableCard(string cardName)
@@ -275,6 +274,11 @@ public class OPENAndEXITGame : MonoBehaviour
                 teams[i].deck = GetCards(i);
                 i++;
             }
+            else
+            {
+                teams[i].name = "";
+                teams[i].deck = new CardJSONFile[5];
+            }
         }
         if (i == 0)
         {
@@ -292,23 +296,31 @@ public class OPENAndEXITGame : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             // Getting card's name
-            switch (i)
+            try
             {
-                case 0:
-                    cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().commander.name;
-                    break;
-                case 1:
-                    cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew1.name;
-                    break;
-                case 2:
-                    cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew2.name;
-                    break;
-                case 3:
-                    cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew3.name;
-                    break;
-                case 4:
-                    cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew4.name;
-                    break;
+                switch (i)
+                {
+                    case 0:
+                        cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().commander.name;
+                        break;
+                    case 1:
+                        cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew1.name;
+                        break;
+                    case 2:
+                        cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew2.name;
+                        break;
+                    case 3:
+                        cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew3.name;
+                        break;
+                    case 4:
+                        cardName = FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamID].GetComponent<TeamSetItem>().crew4.name;
+                        break;
+                }
+            }
+            catch (System.NullReferenceException e)
+            {
+                Debug.LogException(e);
+                return new CardJSONFile[0];
             }
 
             // Assigning card ID according to it's name
