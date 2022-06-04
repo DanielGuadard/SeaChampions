@@ -317,9 +317,9 @@ public class OPENAndEXITGame : MonoBehaviour
                         break;
                 }
             }
-            catch (System.NullReferenceException e)
+            catch (System.NullReferenceException)
             {
-                Debug.LogException(e);
+                Debug.Log("NullReferenceException in OPENAndEXITGame.cs, try&cath block in public CardJSONFile[] GetCards(int teamID)");
                 return new CardJSONFile[0];
             }
 

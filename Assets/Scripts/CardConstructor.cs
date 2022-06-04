@@ -318,7 +318,9 @@ public class CardConstructor : MonoBehaviour
         {
             GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
         }
-        catch(System.NullReferenceException e) {}
+        catch(System.NullReferenceException) {
+            Debug.Log("NullReferenceException in CardConstructor.cs at GameObject.Find(\"ScriptHolder\").GetComponent<OPENAndEXITGame>().LoadTeams();");
+        }
     }
 
 }
