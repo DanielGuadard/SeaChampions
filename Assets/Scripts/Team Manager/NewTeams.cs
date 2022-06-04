@@ -15,7 +15,7 @@ public class NewTeams : MonoBehaviour
     public void NewTeam()
     {
         teamCreated = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated;
-        if (teamCreated <  teamLimit)
+        if (teamCreated < teamLimit)
         {
             GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated++;

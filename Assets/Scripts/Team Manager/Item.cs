@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
         championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
     }
     
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if (GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot != null)
         {
@@ -36,7 +36,7 @@ public class Item : MonoBehaviour
             this.GetComponent<BoxCollider>().enabled = false;
             this.GetComponent<Button>().interactable = false;
 
-            switch ( Crew )
+            switch (Crew)
             {
                 case 0:
                     Team.GetComponent<TeamSetItem>().commander = this.gameObject;

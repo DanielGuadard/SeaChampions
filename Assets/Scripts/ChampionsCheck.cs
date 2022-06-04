@@ -4,22 +4,13 @@ public class ChampionsCheck : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject Mark_JOHN_FANGO, Mark_CAPTAIN, Mark_Ted, Mark_NENRUNG, Mark_REZAUL,
+    private GameObject Mark_JOHN_FANGO, Mark_CAPTAIN, Mark_TED, Mark_NENRUNG, Mark_REZAUL,
         Mark_GARRINCHA, Mark_LUKE, Mark_RAY, Mark_SIR_WESTLEY, Mark_LIZA, Mark_HANIS, Mark_SARGEANT_HARTMAN,
         Mark_RIDLEY, Mark_ARSELLA, Mark_ROCUS, Mark_AARON, Mark_WANDERLEY, Marck_LOLA, Mark_TODD, Mark_JOHNNY,
         Mark_SOORYA, Mark_IRFAN, mark_DANILO, Mark_ZEPEREIRA, Mark_BOB_SAW, Mark_TISYA, Mark_SASHA, Mark_MEDHANSH,
         Mark_SIRILO, Mark_MAHESH, Mark_RICHARD, Mark_ED, Mark_ADAM;
    
     public string urlAPIFinal;
-
-     
-    [System.Serializable]
-    public class CardList
-    {
-
-        public Card[] Deck;
-
-    }
 
     [System.Serializable]
     public class Card
@@ -30,6 +21,12 @@ public class ChampionsCheck : MonoBehaviour
         public string rarity;
         public string tribe;
         public bool elite;
+    }
+
+    [System.Serializable]
+    public class CardList
+    {
+        public Card[] Deck;
     }
 
     public CardList jsonData = new CardList();
@@ -69,7 +66,7 @@ public class ChampionsCheck : MonoBehaviour
                     Mark_CAPTAIN.SetActive(true);
                     break;
                 case "Ted Righty the Boxer Whale":
-                    Mark_Ted.SetActive(true);
+                    Mark_TED.SetActive(true);
                     break;
                 case "Nenrung the Dragon":
                     Mark_NENRUNG.SetActive(true);
