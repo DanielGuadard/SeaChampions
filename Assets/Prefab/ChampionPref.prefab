@@ -196,9 +196,10 @@ MonoBehaviour:
   brawl: 0
   agility: 0
   cunning: 0
+  battlePower: 0
   JOHN_FANGO: {fileID: 21300000, guid: 04520dde0fd5f9246a3401c7764d8c7c, type: 3}
   CAPTAIN: {fileID: 21300000, guid: ff56a35c43d1b1c4e882b1b09c9c00be, type: 3}
-  Ted: {fileID: 21300000, guid: 23f37ad7f6fbac74ba137e36fdbc3279, type: 3}
+  TED: {fileID: 21300000, guid: 23f37ad7f6fbac74ba137e36fdbc3279, type: 3}
   NENRUNG: {fileID: 21300000, guid: 8a7e98dd2b36e4e4cb7f69702d816c7e, type: 3}
   REZAUL: {fileID: 21300000, guid: 66b1e53e9f6db6f4f9c57c413e176a2b, type: 3}
   GARRINCHA: {fileID: 21300000, guid: 1a6e543e2070905458b3b3300ea6cedc, type: 3}

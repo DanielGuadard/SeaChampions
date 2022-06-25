@@ -9,15 +9,16 @@ public class TeamSetItem : MonoBehaviour
     [SerializeField]
     private Sprite plusCommander;
     [SerializeField]
-    private Text BattePowerText;
-    private string BattlePower;
+    private Text battlePowerText;
 
     public GameObject slot, championObj, commander, crew1, crew2, crew3, crew4,
         addC, add1, add2, add3, add4, removeC, remove1, remove2, remove3, remove4,
         inputField, teamName, nameHolder, incomplete,
         imageC, image1, image2, image3, image4;
+
     public bool completed;
-    public float BPT,BPC,BP1,BP2,BP3,BP4;
+
+    public float battlePowerTeam, battlePowerCommander, battlePowerCrew1, battlePowerCrew2, battlePowerCrew3, battlePowerCrew4;
     
 
     void Start()
@@ -45,7 +46,7 @@ public class TeamSetItem : MonoBehaviour
             nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
                 new Vector3(0, 0, 0);
         }
-        BattePowerCalculationc();
+        CalculateBattlePower();
        
     }
 
@@ -156,16 +157,50 @@ public class TeamSetItem : MonoBehaviour
         champ.GetComponent<Button>().interactable = true;
         champ.GetComponent<BoxCollider>().enabled = true;
     }
-    public void BattePowerCalculationc()
-    { 
-        if (commander != null) { BPC = commander.GetComponent<Item>().BattlePower; } else BPC = 0;
-        if (crew1 != null) { BP1 = crew1.GetComponent<Item>().BattlePower; } else BP1 = 0;
-        if (crew2 != null) { BP2 = crew2.GetComponent<Item>().BattlePower; } else BP2 = 0;
-        if (crew3 != null) { BP3 = crew3.GetComponent<Item>().BattlePower; } else BP3 = 0;
-        if (crew4 != null) { BP4 = crew4.GetComponent<Item>().BattlePower; } else BP4 = 0;
+    public void CalculateBattlePower()
+    {
+        if (commander != null)
+        {
+            battlePowerCommander = commander.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCommander = 0;
+        }
+        if (crew1 != null)
+        {
+            battlePowerCrew1 = crew1.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew1 = 0;
+        }
+        if (crew2 != null)
+        {
+            battlePowerCrew2 = crew2.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew2 = 0;
+        }
+        if (crew3 != null)
+        {
+            battlePowerCrew3 = crew3.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew3 = 0;
+        }
+        if (crew4 != null)
+        {
+            battlePowerCrew4 = crew4.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew4 = 0;
+        }
 
-        BPT = BPC + BP1 + BP2 + BP3 + BP4;
-        BattlePower = "BP: " + BPT;
-        BattePowerText.text = BattlePower;
+        battlePowerTeam = battlePowerCommander + battlePowerCrew1 + battlePowerCrew2 + battlePowerCrew3 + battlePowerCrew4;
+        battlePowerText.text = "BP: " + battlePowerTeam;
     }
 }

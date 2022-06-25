@@ -20,9 +20,9 @@ public class Item : MonoBehaviour
     public float brawl;
     public float agility;
     public float cunning;
-    public float BattlePower;
+    public float battlePower;
 
-    public Sprite JOHN_FANGO, CAPTAIN,Ted, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
+    public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
     ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
     RICHARD, ED, ADAM;
 
@@ -30,11 +30,10 @@ public class Item : MonoBehaviour
     void Start()
     {
         championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
-        CardImage();
-        // Battle_Power = A+(0.8*B)+(1.2*C)
-        BattlePower = agility + (0.8f * brawl) + (1.2f * cunning);
+        SetCardImage();
+        battlePower = agility + (0.8f * brawl) + (1.2f * cunning);
     }
-    
+
     public void OnMouseDown()
     {
         if (GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot != null)
@@ -83,31 +82,28 @@ public class Item : MonoBehaviour
         
         foreach(GameObject gameObject in slotList)
         {
-            gameObject.GetComponent<Image>().color = new Color(1, 1, 1,1);   
+            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);   
         }
     }
      
-public void CardImage()
-{
+    public void SetCardImage()
+    {
         switch (name)
         {
             case "John Fango the Tactical Megalodon":
-                this.GetComponent<Image>().sprite= JOHN_FANGO;
-               idealPressure = 4;
+                this.GetComponent<Image>().sprite = JOHN_FANGO;
+                idealPressure = 4;
                 break;
             case "Captain Costa the Man O'War":
                 this.GetComponent<Image>().sprite = CAPTAIN;
-
                 idealPressure = 1;
                 break;
             case "Ted Righty the Boxer Whale":
-                this.GetComponent<Image>().sprite = Ted;
-               
+                this.GetComponent<Image>().sprite = TED;
                 idealPressure = 2;
                 break;
             case "Nenrung the Dragon":
                 this.GetComponent<Image>().sprite = NENRUNG;
-                
                 idealPressure = 3;
                 break;
             case "Rezaul the master Octopus":
@@ -226,10 +222,14 @@ public void CardImage()
                 this.GetComponent<Image>().sprite = ADAM;
                 idealPressure = 2;
                 break;
-
             default:
                 break;
         }
+    }
+
+    public Sprite GetSprite()
+    {
+        return this.GetComponent<Image>().sprite;
     }
 
   

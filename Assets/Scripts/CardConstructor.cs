@@ -75,27 +75,20 @@ public class CardConstructor : MonoBehaviour
         foreach (Card card in JsonData.Deck)
         {
             
-                    GameObject.Instantiate(ChampionPref).transform.SetParent(myTeamContent.transform, false);
+            GameObject.Instantiate(ChampionPref).transform.SetParent(myTeamContent.transform, false);
             ChampionPref.GetComponentInChildren<Item>().id = card.id;             
             ChampionPref.GetComponentInChildren<Item>().name = card.name;
             ChampionPref.GetComponentInChildren<Item>().image = card.image;
             ChampionPref.GetComponentInChildren<Item>().tribe = card.tribe;
             ChampionPref.GetComponentInChildren<Item>().rarity = card.rarity;
             ChampionPref.GetComponentInChildren<Item>().elite = card.elite;
-   //    ChampionPref.GetComponentInChildren<Item>().idealPressure = card.idealPressure;
+            ChampionPref.GetComponentInChildren<Item>().idealPressure = card.idealPressure;
             ChampionPref.GetComponentInChildren<Item>().brawl = card.brawl;
             ChampionPref.GetComponentInChildren<Item>().agility = card.agility;
             ChampionPref.GetComponentInChildren<Item>().cunning = card.cunning;
-
-
-}
-        try
-        {
-            GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
         }
-        catch(System.NullReferenceException) {
-            Debug.Log("NullReferenceException in CardConstructor.cs at GameObject.Find(\"ScriptHolder\").GetComponent<OPENAndEXITGame>().LoadTeams();");
-        }
+        
+        GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
     }
 
 }
