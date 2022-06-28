@@ -35,8 +35,8 @@ public class CardConstructor : MonoBehaviour
         public Card[] Deck;
     }
 
-    public CardList JsonData;
-    public GameObject ChampionPref;
+    public CardList jsonData;
+    public GameObject championPref;
 
     void Start()
     {
@@ -70,22 +70,21 @@ public class CardConstructor : MonoBehaviour
     }
     public void ProcessJsonData(string content)
     {
-        JsonData = JsonUtility.FromJson<CardList>(content); 
+        jsonData = JsonUtility.FromJson<CardList>(content); 
 
-        foreach (Card card in JsonData.Deck)
+        foreach (Card card in jsonData.Deck)
         {
-            
-            GameObject.Instantiate(ChampionPref).transform.SetParent(myTeamContent.transform, false);
-            ChampionPref.GetComponentInChildren<Item>().id = card.id;             
-            ChampionPref.GetComponentInChildren<Item>().name = card.name;
-            ChampionPref.GetComponentInChildren<Item>().image = card.image;
-            ChampionPref.GetComponentInChildren<Item>().tribe = card.tribe;
-            ChampionPref.GetComponentInChildren<Item>().rarity = card.rarity;
-            ChampionPref.GetComponentInChildren<Item>().elite = card.elite;
-            ChampionPref.GetComponentInChildren<Item>().idealPressure = card.idealPressure;
-            ChampionPref.GetComponentInChildren<Item>().brawl = card.brawl;
-            ChampionPref.GetComponentInChildren<Item>().agility = card.agility;
-            ChampionPref.GetComponentInChildren<Item>().cunning = card.cunning;
+            GameObject.Instantiate(championPref).transform.SetParent(myTeamContent.transform, false);
+            championPref.GetComponentInChildren<Item>().id = card.id;             
+            championPref.GetComponentInChildren<Item>().name = card.name;
+            championPref.GetComponentInChildren<Item>().image = card.image;
+            championPref.GetComponentInChildren<Item>().tribe = card.tribe;
+            championPref.GetComponentInChildren<Item>().rarity = card.rarity;
+            championPref.GetComponentInChildren<Item>().elite = card.elite;
+            championPref.GetComponentInChildren<Item>().idealPressure = card.idealPressure;
+            championPref.GetComponentInChildren<Item>().brawl = card.brawl;
+            championPref.GetComponentInChildren<Item>().agility = card.agility;
+            championPref.GetComponentInChildren<Item>().cunning = card.cunning;
         }
         
         GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
