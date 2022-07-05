@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainSlot, championObj;
+    private GameObject mainSlot, championObj,BattlePowerText;
     [SerializeField]
     private GameObject[] slotList;
     [SerializeField]
@@ -32,6 +32,7 @@ public class Item : MonoBehaviour
         championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
         SetCardImage();
         battlePower = agility + (0.8f * brawl) + (1.2f * cunning);
+        BattlePowerText.GetComponent<Text>().text = "BP: " + battlePower.ToString();
     }
 
     public void OnMouseDown()
