@@ -1,22 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerACC : MonoBehaviour
 {
-   
-    public Text Wallet;
-    // Start is called before the first frame update
+    [SerializeField]
+    private Text wallet;
 
     void Start()
     {
-
-        Wallet.text = PlayerPrefs.GetString("Account");
-
-
+        wallet.text = PlayerPrefs.GetString("Account");
     }
-
-    
-
 }

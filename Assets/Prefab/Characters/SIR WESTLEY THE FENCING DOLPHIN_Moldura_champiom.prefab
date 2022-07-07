@@ -93,9 +93,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3bfab6fa356e24db8267cd2ec1463b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mainslot: {fileID: 4890360061756688045}
-  Slotlist: []
-  Slotcolor: {r: 0, g: 0, b: 0, a: 0}
+  mainSlot: {fileID: 0}
+  championObj: {fileID: 0}
+  slotList: []
+  slotColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &5724804407228066988
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4645322675983189620}
           m_TargetAssemblyTypeName: SoundOver, Assembly-CSharp
-          m_MethodName: Myteam
+          m_MethodName: MyTeam
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -194,8 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0b792e239049745bfc8015e998a74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyteamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
-  AudioSourMyteamsSound: {fileID: 381341437871360764}
+  myTeamsSound: {fileID: 8300000, guid: 89939e70d45963f498647afc97f3e1d5, type: 3}
 --- !u!82 &381341437871360764
 AudioSource:
   m_ObjectHideFlags: 0

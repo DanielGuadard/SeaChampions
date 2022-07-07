@@ -1,47 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DeleteTeam : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public GameObject ThisTeam, commander, crew1, crew2, crew3, crew4;
-    public Image image;
-    public AudioClip MySound;
-    public AudioSource AudioSour;
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject thisTeam, commander, crew1, crew2, crew3, crew4;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    private AudioClip mySound;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-   public void DeletthisTeam()
+   public void DeleteThisTeam()
     {
 
-        ThisTeam.GetComponent<TeamSetItem>().RemoveC();
-        ThisTeam.GetComponent<TeamSetItem>().Remove1();
-        ThisTeam.GetComponent<TeamSetItem>().Remove2();
-        ThisTeam.GetComponent<TeamSetItem>().Remove3();
-        ThisTeam.GetComponent<TeamSetItem>().Remove4();
+        thisTeam.GetComponent<TeamSetItem>().RemoveC();
+        thisTeam.GetComponent<TeamSetItem>().Remove1();
+        thisTeam.GetComponent<TeamSetItem>().Remove2();
+        thisTeam.GetComponent<TeamSetItem>().Remove3();
+        thisTeam.GetComponent<TeamSetItem>().Remove4();
 
-        Destroy(ThisTeam);
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamCriado--;
+        Destroy(thisTeam);
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated--;
     }
 
     public void Enter()
     {
         image.GetComponent<Image>().color = new Color(1, 1, 1, .5f);
-        AudioSour.PlayOneShot(MySound);
+        GameObject.Find("AudioKey").GetComponent<AudioSource>().PlayOneShot(mySound);
     }
+
     public void Exit()
     {
         image.GetComponent<Image>().color = new Color(1, 1, 1, 0);
     }
-
 
 }

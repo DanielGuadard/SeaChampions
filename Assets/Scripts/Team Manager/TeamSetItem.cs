@@ -1,86 +1,101 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TeamSetItem : MonoBehaviour
 {
 
-    public GameObject slot, ChampiomObj, commander, crew1, crew2, crew3, crew4, addC, add1, add2, add3, add4, removeC, remove1, remove2, remove3, remove4, InputField, TeamName, NameHolder, Incomplete,
-    imageC,image1, image2, image3, image4;
-    public Texture MinusCommander, Plus, Minus;
-    public Sprite PlusCommander;
-    public bool Completo;
-    // Start is called before the first frame update
+    [SerializeField]
+    private Texture minusCommander, plus, minus;
+    [SerializeField]
+    private Sprite plusCommander;
+    [SerializeField]
+    private Text battlePowerText;
+
+    public GameObject slot, championObj, commander, crew1, crew2, crew3, crew4,
+        addC, add1, add2, add3, add4, removeC, remove1, remove2, remove3, remove4,
+        inputField, teamName, nameHolder, incomplete,
+        imageC, image1, image2, image3, image4;
+
+    public bool completed;
+
+    public float battlePowerTeam, battlePowerCommander, battlePowerCrew1, battlePowerCrew2, battlePowerCrew3, battlePowerCrew4;
+    
+
     void Start()
     {
-      //  ChampiomObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        slot = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().slot;
-        removeC.SetActive(false);
-        remove1.SetActive(false);
-        remove2.SetActive(false);
-        remove3.SetActive(false);
-        remove4.SetActive(false);
-
+        slot = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().slot;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (commander == null || crew1 == null || crew2 == null || crew3 == null || crew4 == null)
         {
-            Completo = false;
-            Incomplete.SetActive(true);
-            TeamName.GetComponent<RectTransform>().position = Incomplete.GetComponent<Transform>().position + new Vector3(140, 0, 0);
-            NameHolder.GetComponent<RectTransform>().position = Incomplete.GetComponent<Transform>().position + new Vector3(140, 0, 0);
+            completed = false;
+            incomplete.SetActive(true);
+            teamName.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
+                new Vector3(140, 0, 0);
+            nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
+                new Vector3(140, 0, 0);
         }
         if (commander != null & crew1 != null & crew2 != null & crew3 != null & crew4 != null)
         {
-            Completo = true;
-            Incomplete.SetActive(false);
-            TeamName.GetComponent<RectTransform>().position = Incomplete.GetComponent<Transform>().position+ new Vector3(0,0,0);
-            NameHolder.GetComponent<RectTransform>().position = Incomplete.GetComponent<Transform>().position + new Vector3(0, 0, 0);
-
+            completed = true;
+            incomplete.SetActive(false);
+            teamName.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
+                new Vector3(0, 0, 0);
+            nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
+                new Vector3(0, 0, 0);
         }
-        
+        CalculateBattlePower();
+       
     }
-
 
     public void SetCommander()
     {
-         
-        AddImage(0,removeC, addC, imageC);
-
-
-    }
-    public void Setcrew1()
-    {
-        crew1 = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        AddImage(1,remove1, add1, image1);
-    }
-    public void Setcrew2()
-    {
-        crew2 = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        AddImage(2,remove2, add2, image2);
-    }
-    public void Setcrew3()
-    {
-        crew3 = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        AddImage(3,remove3, add3, image3);
-    }
-    public void Setcrew4()
-    {
-        crew4 = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        AddImage(4,remove4, add4, image4);
+        commander = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
+        AddImage(0, removeC, addC, imageC);
+        
+          
     }
 
+    public void SetCrew1()
+    {
+        crew1 = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
+        AddImage(1, remove1, add1, image1);
+        
+            
+    }
+
+    public void SetCrew2()
+    {
+        crew2 = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
+        AddImage(2, remove2, add2, image2); 
+       
+
+    }
+
+    public void SetCrew3()
+    {
+        crew3 = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
+        AddImage(3, remove3, add3, image3);
+      
+
+    }
+
+    public void SetCrew4()
+    {
+        crew4 = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
+        AddImage(4, remove4, add4, image4);
+        
+    }
 
     public void RemoveC()
     {
         if (commander != null)
         { 
             RemoveImage(removeC, addC, commander, imageC);
-        commander = null;
+            commander = null;
+            
         }
     }
 
@@ -90,27 +105,27 @@ public class TeamSetItem : MonoBehaviour
         {
             RemoveImage(remove1, add1, crew1, image1);
             crew1 = null;
-        }
-           
+        }   
     }
+
     public void Remove2()
     {
         if (crew2 != null)
         {
             RemoveImage(remove2, add2, crew2, image2);
             crew2 = null;
-        }
-            
+        }        
     }
+
     public void Remove3()
     {
         if (crew3 != null)
         {
-            RemoveImage(remove3, add3, crew3,image3);
+            RemoveImage(remove3, add3, crew3, image3);
             crew3 = null;
         }
-            
     }
+
     public void Remove4()
     {
         if (crew4 != null)
@@ -118,50 +133,74 @@ public class TeamSetItem : MonoBehaviour
             RemoveImage(remove4, add4, crew4, image4);
             crew4 = null;
         }
-            
     }
 
-
-    public void AddImage(int Crew,GameObject Remove, GameObject TeamSlot, GameObject TeamImage )
-    {   GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Crew = Crew;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Remove = Remove;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot = TeamSlot;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamImage = TeamImage;
-        GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().Team = this.gameObject;
-
-        /*ChampiomObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
-        slot = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().slot;
-        */
-        /* if (GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamSlot != null && ChampiomObj != null)
-        {
-
-            add.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 170);
-            add.GetComponent<Image>().sprite = ChampiomObj.GetComponent<Image>().sprite;
-            remove.SetActive(true);
-            ChampiomObj.GetComponent<Button>().interactable = false;
-            slot.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            ChampiomObj.GetComponent<BoxCollider>().enabled = false;
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj = null;
-            image.GetComponent<Button>().interactable = false;
-
-        }*/
+    public void AddImage(int crew, GameObject remove, GameObject teamSlot, GameObject teamImage)
+    {
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = crew;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove = remove;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot = teamSlot;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage = teamImage;
+        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().team = this.gameObject;
 
     }
 
     public void RemoveImage(GameObject remove, GameObject add, GameObject champ, GameObject image)
     {
-
-        ChampiomObj = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().ChampiomObj;
+        championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
         add.GetComponent<RectTransform>().sizeDelta = new Vector2(32, 32);
         remove.SetActive(false);
-        add.GetComponent<Image>().sprite = PlusCommander;
-
-        // Debug.Log("removed");
-        add.GetComponent<Image>().sprite = PlusCommander;
+        add.GetComponent<Image>().sprite = plusCommander;
+        add.GetComponent<Image>().sprite = plusCommander;
         image.SetActive(true);
         image.GetComponent<Button>().interactable = true;
         champ.GetComponent<Button>().interactable = true;
         champ.GetComponent<BoxCollider>().enabled = true;
+    }
+    public void CalculateBattlePower()
+    {
+        if (commander != null)
+        {
+            battlePowerCommander = commander.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCommander = 0;
+        }
+        if (crew1 != null)
+        {
+            battlePowerCrew1 = crew1.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew1 = 0;
+        }
+        if (crew2 != null)
+        {
+            battlePowerCrew2 = crew2.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew2 = 0;
+        }
+        if (crew3 != null)
+        {
+            battlePowerCrew3 = crew3.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew3 = 0;
+        }
+        if (crew4 != null)
+        {
+            battlePowerCrew4 = crew4.GetComponent<Item>().battlePower;
+        }
+        else
+        {
+            battlePowerCrew4 = 0;
+        }
 
+        battlePowerTeam = battlePowerCommander + battlePowerCrew1 + battlePowerCrew2 + battlePowerCrew3 + battlePowerCrew4;
+        battlePowerText.text = "BP: " + battlePowerTeam;
     }
 }
