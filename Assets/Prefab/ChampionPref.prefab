@@ -343,16 +343,17 @@ MonoBehaviour:
   BattlePowerText: {fileID: 990001751892976998}
   slotList: []
   slotColor: {r: 0, g: 0, b: 0, a: 0}
-  id: 0
-  name: 
-  image: 
-  tribe: 
-  rarity: 
+  CardChampion: {fileID: 3341496036332111289, guid: acf852cb218d1174abec615bdccc13b6, type: 3}
+  id: 20
+  name: Danilo the Piercing Tatui
+  image: https://cdn.seachampions.com/champion/danilo.webp
+  tribe: Shellbearers
+  rarity: Common
   elite: 0
   idealPressure: 0
-  brawl: 0
-  agility: 0
-  cunning: 0
+  brawl: 151
+  agility: 111
+  cunning: 75
   battlePower: 0
   JOHN_FANGO: {fileID: 21300000, guid: 04520dde0fd5f9246a3401c7764d8c7c, type: 3}
   CAPTAIN: {fileID: 21300000, guid: ff56a35c43d1b1c4e882b1b09c9c00be, type: 3}
@@ -451,6 +452,38 @@ MonoBehaviour:
         - m_Target: {fileID: 3142453269175642471}
           m_TargetAssemblyTypeName: SoundOver, Assembly-CSharp
           m_MethodName: MyTeam
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3795174583637242054}
+          m_TargetAssemblyTypeName: Item, Assembly-CSharp
+          m_MethodName: GetCard
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3795174583637242054}
+          m_TargetAssemblyTypeName: Item, Assembly-CSharp
+          m_MethodName: DestroyCard
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

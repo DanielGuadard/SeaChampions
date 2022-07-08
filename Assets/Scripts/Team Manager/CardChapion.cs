@@ -1,16 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
-public class Item : MonoBehaviour
+public class CardChapion : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainSlot, championObj,BattlePowerText;
+    private GameObject AgilityObj, BrawlObj, CunningObj,NameObj;
     [SerializeField]
-    private GameObject[] slotList;
-    [SerializeField]
-    private Color slotColor;
-    public GameObject CardChampion;
+    private GameObject Pressure2,Pressure3, Pressure4, Pressure5;
+    
+    
+
+
+
 
     public int id;
     public string name;
@@ -28,68 +31,47 @@ public class Item : MonoBehaviour
     ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
     RICHARD, ED, ADAM;
 
+    [SerializeField]
+    private Vector3 CardOffSet ;
 
+    // Start is called before the first frame update
     void Start()
     {
-        championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
-        SetCardImage();
+        SetCardImage();        
+        CardOffSet = new Vector3(0f, 0f, 0f);
+        AgilityObj.GetComponent<Text>().text = agility.ToString(); 
+        BrawlObj.GetComponent<Text>().text = brawl.ToString();
+        CunningObj.GetComponent<Text>().text = cunning.ToString();
+        NameObj.GetComponent<Text>().text = name;
+        Pressure2.SetActive(false);
+        Pressure3.SetActive(false);
+        Pressure4.SetActive(false);
+        Pressure5.SetActive(false);
+        if (idealPressure >= 2)
+        {
+            Pressure2.SetActive(true);
+        }
+        if (idealPressure >= 3)
+        {
+            Pressure3.SetActive(true);
+        }
+        if (idealPressure >= 4)
+        {
+            Pressure4.SetActive(true);
+        }
+        if (idealPressure >= 5)
+        {
+            Pressure5.SetActive(true);
+        }
 
-        battlePower = agility + (0.8f * brawl) + (1.2f * cunning);
-        BattlePowerText.GetComponent<Text>().text = "BP: " + battlePower.ToString();
     }
 
-    public void OnMouseDown()
+    // Update is called once per frame
+    void Update()
     {
-        if (GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot != null)
-        {
-            // Get the game objects to show the champion
-            GameObject Remove = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove;
-            GameObject TeamSlot = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot;
-            GameObject TeamImage = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage;
-            GameObject Team = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().team;
-            int Crew = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew;
 
-            // Configure the Gameobjects to show the champion
-            Remove.SetActive(true);
-            TeamImage.GetComponent<Button>().interactable = false;
-            TeamSlot.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 170);
-            TeamSlot.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-            this.GetComponent<BoxCollider>().enabled = false;
-            this.GetComponent<Button>().interactable = false;
-
-            switch (Crew)
-            {
-                case 0:
-                    Team.GetComponent<TeamSetItem>().commander = this.gameObject;
-                    break;
-                case 1:
-                    Team.GetComponent<TeamSetItem>().crew1 = this.gameObject;
-                    break;
-                case 2:
-                    Team.GetComponent<TeamSetItem>().crew2 = this.gameObject;
-                    break;
-                case 3:
-                    Team.GetComponent<TeamSetItem>().crew3 = this.gameObject;
-                    break;
-                case 4:
-                    Team.GetComponent<TeamSetItem>().crew4 = this.gameObject;
-                    break;
-            }
-
-            // Reset
-            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot = null;
-            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage = null;
-
-        }
-
-        slotList = GameObject.FindGameObjectsWithTag("slot");
-        
-        foreach(GameObject gameObject in slotList)
-        {
-            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);   
-        }
+       // this.transform.position = Input.mousePosition + CardOffSet;
     }
-     
     public void SetCardImage()
     {
         switch (name)
@@ -112,7 +94,7 @@ public class Item : MonoBehaviour
                 break;
             case "Rezaul the master Octopus":
                 this.GetComponent<Image>().sprite = REZAUL;
-               idealPressure = 1;
+                idealPressure = 1;
                 break;
             case "Garrincha the Tough Blue Lobster":
                 this.GetComponent<Image>().sprite = GARRINCHA;
@@ -154,7 +136,7 @@ public class Item : MonoBehaviour
                 this.GetComponent<Image>().sprite = ROCUS;
                 idealPressure = 2;
                 break;
-            case "Aaron the Ramming Crab": 
+            case "Aaron the Ramming Crab":
                 this.GetComponent<Image>().sprite = AARON;
                 idealPressure = 3;
                 break;
@@ -231,38 +213,4 @@ public class Item : MonoBehaviour
         }
     }
 
-    public Sprite GetSprite()
-    {
-        return this.GetComponent<Image>().sprite;
-    }
-
-  
-    public void GetCard()
-    {
-        GameObject CardOverlayHolder =  GameObject.Find("CardOverlayHolder");
-        var CardChampionClone = Instantiate(CardChampion);
-        CardChampionClone.transform.SetParent(CardOverlayHolder.transform, false);
-        CardChampionClone.transform.position = Input.mousePosition;
-        CardChampionClone.GetComponent<CardChapion>().id = this.id;
-        CardChampionClone.GetComponent<CardChapion>().name = this.name;
-        CardChampionClone.GetComponent<CardChapion>().image = this.image;
-        CardChampionClone.GetComponent<CardChapion>().tribe = this.tribe;
-        CardChampionClone.GetComponent<CardChapion>().rarity = this.rarity;
-        CardChampionClone.GetComponent<CardChapion>().elite = this.elite;
-        CardChampionClone.GetComponent<CardChapion>().idealPressure = this.idealPressure;
-        CardChampionClone.GetComponent<CardChapion>().brawl = this.brawl;
-        CardChampionClone.GetComponent<CardChapion>().agility = this.agility;
-        CardChampionClone.GetComponent<CardChapion>().cunning = this.cunning;
-        CardChampionClone.GetComponent<CardChapion>().battlePower = this.battlePower;
-    }
-    public void DestroyCard()
-    {
-        GameObject CardChampionClone = GameObject.Find("CardChampion(Clone)");
-        Destroy(CardChampionClone);
-    }
-
-
-
 }
-
-
