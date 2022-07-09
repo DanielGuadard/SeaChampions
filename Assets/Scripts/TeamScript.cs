@@ -50,7 +50,7 @@ public class TeamScript : MonoBehaviour
 
     public void Enter()
     {
-        inputFieldImage.color= new Color(1, 1, 1, .5f);
+        inputFieldImage.color = new Color(1, 1, 1, .5f);
         GameObject.Find("AudioKey").GetComponent<AudioSource>().PlayOneShot(myTeamsSound);
     }
 

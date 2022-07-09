@@ -7,7 +7,7 @@ public class OPENAndEXITGame : MonoBehaviour
     [SerializeField]
     private string filenameTeams, filenameConfig;
     [SerializeField]
-    private GameObject teamsContent, teamPref;
+    private GameObject teamsContent, teamsContentPlayNow, teamPref, teamPrefPlayNow;
     [SerializeField]
     private GameObject[] slotList;
 
@@ -122,17 +122,42 @@ public class OPENAndEXITGame : MonoBehaviour
                 }
                 
                 // Filling team's name
-
                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Placeholder_Team")[teamsCount].GetComponent<Text>().text = "Enter new name...";
                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "TeamName")[teamsCount].GetComponent<Text>().text = team.name;
                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "InputField_Team")[teamsCount].GetComponent<InputField>().text = team.name;
+
+                FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().completed = true;
+
+                // Instantiating Play Now menu team
+                GameObject.Instantiate(teamPrefPlayNow).transform.SetParent(teamsContentPlayNow.transform, false);
                 teamsCount++;
             }
+        }
+
+        // Associating teams in two menus
+        int teamCount = 0;
+        foreach (GameObject team in FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team"))
+        {
+            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "playnowteam")[teamCount].GetComponent<PlayNowTeamSetItem>().team = team;
+            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamCount].GetComponent<TeamSetItem>().CalculateBattlePower();
+            teamCount++;
         }
 
         // Updating teamsCreated counter in scripts
         GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated = teamsCount;
         teamsContent.GetComponentInChildren<NewTeams>().teamCreated = teamsCount;
+    }
+
+    public void NewTeamPlayNow()
+    {
+        GameObject.Instantiate(teamPrefPlayNow).transform.SetParent(teamsContentPlayNow.transform, false);
+        int teamCount = 0;
+        foreach (GameObject team in FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team"))
+        {
+            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "playnowteam")[teamCount].GetComponent<PlayNowTeamSetItem>().team = team;
+            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamCount].GetComponent<TeamSetItem>().CalculateBattlePower();
+            teamCount++;
+        }
     }
 
     public GameObject FindAvailableCard(int id)
@@ -158,11 +183,22 @@ public class OPENAndEXITGame : MonoBehaviour
         Application.Quit();
     }
 
+    public void SaveTeams()
+    {
+        JSONHandler.SaveTeamsToJSON(GetTeams(), filenameTeams);
+    }
+
+    public void SaveConfig()
+    {
+        JSONHandler.SaveConfigToJSON(GetConfig(), filenameConfig);
+    }
+
     public ConfigJSON GetConfig()
     {
         ConfigJSON config = new ConfigJSON((int)FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Music_Slider").GetComponent<Slider>().value,
             (int)FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Sound_Slider").GetComponent<Slider>().value,
             FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Dropdown_Resolution").GetComponent<TMP_Dropdown>().value,
+            GameObject.Find("ScriptHolder").GetComponent<PlayNow>().gamemode,
             FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Full_Screen_Toggle").GetComponent<Toggle>().isOn);
 
         return config;
