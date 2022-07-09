@@ -344,16 +344,16 @@ MonoBehaviour:
   slotList: []
   slotColor: {r: 0, g: 0, b: 0, a: 0}
   CardChampion: {fileID: 3341496036332111289, guid: acf852cb218d1174abec615bdccc13b6, type: 3}
-  id: 20
-  name: Danilo the Piercing Tatui
-  image: https://cdn.seachampions.com/champion/danilo.webp
-  tribe: Shellbearers
-  rarity: Common
+  id: 0
+  name: 
+  image: 
+  tribe: 
+  rarity: 
   elite: 0
   idealPressure: 0
-  brawl: 151
-  agility: 111
-  cunning: 75
+  brawl: 0
+  agility: 0
+  cunning: 0
   battlePower: 0
   JOHN_FANGO: {fileID: 21300000, guid: 04520dde0fd5f9246a3401c7764d8c7c, type: 3}
   CAPTAIN: {fileID: 21300000, guid: ff56a35c43d1b1c4e882b1b09c9c00be, type: 3}
