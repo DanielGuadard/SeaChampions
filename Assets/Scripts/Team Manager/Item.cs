@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainSlot, championObj;
+    private GameObject mainSlot, championObj,BattlePowerText;
     [SerializeField]
     private GameObject[] slotList;
     [SerializeField]
     private Color slotColor;
+    public GameObject CardChampion;
 
     public int id;
     public string name;
@@ -31,7 +33,9 @@ public class Item : MonoBehaviour
     {
         championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
         SetCardImage();
+
         battlePower = agility + (0.8f * brawl) + (1.2f * cunning);
+        BattlePowerText.GetComponent<Text>().text = "BP: " + battlePower.ToString();
     }
 
     public void OnMouseDown()
@@ -233,7 +237,32 @@ public class Item : MonoBehaviour
     }
 
   
-   
+    public void GetCard()
+    {
+        GameObject CardOverlayHolder =  GameObject.Find("CardOverlayHolder");
+        var CardChampionClone = Instantiate(CardChampion);
+        CardChampionClone.transform.SetParent(CardOverlayHolder.transform, false);
+        CardChampionClone.transform.position = Input.mousePosition;
+        CardChampionClone.GetComponent<CardChapion>().id = this.id;
+        CardChampionClone.GetComponent<CardChapion>().name = this.name;
+        CardChampionClone.GetComponent<CardChapion>().image = this.image;
+        CardChampionClone.GetComponent<CardChapion>().tribe = this.tribe;
+        CardChampionClone.GetComponent<CardChapion>().rarity = this.rarity;
+        CardChampionClone.GetComponent<CardChapion>().elite = this.elite;
+        CardChampionClone.GetComponent<CardChapion>().idealPressure = this.idealPressure;
+        CardChampionClone.GetComponent<CardChapion>().brawl = this.brawl;
+        CardChampionClone.GetComponent<CardChapion>().agility = this.agility;
+        CardChampionClone.GetComponent<CardChapion>().cunning = this.cunning;
+        CardChampionClone.GetComponent<CardChapion>().battlePower = this.battlePower;
+    }
+    public void DestroyCard()
+    {
+        GameObject CardChampionClone = GameObject.Find("CardChampion(Clone)");
+        Destroy(CardChampionClone);
+    }
+
+
+
 }
 
 
