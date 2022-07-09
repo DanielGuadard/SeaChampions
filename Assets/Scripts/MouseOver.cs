@@ -1,28 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseOver : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip onMouseOverSound;
+    [SerializeField]
+    private AudioSource audioSourceOnMouseOverSound;
 
-    public AudioClip menuSound;
-    public AudioSource AudioSourceMenuSound;
-    // Start is called before the first frame update
-    void Start()
+    public void PlaySound()
     {
-        
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void Menu()
-    {
-        AudioSourceMenuSound.PlayOneShot(menuSound);
+        audioSourceOnMouseOverSound.PlayOneShot(onMouseOverSound);
     }
     
 }

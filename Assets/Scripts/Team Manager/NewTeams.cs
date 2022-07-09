@@ -1,45 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NewTeams : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject teamsContent, teamPref;    
+    [SerializeField]
+    private AudioClip mySound;
+    [SerializeField]
+    private AudioSource audioSource;
 
-    public GameObject teamsContent,Team_Pref;    
-    public int TeamLimit, TeamCriado;
-    public AudioClip MySound;
-    public AudioSource AudioSour;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int teamLimit, teamCreated;
 
     public void NewTeam()
     {
-        TeamCriado = GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamCriado;
-        if (TeamCriado <  TeamLimit)
+        teamCreated = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated;
+        if (teamCreated < teamLimit)
         {
-            GameObject.Instantiate(Team_Pref).transform.SetParent(teamsContent.transform, false);
-            GameObject.Find("ScriptHolder").GetComponent<CardCostructor>().TeamCriado++;
+            GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
+            GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated++;
         }
-        
     }
+
      public void Enter()
     {
-        GetComponent<Image>().color = new Color(1,1,1,.5f);
-        AudioSour.PlayOneShot(MySound);
+        GetComponent<Image>().color = new Color(1, 1, 1, .5f);
+        audioSource.PlayOneShot(mySound);
     }
+
     public void Exit()
     {
         GetComponent<Image>().color = new Color(1, 1, 1, 0);
