@@ -19,7 +19,6 @@ public class TeamSetItem : MonoBehaviour
     public bool completed;
 
     public float battlePowerTeam, battlePowerCommander, battlePowerCrew1, battlePowerCrew2, battlePowerCrew3, battlePowerCrew4;
-    
 
     void Start()
     {
@@ -36,6 +35,7 @@ public class TeamSetItem : MonoBehaviour
                 new Vector3(140, 0, 0);
             nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
                 new Vector3(140, 0, 0);
+            GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().SaveTeams();
         }
         if (commander != null & crew1 != null & crew2 != null & crew3 != null & crew4 != null)
         {
@@ -45,9 +45,9 @@ public class TeamSetItem : MonoBehaviour
                 new Vector3(0, 0, 0);
             nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
                 new Vector3(0, 0, 0);
+            GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().SaveTeams();
         }
         CalculateBattlePower();
-       
     }
 
     public void SetCommander()
@@ -157,6 +157,7 @@ public class TeamSetItem : MonoBehaviour
         champ.GetComponent<Button>().interactable = true;
         champ.GetComponent<BoxCollider>().enabled = true;
     }
+
     public void CalculateBattlePower()
     {
         if (commander != null)
