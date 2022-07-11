@@ -10,17 +10,16 @@ public class DeleteTeam : MonoBehaviour
     [SerializeField]
     private AudioClip mySound;
 
-   public void DeleteThisTeam()
+    public void DeleteThisTeam()
     {
 
-        thisTeam.GetComponent<TeamSetItem>().RemoveC();
-        thisTeam.GetComponent<TeamSetItem>().Remove1();
-        thisTeam.GetComponent<TeamSetItem>().Remove2();
-        thisTeam.GetComponent<TeamSetItem>().Remove3();
-        thisTeam.GetComponent<TeamSetItem>().Remove4();
-
-        Destroy(thisTeam);
-        GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated--;
+        foreach (GameObject playnowteam in FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "playnowteam"))
+        {
+            if (playnowteam.GetComponent<PlayNowTeamSetItem>().team == thisTeam)
+            {
+                playnowteam.GetComponent<PlayNowTeamSetItem>().DeleteTeam();
+            }
+        }
     }
 
     public void Enter()

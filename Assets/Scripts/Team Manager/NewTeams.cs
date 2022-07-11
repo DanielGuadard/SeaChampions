@@ -19,6 +19,7 @@ public class NewTeams : MonoBehaviour
         {
             GameObject.Instantiate(teamPref).transform.SetParent(teamsContent.transform, false);
             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamsCreated++;
+            GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().NewTeamPlayNow();
         }
     }
 

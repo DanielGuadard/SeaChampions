@@ -8,16 +8,16 @@ public class Navigation : MonoBehaviour
 
     // Navigation windows
     [SerializeField]
-    private GameObject buildYourTeamWindow, compendiumWindow, optionsWindow;
+    private GameObject buildYourTeamWindow, compendiumWindow, optionsWindow, playNowWindow;
 
     // Buttons
     [SerializeField]
-    private GameObject idlePVEButton, championsButton, compendiumButton,
+    private GameObject playNowButton, idlePVEButton, championsButton, compendiumButton,
         buildYourTeamButton, optionsButton, optionsButton2;
 
     public void ChampionsClick()
     {
-        if (compendiumButton.activeInHierarchy == false) {
+        if (!compendiumButton.activeInHierarchy) {
            
             compendiumButton.SetActive(true);
             buildYourTeamButton.SetActive(true);
@@ -33,7 +33,7 @@ public class Navigation : MonoBehaviour
             optionsButton.SetActive(true);
         }
         
-        if (menuMiddle.activeInHierarchy == true)
+        if (menuMiddle.activeInHierarchy)
         {
             menuMiddle.SetActive(false);
             menuSide.SetActive(true);
@@ -45,26 +45,28 @@ public class Navigation : MonoBehaviour
     }
     public void CompemdiumClick()
     {
-        if (menuSide.activeInHierarchy == true && menuMiddle.activeInHierarchy == false)
+        if (menuSide.activeInHierarchy)
         {
             optionsWindow.SetActive(false);
             buildYourTeamWindow.SetActive(false);
+            playNowWindow.SetActive(false);
             compendiumWindow.SetActive(true);    
         }
     }
     public void BuildYourTeamClick()
     {
-        if (menuSide.activeInHierarchy == true && menuMiddle.activeInHierarchy == false)
+        if (menuSide.activeInHierarchy)
         {
             compendiumWindow.SetActive(false);
             optionsWindow.SetActive(false);
+            playNowWindow.SetActive(false);
             buildYourTeamWindow.SetActive(true);
         }
     }
 
     public void OptionsClick()
     {
-        if (menuMiddle.activeInHierarchy == true)
+        if (menuMiddle.activeInHierarchy)
         {
             menuMiddle.SetActive(false);
             menuSide.SetActive(true);
@@ -73,7 +75,23 @@ public class Navigation : MonoBehaviour
 
         compendiumWindow.SetActive(false);
         buildYourTeamWindow.SetActive(false);
+        playNowWindow.SetActive(false);
         optionsWindow.SetActive(true);
+    }
+
+    public void PlayNowClick()
+    {
+        if (menuMiddle.activeInHierarchy)
+        {
+            menuMiddle.SetActive(false);
+            menuSide.SetActive(true);
+            playNowButton.SetActive(true);
+        }
+
+        compendiumWindow.SetActive(false);
+        buildYourTeamWindow.SetActive(false);
+        optionsWindow.SetActive(false);
+        playNowWindow.SetActive(true);
     }
 
 

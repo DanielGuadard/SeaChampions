@@ -7,6 +7,7 @@ TagManager:
   - image
   - slot
   - team
+  - playnowteam
   layers:
   - Default
   - TransparentFX

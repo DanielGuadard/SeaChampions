@@ -77,7 +77,7 @@ public class ChampionsCheck : MonoBehaviour
                 case "Garrincha the Tough Blue Lobster":
                     Mark_GARRINCHA.SetActive(true);
                     break;
-                case "Luke the Turtle":
+                case "Luke Leatherback the Turtle":
                     Mark_LUKE.SetActive(true);
                     break;
                 case "Ray the Whipping Manta":
@@ -101,7 +101,7 @@ public class ChampionsCheck : MonoBehaviour
                 case "Arsella the Sea Nettle":
                     Mark_ARSELLA.SetActive(true);
                     break;
-                case "Rocus 'Shades' the Blue Shark":
+                case "Rocus Shades the Blue Shark":
                     Mark_ROCUS.SetActive(true);
                     break;
                 case "Aaron the Ramming Crab":
@@ -116,7 +116,7 @@ public class ChampionsCheck : MonoBehaviour
                 case "Todd the Barber Eel":
                     Mark_TODD.SetActive(true);
                     break;
-                case "Jhonny the Sailor Squid":
+                case "Johnny the Sailor Squid":
                     Mark_JOHNNY.SetActive(true);
                     break;
                 case "Soorya the Needling Box Jellyfish":
@@ -140,7 +140,7 @@ public class ChampionsCheck : MonoBehaviour
                 case "Sasha the Wrestling Beluga":
                     Mark_SASHA.SetActive(true);
                     break;
-                case "Medhansh the Swordsman":
+                case "Medhansh the Swordsman Octopus":
                     Mark_MEDHANSH.SetActive(true);
                     break;
                 case "Sirilo the Marbled Swim Crab":

@@ -35,7 +35,7 @@ public static class JSONHandler
 
         if (string.IsNullOrEmpty(content) || content == "{}")
         {
-            return new ConfigJSON(80, 80, 0, false);
+            return new ConfigJSON(80, 80, 0, 0, false);
         }
         ConfigJSON result = JsonUtility.FromJson<ConfigJSON>(content);
 
@@ -102,14 +102,16 @@ public class ConfigJSON
     public int musicVolume;
     public int soundVolume;
     public int resolution;
+    public int gamemode;
     public bool isFullScreen;
 
-    public ConfigJSON(int musicVolume, int soundVolume, int resolution, bool isFullScreen)
+    public ConfigJSON(int musicVolume, int soundVolume, int resolution, int gamemode, bool isFullScreen)
     {
         this.musicVolume = musicVolume;
         this.soundVolume = soundVolume;
         this.resolution = resolution;
         this.isFullScreen = isFullScreen;
+        this.gamemode = gamemode;
     }
 }
 
