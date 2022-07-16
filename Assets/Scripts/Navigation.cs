@@ -15,6 +15,13 @@ public class Navigation : MonoBehaviour
     private GameObject playNowButton, idlePVEButton, championsButton, compendiumButton,
         buildYourTeamButton, optionsButton, optionsButton2;
 
+    //Scenes
+    [SerializeField]
+    private GameObject MainWindow, TrainingMode;
+
+
+    public int BattleMode;
+
     public void ChampionsClick()
     {
         if (!compendiumButton.activeInHierarchy) {
@@ -94,5 +101,25 @@ public class Navigation : MonoBehaviour
         playNowWindow.SetActive(true);
     }
 
+    public void ToBattle()
+    {
+        switch (BattleMode)
+        {
+            case 0://QuickPlay
 
+            break;
+
+            case 1://TrainigMode
+                MainWindow.SetActive(false);
+                TrainingMode.SetActive(true);
+                GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Timer = 50;
+
+                break;
+
+            case 2: //Tutorial
+
+            break;
+
+        }
+    }
 }

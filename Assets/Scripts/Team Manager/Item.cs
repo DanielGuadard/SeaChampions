@@ -5,7 +5,7 @@ using System.Collections;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainSlot, championObj,BattlePowerText;
+    private GameObject mainSlot, championObj, BattlePowerText;
     [SerializeField]
     private GameObject[] slotList;
     [SerializeField]
@@ -27,9 +27,9 @@ public class Item : MonoBehaviour
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
     ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
     RICHARD, ED, ADAM;
+    
 
-
-    void Start()
+    void Awake()
     {
         championObj = GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().championObj;
         SetCardImage();
@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
         BattlePowerText.GetComponent<Text>().text = "BP: " + battlePower.ToString();
     }
 
-    public void OnMouseDown()
+    public void SelectChampion()
     {
         if (GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamSlot != null)
         {
@@ -83,13 +83,13 @@ public class Item : MonoBehaviour
         }
 
         slotList = GameObject.FindGameObjectsWithTag("slot");
-        
-        foreach(GameObject gameObject in slotList)
+
+        foreach (GameObject gameObject in slotList)
         {
-            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);   
+            gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
     }
-     
+
     public void SetCardImage()
     {
         switch (name)
@@ -112,7 +112,7 @@ public class Item : MonoBehaviour
                 break;
             case "Rezaul the Master Octopus":
                 this.GetComponent<Image>().sprite = REZAUL;
-               idealPressure = 1;
+                idealPressure = 1;
                 break;
             case "Garrincha the Tough Blue Lobster":
                 this.GetComponent<Image>().sprite = GARRINCHA;
@@ -154,7 +154,7 @@ public class Item : MonoBehaviour
                 this.GetComponent<Image>().sprite = ROCUS;
                 idealPressure = 2;
                 break;
-            case "Aaron the Ramming Crab": 
+            case "Aaron the Ramming Crab":
                 this.GetComponent<Image>().sprite = AARON;
                 idealPressure = 3;
                 break;
@@ -226,7 +226,7 @@ public class Item : MonoBehaviour
                 this.GetComponent<Image>().sprite = ADAM;
                 idealPressure = 2;
                 break;
-            
+
         }
     }
 
@@ -235,10 +235,10 @@ public class Item : MonoBehaviour
         return this.GetComponent<Image>().sprite;
     }
 
-  
+
     public void GetCard()
     {
-        GameObject CardOverlayHolder =  GameObject.Find("CardOverlayHolder");
+        GameObject CardOverlayHolder = GameObject.Find("CardOverlayHolder");
         var CardChampionClone = Instantiate(CardChampion);
         CardChampionClone.transform.SetParent(CardOverlayHolder.transform, false);
         CardChampionClone.transform.position = Input.mousePosition;

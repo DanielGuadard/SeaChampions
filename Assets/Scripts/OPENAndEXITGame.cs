@@ -53,7 +53,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_commander")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "ImageC")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_commander")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
@@ -68,7 +68,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (1)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image1")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (1)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
@@ -83,7 +83,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (2)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image2")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (2)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
@@ -98,7 +98,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (3)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image3")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (3)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
@@ -113,7 +113,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (4)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image4")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (4)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
