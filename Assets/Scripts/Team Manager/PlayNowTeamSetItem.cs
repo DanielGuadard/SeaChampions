@@ -137,6 +137,9 @@ public class PlayNowTeamSetItem : MonoBehaviour
         team.GetComponent<TeamSetItem>().Remove2();
         team.GetComponent<TeamSetItem>().Remove3();
         team.GetComponent<TeamSetItem>().Remove4();
+        team.GetComponent<TeamSetItem>().completed = false;
+        teamName.GetComponent<Text>().text = "";
+        team.GetComponent<TeamSetItem>().teamName.GetComponent<Text>().text = "";
 
         Destroy(thisTeam);
         Destroy(team);

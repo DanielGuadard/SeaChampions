@@ -1353,7 +1353,7 @@ GameObject:
   - component: {fileID: 1297496903}
   - component: {fileID: 1297496904}
   m_Layer: 5
-  m_Name: InputField_Team
+  m_Name: InputField_TeamPlayNow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1784,7 +1784,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: test
+  m_Text: 
 --- !u!1 &7237553894222320867
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,7 +2051,7 @@ GameObject:
   - component: {fileID: 5485747250544126237}
   - component: {fileID: 4304551252502189552}
   m_Layer: 5
-  m_Name: TeamName
+  m_Name: TeamNamePlayNow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

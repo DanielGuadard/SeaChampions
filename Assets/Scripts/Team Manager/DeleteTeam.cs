@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +13,10 @@ public class DeleteTeam : MonoBehaviour
 
     public void DeleteThisTeam()
     {
-
         foreach (GameObject playnowteam in FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "playnowteam"))
         {
-            if (playnowteam.GetComponent<PlayNowTeamSetItem>().team == thisTeam)
+            if (playnowteam.GetComponent<PlayNowTeamSetItem>().team.GetComponent<TeamSetItem>().teamName
+                .GetComponent<Text>().text == thisTeam.GetComponent<TeamSetItem>().teamName.GetComponent<Text>().text)
             {
                 playnowteam.GetComponent<PlayNowTeamSetItem>().DeleteTeam();
             }
