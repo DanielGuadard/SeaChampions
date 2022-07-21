@@ -5,7 +5,7 @@ public class PlayNowTeamSetItem : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject thisTeam, commander, crew1, crew2, crew3, crew4, teamName, inactiveName, incomplete, battlePower, selected, selectButton;
+    private GameObject thisTeam, commander, crew1, crew2, crew3, crew4, teamName, inactiveName, incomplete, battlePower, selected, selectButton, SelectedBackGround;
 
     public GameObject team;
 
@@ -117,7 +117,10 @@ public class PlayNowTeamSetItem : MonoBehaviour
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew1 = team.GetComponent<TeamSetItem>().crew1;
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew2 = team.GetComponent<TeamSetItem>().crew2;
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew3 = team.GetComponent<TeamSetItem>().crew3; 
-            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew4 = team.GetComponent<TeamSetItem>().crew4; 
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew4 = team.GetComponent<TeamSetItem>().crew4;
+            SelectedBackGround.SetActive(true);
+
+
         }
         else if (selectedTeams == 1)
         {
@@ -126,6 +129,7 @@ public class PlayNowTeamSetItem : MonoBehaviour
                 isSelected = false;
                 selected.SetActive(false);
                 selectButton.GetComponentInChildren<Text>().text = "Select";
+                SelectedBackGround.SetActive(false);
             }
         }
     }

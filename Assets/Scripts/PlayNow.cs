@@ -64,20 +64,20 @@ public class PlayNow : MonoBehaviour
     public void QuickPlayClick()
     {
         gamemode = 0;
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color(255, 217, 0);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 217, 0);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").GetComponent<Image>().color = new Color(255, 255, 255);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 255, 255);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
-       
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color32(255, 170, 0,255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0,255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").GetComponent<Image>().color = new Color32(255, 255, 255,255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+
     }
 
     public void TrainingModeClick()
     {
         gamemode = 1;
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").GetComponent<Image>().color = new Color(255, 217, 0);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 217, 0);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").GetComponent<Image>().color = new Color32(255, 170, 0,255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0,255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 255, 255);
@@ -88,8 +88,8 @@ public class PlayNow : MonoBehaviour
     public void TutorialClick()
     {
         gamemode = 2;
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 217, 0);
-        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 217, 0);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color32(255, 170, 0,255);
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0,255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color(255, 255, 255);

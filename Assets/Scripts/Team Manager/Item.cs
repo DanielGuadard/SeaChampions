@@ -241,7 +241,7 @@ public class Item : MonoBehaviour
         GameObject CardOverlayHolder = GameObject.Find("CardOverlayHolder");
         var CardChampionClone = Instantiate(CardChampion);
         CardChampionClone.transform.SetParent(CardOverlayHolder.transform, false);
-        CardChampionClone.transform.position = Input.mousePosition;
+        CardChampionClone.transform.position = this.transform.position;
         CardChampionClone.GetComponent<CardChapion>().id = this.id;
         CardChampionClone.GetComponent<CardChapion>().name = this.name;
         CardChampionClone.GetComponent<CardChapion>().image = this.image;
@@ -256,8 +256,12 @@ public class Item : MonoBehaviour
     }
     public void DestroyCard()
     {
-        GameObject CardChampionClone = GameObject.Find("CardChampion(Clone)");
-        Destroy(CardChampionClone);
+        GameObject[] Overlay = GameObject.FindGameObjectsWithTag("Overlay");
+        foreach (GameObject x in Overlay)
+        {
+            Destroy(x);
+        }
+
     }
 
 
