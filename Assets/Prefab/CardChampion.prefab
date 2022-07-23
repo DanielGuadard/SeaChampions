@@ -820,7 +820,7 @@ MonoBehaviour:
   CAPTAIN: {fileID: 21300000, guid: cacd58053c2134b4fa78c94e8cf65187, type: 3}
   TED: {fileID: 21300000, guid: 97278c9966b479648a180db1234c16a4, type: 3}
   NENRUNG: {fileID: 21300000, guid: df3a433013003154986ee1ff4b02b60f, type: 3}
-  REZAUL: {fileID: 21300000, guid: bb4dd4a142cde4e4f8d802ffef919be9, type: 3}
+  REZAUL: {fileID: 21300000, guid: 0157513bcbb87024bbf3899d02b970e5, type: 3}
   GARRINCHA: {fileID: 21300000, guid: 009d9b31e3bdac44faefdb996ca69cd6, type: 3}
   LUKE: {fileID: 21300000, guid: bb6e3b2a2e376534abfbfa414bea1c61, type: 3}
   RAY: {fileID: 21300000, guid: 8c6843af363ff0843b91891dd24b196e, type: 3}

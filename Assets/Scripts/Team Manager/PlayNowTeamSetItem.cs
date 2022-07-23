@@ -112,13 +112,14 @@ public class PlayNowTeamSetItem : MonoBehaviour
             isSelected = true;
             selected.SetActive(true);
             selectButton.GetComponentInChildren<Text>().text = "Unselect";
-            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACommander = team.GetComponent<TeamSetItem>().commander;
-            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().TeamAActive = team.GetComponent<TeamSetItem>().commander;
+           // GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().TeamAActive = team.GetComponent<TeamSetItem>().commander;
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACommander = team.GetComponent<TeamSetItem>().commander;           
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew1 = team.GetComponent<TeamSetItem>().crew1;
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew2 = team.GetComponent<TeamSetItem>().crew2;
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew3 = team.GetComponent<TeamSetItem>().crew3; 
             GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew4 = team.GetComponent<TeamSetItem>().crew4;
             SelectedBackGround.SetActive(true);
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Invoke("",1);
 
 
         }

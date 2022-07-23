@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayNow : MonoBehaviour
 {
 
-    public int gamemode;
+    public int gamemode,Dificult;
     private bool started;
 
     [SerializeField]
@@ -130,12 +130,20 @@ public class PlayNow : MonoBehaviour
                 StartCoroutine(FadeIn());
             }
         }
+
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Dificult = this.Dificult;
         GameObject.Find("ScriptHolder").GetComponent<Navigation>().Invoke("ToBattle", 1);
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Started = true;
     }
 
     public void Cancel()
     {
         started = false;
     }
+
+    public void DificultBegginer() { Dificult = 1; }
+    public void DificultChallenging() { Dificult = 2; }
+    public void DificultExpert() { Dificult = 3; }
+
 
 }

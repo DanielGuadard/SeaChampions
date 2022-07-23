@@ -80,7 +80,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = JOHN_FANGO;
                 idealPressure = 4;
                 break;
-            case "Captain Costa the Man O'War":
+            case "Captain Costa the Man O’War":
                 this.GetComponent<Image>().sprite = CAPTAIN;
                 idealPressure = 1;
                 break;
@@ -92,7 +92,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = NENRUNG;
                 idealPressure = 3;
                 break;
-            case "Rezaul the master Octopus":
+            case "Rezaul the Master Octopus":
                 this.GetComponent<Image>().sprite = REZAUL;
                 idealPressure = 1;
                 break;
@@ -100,7 +100,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = GARRINCHA;
                 idealPressure = 2;
                 break;
-            case "Luke the Turtle":
+            case "Luke Leatherback the Turtle":
                 this.GetComponent<Image>().sprite = LUKE;
                 idealPressure = 2;
                 break;
@@ -132,7 +132,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = ARSELLA;
                 idealPressure = 4;
                 break;
-            case "Rocus 'Shades' the Blue Shark":
+            case "Rocus Shades the Blue Shark":
                 this.GetComponent<Image>().sprite = ROCUS;
                 idealPressure = 2;
                 break;
@@ -152,7 +152,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = TODD;
                 idealPressure = 4;
                 break;
-            case "Jhonny the Sailor Squid":
+            case "Johnny the Sailor Squid":
                 this.GetComponent<Image>().sprite = JOHNNY;
                 idealPressure = 2;
                 break;
@@ -184,7 +184,7 @@ public class CardChapion : MonoBehaviour
                 this.GetComponent<Image>().sprite = SASHA;
                 idealPressure = 1;
                 break;
-            case "Medhansh the Swordsman":
+            case "Medhansh the Swordsman Octopus":
                 this.GetComponent<Image>().sprite = MEDHANSH;
                 idealPressure = 2;
                 break;

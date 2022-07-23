@@ -174,7 +174,7 @@ public class Item : MonoBehaviour
                 this.GetComponent<Image>().sprite = JOHNNY;
                 idealPressure = 2;
                 break;
-            case "Soorya the Needling Box Jellyfish":
+            case "Soorya the Needling Box Jellyfish":   
                 this.GetComponent<Image>().sprite = SOORYA;
                 idealPressure = 4;
                 break;
@@ -242,6 +242,7 @@ public class Item : MonoBehaviour
         var CardChampionClone = Instantiate(CardChampion);
         CardChampionClone.transform.SetParent(CardOverlayHolder.transform, false);
         CardChampionClone.transform.position = this.transform.position;
+        CardChampionClone.transform.localScale=new Vector3(0.6f, 0.6f, 1);    
         CardChampionClone.GetComponent<CardChapion>().id = this.id;
         CardChampionClone.GetComponent<CardChapion>().name = this.name;
         CardChampionClone.GetComponent<CardChapion>().image = this.image;
