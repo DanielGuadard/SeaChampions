@@ -45,6 +45,7 @@ public class OPENAndEXITGame : MonoBehaviour
                     {
                         case 0:
                             // Setting team's commander
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().commander = cardObject;
                             FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCommander();
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 0;
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove = 
@@ -53,13 +54,14 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_commander")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "ImageC")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_commander")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
                             break;
                         case 1:
                             // Setting team's crew1
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().crew1 = cardObject;
                             FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew1();
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 1;
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
@@ -68,13 +70,14 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (1)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image1")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (1)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
                             break;
                         case 2:
                             // Setting team's crew2
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().crew2 = cardObject;
                             FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew2();
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 2;
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
@@ -83,13 +86,14 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (2)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image2")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (2)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
                             break;
                         case 3:
                             // Setting team's crew3
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().crew3 = cardObject;
                             FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew3();
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 3;
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
@@ -98,13 +102,14 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (3)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image3")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (3)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
                             break;
                         case 4:
                             // Setting team's crew4
+                            FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().crew4 = cardObject;
                             FindInactiveHelper.FindObjectsByTag(GameObject.Find("Canvas_Holder"), "team")[teamsCount].GetComponent<TeamSetItem>().SetCrew4();
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().crew = 4;
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().remove =
@@ -113,7 +118,7 @@ public class OPENAndEXITGame : MonoBehaviour
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (4)")[teamsCount];
                             GameObject.Find("ScriptHolder").GetComponent<CardConstructor>().teamImage =
                                 FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Image4")[teamsCount];
-                            cardObject.GetComponentInChildren<Item>().OnMouseDown();
+                            cardObject.GetComponentInChildren<Item>().SelectChampion();
                             cardObject.GetComponentInChildren<Item>().SetCardImage();
                             FindInactiveHelper.FindObjectsByName(GameObject.Find("Canvas_Holder"), "Add_crew (4)")[teamsCount].GetComponent<Image>().sprite =
                                 cardObject.GetComponentInChildren<Item>().GetSprite();
@@ -219,6 +224,7 @@ public class OPENAndEXITGame : MonoBehaviour
             if (team.GetComponent<TeamSetItem>().completed)
             {
                 GameObject nameObj = team.GetComponent<TeamSetItem>().teamName;
+                Debug.Log(nameObj.GetComponent<Text>().text);
                 teams[i].name = nameObj.GetComponent<Text>().text;
                 teams[i].deck = GetCards(i);
                 i++;

@@ -70,6 +70,7 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+       
     }
 
     public void TrainingModeClick()
@@ -81,6 +82,7 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+        
     }
 
     public void TutorialClick()
@@ -92,6 +94,7 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+       
     }
 
     public void StartGameClick()
@@ -105,14 +108,18 @@ public class PlayNow : MonoBehaviour
                 switch (gamemode)
                 {
                     case 0:
-                        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Canvas_QuickPlay").SetActive(true);
+                        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Canvas_Queu").SetActive(true);
                         // Other implementation when Quick Play is selected
+                        GameObject.Find("ScriptHolder").GetComponent<Navigation>().BattleMode = 0;
                         break;
                     case 1:
                         // Implementation when Training Mode is selected
+                        GameObject.Find("ScriptHolder").GetComponent<Navigation>().BattleMode = 1;
+
                         break;
                     case 2:
                         // Implementation when Tutorial is selected
+                        GameObject.Find("ScriptHolder").GetComponent<Navigation>().BattleMode = 2;
                         break;
                     default:
                         break;
@@ -123,6 +130,7 @@ public class PlayNow : MonoBehaviour
                 StartCoroutine(FadeIn());
             }
         }
+        GameObject.Find("ScriptHolder").GetComponent<Navigation>().Invoke("ToBattle", 1);
     }
 
     public void Cancel()

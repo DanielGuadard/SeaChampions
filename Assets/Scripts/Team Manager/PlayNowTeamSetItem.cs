@@ -25,67 +25,44 @@ public class PlayNowTeamSetItem : MonoBehaviour
 
     public void SetCommanderImage()
     {
-        if (team.GetComponent<TeamSetItem>().battlePowerCommander == 0)
+        
         {
-            commander.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-        }
-        else
-        {
-            commander.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().addC.GetComponent<Image>().sprite;
+            commander.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().commander.GetComponent<Image>().sprite;
             commander.GetComponent<Image>().color = new Color(255, 255, 255, 255);
         }
     }
 
     public void SetCrew1Image()
     {
-        if (team.GetComponent<TeamSetItem>().battlePowerCrew1 == 0)
-        {
-            crew1.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-        }
-        else
-        {
-            crew1.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().add1.GetComponent<Image>().sprite;
+        
+            crew1.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().crew1.GetComponent<Image>().sprite;
             crew1.GetComponent<Image>().color = new Color(255, 255, 255, 255);
-        }
+        
     }
 
     public void SetCrew2Image()
     {
-        if (team.GetComponent<TeamSetItem>().battlePowerCrew2 == 0)
-        {
-            crew2.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-        }
-        else
-        {
-            crew2.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().add2.GetComponent<Image>().sprite;
+       
+            crew2.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().crew2.GetComponent<Image>().sprite;
             crew2.GetComponent<Image>().color = new Color(255, 255, 255, 255);
-        }
+       
     }
 
     public void SetCrew3Image()
     {
-        if (team.GetComponent<TeamSetItem>().battlePowerCrew3 == 0)
-        {
-            crew3.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-        }
-        else
-        {
-            crew3.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().add3.GetComponent<Image>().sprite;
+        
+        
+            crew3.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().crew3.GetComponent<Image>().sprite;
             crew3.GetComponent<Image>().color = new Color(255, 255, 255, 255);
-        }
+        
     }
 
     public void SetCrew4Image()
     {
-        if (team.GetComponent<TeamSetItem>().battlePowerCrew4 == 0)
-        {
-            crew4.GetComponent<Image>().color = new Color(255, 255, 255, 0);
-        }
-        else
-        {
-            crew4.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().add4.GetComponent<Image>().sprite;
+       
+            crew4.GetComponent<Image>().sprite = team.GetComponent<TeamSetItem>().crew4.GetComponent<Image>().sprite;
             crew4.GetComponent<Image>().color = new Color(255, 255, 255, 255);
-        }
+        
     }
 
     public void SetTeamName()
@@ -126,6 +103,7 @@ public class PlayNowTeamSetItem : MonoBehaviour
             if (playnowteam.GetComponent<PlayNowTeamSetItem>().isSelected)
             {
                 selectedTeams++;
+
             }
             teamCount++;
         }
@@ -134,6 +112,12 @@ public class PlayNowTeamSetItem : MonoBehaviour
             isSelected = true;
             selected.SetActive(true);
             selectButton.GetComponentInChildren<Text>().text = "Unselect";
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACommander = team.GetComponent<TeamSetItem>().commander;
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().TeamAActive = team.GetComponent<TeamSetItem>().commander;
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew1 = team.GetComponent<TeamSetItem>().crew1;
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew2 = team.GetComponent<TeamSetItem>().crew2;
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew3 = team.GetComponent<TeamSetItem>().crew3; 
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().ACrew4 = team.GetComponent<TeamSetItem>().crew4; 
         }
         else if (selectedTeams == 1)
         {
@@ -153,6 +137,9 @@ public class PlayNowTeamSetItem : MonoBehaviour
         team.GetComponent<TeamSetItem>().Remove2();
         team.GetComponent<TeamSetItem>().Remove3();
         team.GetComponent<TeamSetItem>().Remove4();
+        team.GetComponent<TeamSetItem>().completed = false;
+        teamName.GetComponent<Text>().text = "";
+        team.GetComponent<TeamSetItem>().teamName.GetComponent<Text>().text = "";
 
         Destroy(thisTeam);
         Destroy(team);

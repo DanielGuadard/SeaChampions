@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class CardConstructor : MonoBehaviour
 {
-    public GameObject championObj, teamSlot, remove, slot, teamImage, team;
+    public GameObject championObj, teamSlot, remove, slot, teamImage, team, PlayNowContent;
     public int teamsCreated, crew;
     public string URL, urlAPIFinal;
 
@@ -12,6 +12,8 @@ public class CardConstructor : MonoBehaviour
     private GameObject myTeamContent;
     [SerializeField]
     private Sprite item;
+
+
 
     [System.Serializable]
     public class Card
@@ -26,7 +28,7 @@ public class CardConstructor : MonoBehaviour
         public float brawl;
         public float agility;
         public float cunning;
-        
+
     }
 
     [System.Serializable]
@@ -70,12 +72,12 @@ public class CardConstructor : MonoBehaviour
     }
     public void ProcessJsonData(string content)
     {
-        jsonData = JsonUtility.FromJson<CardList>(content); 
+        jsonData = JsonUtility.FromJson<CardList>(content);
 
         foreach (Card card in jsonData.Deck)
         {
             GameObject.Instantiate(championPref).transform.SetParent(myTeamContent.transform, false);
-            championPref.GetComponentInChildren<Item>().id = card.id;             
+            championPref.GetComponentInChildren<Item>().id = card.id;
             championPref.GetComponentInChildren<Item>().name = card.name;
             championPref.GetComponentInChildren<Item>().image = card.image;
             championPref.GetComponentInChildren<Item>().tribe = card.tribe;
@@ -86,7 +88,7 @@ public class CardConstructor : MonoBehaviour
             championPref.GetComponentInChildren<Item>().agility = card.agility;
             championPref.GetComponentInChildren<Item>().cunning = card.cunning;
         }
-        
+
         GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().LoadTeams();
     }
 
