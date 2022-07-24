@@ -9,12 +9,17 @@ public class CardChapion : MonoBehaviour
     private GameObject AgilityObj, BrawlObj, CunningObj,NameObj;
     [SerializeField]
     private GameObject Pressure2,Pressure3, Pressure4, Pressure5;
-    
-    
+    [SerializeField]
+    private GameObject TribeIcon,MedalIcon;
 
 
 
 
+
+    [SerializeField]
+    private Sprite Scalefins, Seasingers, Jellies, Clawbeasts, Shellbearers, Manylimbs, Roughskins;
+    [SerializeField]
+    private Sprite Common,Uncommon,RareVery,Rare,Legendary;
     public int id;
     public string name;
     public string image;
@@ -30,6 +35,8 @@ public class CardChapion : MonoBehaviour
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
     ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
     RICHARD, ED, ADAM;
+
+    
 
     [SerializeField]
     private Vector3 CardOffSet ;
@@ -63,16 +70,10 @@ public class CardChapion : MonoBehaviour
         {
             Pressure5.SetActive(true);
         }
-
+        SetRarity();
+        SetTribe();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-       // this.transform.position = Input.mousePosition + CardOffSet;
-    }
-    public void SetCardImage()
+    private void SetCardImage()
     {
         switch (name)
         {
@@ -209,6 +210,66 @@ public class CardChapion : MonoBehaviour
                 idealPressure = 2;
                 break;
             default:
+                break;
+        }
+    }
+
+    private void SetRarity()
+    {
+        switch (rarity)
+        {
+            case "Common":
+                MedalIcon.GetComponent<Image>().sprite = Common;
+                break;
+
+            case "Uncommon":
+                MedalIcon.GetComponent<Image>().sprite = Uncommon;
+                break;
+
+            case "Rare":
+                MedalIcon.GetComponent<Image>().sprite = Rare;
+                break;
+
+            case "Very Rare":
+                MedalIcon.GetComponent<Image>().sprite = RareVery;
+                break;
+
+            case "Legendary":
+                MedalIcon.GetComponent<Image>().sprite = Legendary;
+                break;
+        }
+    }
+
+    private void SetTribe()
+    {
+        switch (tribe)
+        {
+            case "Scalefins":
+                TribeIcon.GetComponent<Image>().sprite = Scalefins;
+                break;
+
+            case "Seasingers":
+                TribeIcon.GetComponent<Image>().sprite = Seasingers;
+                break;
+
+            case "Jellies":
+                TribeIcon.GetComponent<Image>().sprite = Jellies;
+                break;
+
+            case "Clawbeasts":
+                TribeIcon.GetComponent<Image>().sprite = Clawbeasts;
+                break;
+
+            case "Shellbearers":
+                TribeIcon.GetComponent<Image>().sprite = Shellbearers;
+                break;
+
+            case "Manylimbs":
+                TribeIcon.GetComponent<Image>().sprite = Manylimbs;
+                break;
+
+            case "Roughskins":
+                TribeIcon.GetComponent<Image>().sprite = Roughskins;
                 break;
         }
     }

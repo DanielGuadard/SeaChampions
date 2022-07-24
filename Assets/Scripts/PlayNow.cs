@@ -70,7 +70,7 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
-
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Dificults").SetActive(false);
     }
 
     public void TrainingModeClick()
@@ -82,7 +82,8 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Tutorial_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
-        
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Dificults").SetActive(true);
+        DificultBegginer();
     }
 
     public void TutorialClick()
@@ -94,7 +95,7 @@ public class PlayNow : MonoBehaviour
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "TrainingMode_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").GetComponent<Image>().color = new Color(255, 255, 255);
         FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "QuickPlay_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
-       
+        FindInactiveHelper.FindObjectByName(GameObject.Find("Canvas_Holder"), "Dificults").SetActive(false);
     }
 
     public void StartGameClick()
@@ -124,16 +125,14 @@ public class PlayNow : MonoBehaviour
                     default:
                         break;
                 }
+            GameObject.Find("ScriptHolder").GetComponent<Navigation>().Invoke("ToBattle", 1);           
             }
             else if (playnowteam.GetComponent<PlayNowTeamSetItem>().isSelected)
             {
                 StartCoroutine(FadeIn());
             }
         }
-
-        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Dificult = this.Dificult;
-        GameObject.Find("ScriptHolder").GetComponent<Navigation>().Invoke("ToBattle", 1);
-        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Started = true;
+        
     }
 
     public void Cancel()
@@ -141,9 +140,36 @@ public class PlayNow : MonoBehaviour
         started = false;
     }
 
-    public void DificultBegginer() { Dificult = 1; }
-    public void DificultChallenging() { Dificult = 2; }
-    public void DificultExpert() { Dificult = 3; }
+    public void DificultBegginer() 
+    {
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Dificult = 1;
+        GameObject.Find("Begginner_Button").GetComponent<Image>().color= new Color32(255, 170, 0, 255);
+        GameObject.Find("Begginner_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0, 255);
+        GameObject.Find("Challenging_Button").GetComponent<Image>().color = new Color(255, 255, 255);
+        GameObject.Find("Challenging_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+        GameObject.Find("Expert_Button").GetComponent<Image>().color = new Color(255, 255, 255);
+        GameObject.Find("Expert_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+    }
+    public void DificultChallenging() 
+    {
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Dificult = 2;
+        GameObject.Find("Begginner_Button").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        GameObject.Find("Begginner_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+        GameObject.Find("Challenging_Button").GetComponent<Image>().color = new Color32(255, 170, 0,255);
+        GameObject.Find("Challenging_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0,255);
+        GameObject.Find("Expert_Button").GetComponent<Image>().color = new Color(255, 255, 255);
+        GameObject.Find("Expert_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255, 255);
+    }
+    public void DificultExpert() 
+    {
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Dificult = 3;
+        GameObject.Find("Begginner_Button").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+        GameObject.Find("Begginner_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 255, 255, 255);
+        GameObject.Find("Challenging_Button").GetComponent<Image>().color = new Color(255, 255, 255);
+        GameObject.Find("Challenging_Button").transform.GetComponentInChildren<Text>().color = new Color(255, 255,255);
+        GameObject.Find("Expert_Button").GetComponent<Image>().color = new Color32(255, 170, 0,255);
+        GameObject.Find("Expert_Button").transform.GetComponentInChildren<Text>().color = new Color32(255, 170, 0,255);
+    }
 
 
 }

@@ -280,7 +280,7 @@ public class TrainingMode : MonoBehaviour
                 if (PollutionLevel > 1)
                 {
                     PollutionLevel -= 3;
-                    if (PollutionLevel <= 0)
+                    if (PollutionLevel < 0)
                     {
                         PollutionLevel = 0;
                     }
@@ -625,6 +625,11 @@ public class TrainingMode : MonoBehaviour
         }
     }
 
+    public void UpdateRaity()
+    {
+
+    }
+
     //INtantiate and Destroy Card Overlay os the crew
     public void ShowCardOver()
     {
@@ -725,9 +730,9 @@ public class TrainingMode : MonoBehaviour
 
         switch (Dificult)
         {
-            case 1:  BPlow = TotalBpTeamA * 0.5f;  BPhigh = TotalBpTeamA;break;
+            case 1:  BPlow = TotalBpTeamA * 0.0f;  BPhigh = TotalBpTeamA;break;
             case 2:  BPlow = TotalBpTeamA * 0.85f; BPhigh = TotalBpTeamA *1.15f;break;
-            case 3:  BPlow = TotalBpTeamA * 1.25f; BPhigh = TotalBpTeamA *1.50f;break;
+            case 3:  BPlow = TotalBpTeamA * 1.25f; BPhigh = TotalBpTeamA *1.75f;break;
         }
         {
             GetRandonCard(TeamBActive);
@@ -751,234 +756,332 @@ public class TrainingMode : MonoBehaviour
     {  
         int number = Random.Range(1, 34);
         switch (number)
-            {
-                case 1:
-                    card.GetComponent<SimpleCard>().agility = 222;
-                    card.GetComponent<SimpleCard>().brawl = 333;
-                    card.GetComponent<SimpleCard>().cunning = 111;
-                    card.GetComponent<SimpleCard>().idealPressure = 4;
-                    break;
-                case 2:
-                    card.GetComponent<SimpleCard>().agility = 222;
-                    card.GetComponent<SimpleCard>().brawl = 111;
-                    card.GetComponent<SimpleCard>().cunning = 222;
-                    card.GetComponent<SimpleCard>().idealPressure = 1;
+        {
+            case 1:
+                card.GetComponent<SimpleCard>().name = "John Fango the Tactical Megalodon";
+                card.GetComponent<SimpleCard>().agility = 222;
+                card.GetComponent<SimpleCard>().brawl = 333;
+                card.GetComponent<SimpleCard>().cunning = 111;
+                card.GetComponent<SimpleCard>().idealPressure = 4;
+                card.GetComponent<SimpleCard>().tribe = "Roughskins";
+                card.GetComponent<SimpleCard>().rarity = "Legendary";
+                break;
+            
+            case 2:
+                card.GetComponent<SimpleCard>().name = "Captain Costa the Man O’War";
+                card.GetComponent<SimpleCard>().agility = 222;
+                card.GetComponent<SimpleCard>().brawl = 111;
+                card.GetComponent<SimpleCard>().cunning = 222;
+                card.GetComponent<SimpleCard>().idealPressure = 1;
+                card.GetComponent<SimpleCard>().tribe = "Jellies";
+                card.GetComponent<SimpleCard>().rarity = "Very Rare";
+                break;
+       
+            case 3:
+                card.GetComponent<SimpleCard>().name = "Ted Righty the Boxer Whale";
+                card.GetComponent<SimpleCard>().agility = 240;
+                card.GetComponent<SimpleCard>().brawl = 260;
+                card.GetComponent<SimpleCard>().cunning = 100;
+                card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Seasingers";
+                card.GetComponent<SimpleCard>().rarity = "Very Rare";
 
-                    break;
-                case 3:
-                    card.GetComponent<SimpleCard>().agility = 240;
-                    card.GetComponent<SimpleCard>().brawl = 260;
-                    card.GetComponent<SimpleCard>().cunning = 100;
-                    card.GetComponent<SimpleCard>().idealPressure = 2;
+                break;
+            case 4:
+                card.GetComponent<SimpleCard>().name = "Nenrung the Dragon";
+                card.GetComponent<SimpleCard>().agility = 247;
+                card.GetComponent<SimpleCard>().brawl = 120;
+                card.GetComponent<SimpleCard>().cunning = 100;
+                card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Rare";
+                break;
+            case 5:
+                card.GetComponent<SimpleCard>().name = "Rezaul the master Octopus";
+                card.GetComponent<SimpleCard>().agility = 75;
+                card.GetComponent<SimpleCard>().brawl = 150;
+                card.GetComponent<SimpleCard>().cunning = 233;
+                card.GetComponent<SimpleCard>().idealPressure = 1;
+                card.GetComponent<SimpleCard>().tribe = "Manylimbs";
+                card.GetComponent<SimpleCard>().rarity = "Rare";
+                break;
 
-                    break;
-                case 4:
-                    card.GetComponent<SimpleCard>().agility = 247;
-                    card.GetComponent<SimpleCard>().brawl = 120;
-                    card.GetComponent<SimpleCard>().cunning = 100;
-                    card.GetComponent<SimpleCard>().idealPressure = 3;
+            case 6:
+                card.GetComponent<SimpleCard>().name = "Garrincha the Tough Blue Lobster";
+                card.GetComponent<SimpleCard>().agility = 220;
+                card.GetComponent<SimpleCard>().brawl = 220;
+                card.GetComponent<SimpleCard>().cunning = 51;
+                card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Clawbeasts";
+                card.GetComponent<SimpleCard>().rarity = "Rare";
+                break;
+            case 7:
+                card.GetComponent<SimpleCard>().name = "Luke Leatherback the Turtle";
+                card.GetComponent<SimpleCard>().agility = 150;
+                card.GetComponent<SimpleCard>().brawl = 261;
+                card.GetComponent<SimpleCard>().cunning = 85;
+                card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Shellbearers";
+                card.GetComponent<SimpleCard>().rarity = "Rare";
 
-                    break;
-                case 5:
-                    card.GetComponent<SimpleCard>().agility = 75;
-                    card.GetComponent<SimpleCard>().brawl = 150;
-                    card.GetComponent<SimpleCard>().cunning = 233;
-                    card.GetComponent<SimpleCard>().idealPressure = 1;
-
-                    break;
-                case 6:
-                    card.GetComponent<SimpleCard>().agility = 220;
-                    card.GetComponent<SimpleCard>().brawl = 220;
-                    card.GetComponent<SimpleCard>().cunning = 51;
-                    card.GetComponent<SimpleCard>().idealPressure = 2;
-                    break;
-                case 7:
-                    card.GetComponent<SimpleCard>().agility = 150;
-                    card.GetComponent<SimpleCard>().brawl = 261;
-                    card.GetComponent<SimpleCard>().cunning = 85;
-                    card.GetComponent<SimpleCard>().idealPressure = 2;
-
-                    break;
+                break;
                 case 8:
-                    card.GetComponent<SimpleCard>().agility = 181;
+                card.GetComponent<SimpleCard>().name = "Ray the Whipping Manta";
+                card.GetComponent<SimpleCard>().agility = 181;
                     card.GetComponent<SimpleCard>().brawl = 264;
                     card.GetComponent<SimpleCard>().cunning = 55;
                     card.GetComponent<SimpleCard>().idealPressure = 4;
+                    card.GetComponent<SimpleCard>().tribe = "Roughskins";
+                card.GetComponent<SimpleCard>().rarity = "Rare";
+                break;
 
-                    break;
                 case 9:
-                    card.GetComponent<SimpleCard>().agility = 183;
+                card.GetComponent<SimpleCard>().name = "Sir Westley the Fencing Dolphin";
+                card.GetComponent<SimpleCard>().agility = 183;
                     card.GetComponent<SimpleCard>().brawl = 75;
                     card.GetComponent<SimpleCard>().cunning = 110;
                     card.GetComponent<SimpleCard>().idealPressure = 1;
-                    break;
+                    card.GetComponent<SimpleCard>().tribe = "Seasingers";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
+
                 case 10:
-                    card.GetComponent<SimpleCard>().agility = 120;
+                card.GetComponent<SimpleCard>().name = "Liza the Carrier Crab";
+                card.GetComponent<SimpleCard>().agility = 120;
                     card.GetComponent<SimpleCard>().brawl = 193;
                     card.GetComponent<SimpleCard>().cunning = 78;
                     card.GetComponent<SimpleCard>().idealPressure = 3;
-                    break;
-                case 11:
+                    card.GetComponent<SimpleCard>().tribe = "Clawbeasts";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
 
-                    card.GetComponent<SimpleCard>().agility = 185;
+                case 11:
+                card.GetComponent<SimpleCard>().name = "Hanis the Menacing Flatfish";
+                card.GetComponent<SimpleCard>().agility = 185;
                     card.GetComponent<SimpleCard>().brawl = 96;
                     card.GetComponent<SimpleCard>().cunning = 90;
                     card.GetComponent<SimpleCard>().idealPressure = 2;
-                    break;
+                    card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
 
                 case 12:
-                    card.GetComponent<SimpleCard>().agility = 180;
+                card.GetComponent<SimpleCard>().name = "Sargeant Hartman the Navy Seal";
+                card.GetComponent<SimpleCard>().agility = 180;
                     card.GetComponent<SimpleCard>().brawl = 116;
                     card.GetComponent<SimpleCard>().cunning = 80;
                     card.GetComponent<SimpleCard>().idealPressure = 1;
-                    break;
+                    card.GetComponent<SimpleCard>().tribe = "Seasingers";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
 
                  case 13:
-                    card.GetComponent<SimpleCard>().agility = 160;
-                    card.GetComponent<SimpleCard>().brawl = 1745;
+                card.GetComponent<SimpleCard>().name = "Ridley the Olive Turtle";
+                card.GetComponent<SimpleCard>().agility = 160;
+                    card.GetComponent<SimpleCard>().brawl = 145;
                     card.GetComponent<SimpleCard>().cunning = 80;
                     card.GetComponent<SimpleCard>().idealPressure = 1;
-                    break;
+                    card.GetComponent<SimpleCard>().tribe = "Shellbearers";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
 
                 case 14:
+                    card.GetComponent<SimpleCard>().name = "Arsella the Sea Nettle";
                     card.GetComponent<SimpleCard>().agility = 85;
                     card.GetComponent<SimpleCard>().brawl = 115;
                     card.GetComponent<SimpleCard>().cunning = 169;
                     card.GetComponent<SimpleCard>().idealPressure = 4;
-                    break;
+                    card.GetComponent<SimpleCard>().tribe = "Jellies";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
+                break;
 
                 case 15:
-                card.GetComponent<SimpleCard>().agility = 100;
-                card.GetComponent<SimpleCard>().brawl = 203;
-                card.GetComponent<SimpleCard>().cunning = 90;
-                card.GetComponent<SimpleCard>().idealPressure = 4;
+                    card.GetComponent<SimpleCard>().name = "Rocus Shades the Blue Shark";
+                    card.GetComponent<SimpleCard>().agility = 100;
+                    card.GetComponent<SimpleCard>().brawl = 203;
+                    card.GetComponent<SimpleCard>().cunning = 90;
+                    card.GetComponent<SimpleCard>().idealPressure = 4;
+                    card.GetComponent<SimpleCard>().tribe = "Roughskins";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
                 break;
 
-                 case 16:
-                card.GetComponent<SimpleCard>().agility = 102;
-                card.GetComponent<SimpleCard>().brawl = 199;
-                card.GetComponent<SimpleCard>().cunning = 93;
-                card.GetComponent<SimpleCard>().idealPressure = 4;
+                case 16:
+                    card.GetComponent<SimpleCard>().name = "Aaron the Ramming Crab";
+                    card.GetComponent<SimpleCard>().agility = 102;
+                    card.GetComponent<SimpleCard>().brawl = 199;
+                    card.GetComponent<SimpleCard>().cunning = 93;
+                    card.GetComponent<SimpleCard>().idealPressure = 4;
+                    card.GetComponent<SimpleCard>().tribe = "Shellbearers";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
                 break;
 
-                 case 17:
+                case 17:
+                card.GetComponent<SimpleCard>().name = "Wanderley the Grappling Octopus";
                 card.GetComponent<SimpleCard>().agility = 93;
                 card.GetComponent<SimpleCard>().brawl = 100;
                 card.GetComponent<SimpleCard>().cunning = 111;
                 card.GetComponent<SimpleCard>().idealPressure = 1;
+                card.GetComponent<SimpleCard>().tribe = "Manylimbs";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
                 break;
 
-                 case 18:
-                card.GetComponent<SimpleCard>().name = "Loa the Blowfish";
+                case 18:                
+                card.GetComponent<SimpleCard>().name = "Lola the Buff Blowfish";
                 card.GetComponent<SimpleCard>().agility = 182;
                 card.GetComponent<SimpleCard>().brawl = 102;
                 card.GetComponent<SimpleCard>().cunning = 90;
                 card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Uncommon";
                 break;
 
-                 case 19:                
-               card.GetComponent<SimpleCard>().agility = 150;
+                case 19:
+                card.GetComponent<SimpleCard>().name = "Todd the Barber Eel";
+                card.GetComponent<SimpleCard>().agility = 150;
                 card.GetComponent<SimpleCard>().brawl = 79;
                 card.GetComponent<SimpleCard>().cunning = 93;
                 card.GetComponent<SimpleCard>().idealPressure = 4;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 20:
+                case 20:
+                card.GetComponent<SimpleCard>().name = "Johnny the Sailor Squid";
                 card.GetComponent<SimpleCard>().agility = 110;
                 card.GetComponent<SimpleCard>().brawl = 60;
                 card.GetComponent<SimpleCard>().cunning = 143;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Manylimbs";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 21:
+                case 21:
+                card.GetComponent<SimpleCard>().name = "Soorya the Needling Box Jellyfish";
                 card.GetComponent<SimpleCard>().agility = 115;
                 card.GetComponent<SimpleCard>().brawl = 73;
                 card.GetComponent<SimpleCard>().cunning = 132;
                 card.GetComponent<SimpleCard>().idealPressure = 4;
+                card.GetComponent<SimpleCard>().tribe = "Jellies";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 22:
+                case 22:
+                card.GetComponent<SimpleCard>().name = "Irfan the Bladed Lobster";
                 card.GetComponent<SimpleCard>().agility = 89;
                 card.GetComponent<SimpleCard>().brawl = 168;
                 card.GetComponent<SimpleCard>().cunning = 82;
                 card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 23:
+                case 23:
+                card.GetComponent<SimpleCard>().name = "Danilo the Piercing Tatui";
                 card.GetComponent<SimpleCard>().agility = 111;
                 card.GetComponent<SimpleCard>().brawl = 151;
                 card.GetComponent<SimpleCard>().cunning = 75;
                 card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().tribe = "Shellbearers";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
                 case 24:
+                card.GetComponent<SimpleCard>().name = "Ze Pereira the Sandbar Shark";
                 card.GetComponent<SimpleCard>().agility = 85;
                 card.GetComponent<SimpleCard>().brawl = 170;
                 card.GetComponent<SimpleCard>().cunning = 85;
                 card.GetComponent<SimpleCard>().idealPressure = 1;
+                card.GetComponent<SimpleCard>().tribe = "Roughskins";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 25:
-                card.GetComponent<SimpleCard>().agility = 145;
+                case 25:
+                card.GetComponent<SimpleCard>().name = "Bob Saw the Anchovy";
+                card.GetComponent<SimpleCard>().agility = 154;
                 card.GetComponent<SimpleCard>().brawl = 90;
                 card.GetComponent<SimpleCard>().cunning = 80;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
                 case 26:
+                card.GetComponent<SimpleCard>().name = "Tisya the Spotted Blademaster";
                 card.GetComponent<SimpleCard>().agility = 100;
                 card.GetComponent<SimpleCard>().brawl = 90;
                 card.GetComponent<SimpleCard>().cunning = 130;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Jellies";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-            case 27:
+                case 27:
+                card.GetComponent<SimpleCard>().name = "Sasha the Wrestling Beluga";
                 card.GetComponent<SimpleCard>().agility = 99;
                 card.GetComponent<SimpleCard>().brawl = 165;
                 card.GetComponent<SimpleCard>().cunning = 75;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Seasingers";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 28:
+                case 28:
+                card.GetComponent<SimpleCard>().name = "Medhansh the Swordsman Octopus";
                 card.GetComponent<SimpleCard>().agility = 65;
                 card.GetComponent<SimpleCard>().brawl = 135;
                 card.GetComponent<SimpleCard>().cunning = 130;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Manylimbs";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 29:
+                case 29:
+                card.GetComponent<SimpleCard>().name = "Sirilo the Marbled Swim Crab";
                 card.GetComponent<SimpleCard>().agility = 93;
                 card.GetComponent<SimpleCard>().brawl = 160;
                 card.GetComponent<SimpleCard>().cunning = 100;
                 card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().tribe = "Clawbeasts";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 30:
+                case 30:
+                card.GetComponent<SimpleCard>().name = "Mahesh the Slashing Mackerel";
                 card.GetComponent<SimpleCard>().agility = 160;
                 card.GetComponent<SimpleCard>().brawl = 97;
                 card.GetComponent<SimpleCard>().cunning = 70;
                 card.GetComponent<SimpleCard>().idealPressure = 3;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                     case 31:
+                case 31:
+                card.GetComponent<SimpleCard>().name = "Richard the Opportunist Cockle";
                 card.GetComponent<SimpleCard>().agility = 98;
                 card.GetComponent<SimpleCard>().brawl = 163;
                 card.GetComponent<SimpleCard>().cunning = 80;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Shellbearers";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 32:
+                case 32:
+                card.GetComponent<SimpleCard>().name = "Ed the Punk Salmon";
                 card.GetComponent<SimpleCard>().agility = 160;
                 card.GetComponent<SimpleCard>().brawl = 85;
                 card.GetComponent<SimpleCard>().cunning = 80;
                 card.GetComponent<SimpleCard>().idealPressure = 4;
+                card.GetComponent<SimpleCard>().tribe = "Scalefins";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
 
-                 case 33:
+                case 33:
+                card.GetComponent<SimpleCard>().name = "Adam Risso the Dolphin";
                 card.GetComponent<SimpleCard>().agility = 140;
                 card.GetComponent<SimpleCard>().brawl = 75;
                 card.GetComponent<SimpleCard>().cunning = 105;
                 card.GetComponent<SimpleCard>().idealPressure = 2;
+                card.GetComponent<SimpleCard>().tribe = "Seasingers";
+                card.GetComponent<SimpleCard>().rarity = "Common";
                 break;
                     
 
