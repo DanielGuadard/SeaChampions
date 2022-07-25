@@ -10,6 +10,15 @@ public class TrainingMode : MonoBehaviour
     private float  TotalBpTeamA,TotalBpTeamB;
     [SerializeField]
     private int PollutionLevel, PressureLevel, Round, Match, Action, CleanPlus;
+
+    public bool Started, ConfirmationButton;
+    public string tribe, ChampionName, Name;
+    public float speed, smooth, PointearC;
+    public int Position, Dificult, Current;
+
+    [SerializeField]
+    private float AidealPressure, Aagility, Abrawl, Acunning, BidealPressure, Bagility, Bbrawl, Bcunning, Abig, Bbig;
+
     [SerializeField]
     private GameObject TimerObj, PollutionText, PressureCompass, RoundTextA, RoundTextB, Pointier, Motor, CardChampion, Pollution1, Pollution2, Pollution3, Pollution4, Pollution5, Pollution6, Pollution7;
     [SerializeField]
@@ -21,10 +30,10 @@ public class TrainingMode : MonoBehaviour
 
     private float BPlow,BPhigh;
 
-    public bool Started, ConfirmationButton;
-    public string tribe, ChampionName, Name;
-    public float speed, smooth, PointearC;
-    public int Position, Dificult;
+    [SerializeField]
+    private GameObject BigAtributeA, BigAtributeB, AagilityPlate, AbrawlPlate, AcunningPlate, BagilityPlate, BbrawlPlate, BcunningPlate;
+    
+
 
     public GameObject ACommander, ACrew1, ACrew2, ACrew3, ACrew4;
     public GameObject TeamAActive, TeamACrew1, TeamACrew2, TeamACrew3, TeamACrew4;
@@ -33,7 +42,7 @@ public class TrainingMode : MonoBehaviour
     public GameObject IdealPressureA1, IdealPressureA2, IdealPressureA3, IdealPressureA4, IdealPressureA5;
     public GameObject IdealPressureB1, IdealPressureB2, IdealPressureB3, IdealPressureB4, IdealPressureB5;
     public GameObject TeamAActiveName, teamBActiveName;
-    public GameObject levelA, MedalIconA, LevelB, MedalIconB, TribeA, TribeB, HabilityA, habilityB, BrawnA, AgilityA, CunnigA, BrawnB, AgilityB, CunningB;
+    public GameObject levelA, MedalIconA, LevelB, MedalIconB, TribeA, TribeB, HabilityA, habilityB, BrawnA, AgilityA, CunningA, BrawnB, AgilityB, CunningB;
     public Sprite TribecaseManylimbs, TribeSeasinger, TribeClawbeasts, TribeRoughskins, TribeJellies, TribeShellbearers, TribeScalefins,Common, Uncommon, Rare, RareVery, Legendary;
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
    ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
@@ -72,6 +81,7 @@ public class TrainingMode : MonoBehaviour
            
             if (CrewImage == false)
             {
+                SetupPlayerCards(TeamAActive, TeamACrew1, TeamACrew2, TeamACrew3, TeamACrew4);
                 CrewUpdateImage();               
                
                 CrewImage = true;
@@ -102,7 +112,48 @@ public class TrainingMode : MonoBehaviour
         }
        
     }
+    public void SetupPlayerCards(GameObject commander, GameObject crew1, GameObject crew2, GameObject crew3, GameObject crew4)
+    {
+        commander.GetComponent<SimpleCard>().name = ACommander.GetComponent<Item>().name;
+        commander.GetComponent<SimpleCard>().agility = ACommander.GetComponent<Item>().agility;
+        commander.GetComponent<SimpleCard>().brawl = ACommander.GetComponent<Item>().brawl;
+        commander.GetComponent<SimpleCard>().cunning = ACommander.GetComponent<Item>().cunning;
+        commander.GetComponent<SimpleCard>().idealPressure = ACommander.GetComponent<Item>().idealPressure;
+        commander.GetComponent<SimpleCard>().tribe = ACommander.GetComponent<Item>().tribe;
+        commander.GetComponent<SimpleCard>().rarity = ACommander.GetComponent<Item>().rarity;
 
+        crew1.GetComponent<SimpleCard>().name = ACrew1.GetComponent<Item>().name;
+        crew1.GetComponent<SimpleCard>().agility = ACrew1.GetComponent<Item>().agility;
+        crew1.GetComponent<SimpleCard>().brawl = ACrew1.GetComponent<Item>().brawl;
+        crew1.GetComponent<SimpleCard>().cunning = ACrew1.GetComponent<Item>().cunning;
+        crew1.GetComponent<SimpleCard>().idealPressure = ACrew1.GetComponent<Item>().idealPressure;
+        crew1.GetComponent<SimpleCard>().tribe = ACrew1.GetComponent<Item>().tribe;
+        crew1.GetComponent<SimpleCard>().rarity = ACrew1.GetComponent<Item>().rarity;
+
+        crew2.GetComponent<SimpleCard>().name = ACrew2.GetComponent<Item>().name;
+        crew2.GetComponent<SimpleCard>().agility = ACrew2.GetComponent<Item>().agility;
+        crew2.GetComponent<SimpleCard>().brawl = ACrew2.GetComponent<Item>().brawl;
+        crew2.GetComponent<SimpleCard>().cunning = ACrew2.GetComponent<Item>().cunning;
+        crew2.GetComponent<SimpleCard>().idealPressure = ACrew2.GetComponent<Item>().idealPressure;
+        crew2.GetComponent<SimpleCard>().tribe = ACrew2.GetComponent<Item>().tribe;
+        crew2.GetComponent<SimpleCard>().rarity = ACrew2.GetComponent<Item>().rarity;
+
+        crew3.GetComponent<SimpleCard>().name = ACrew3.GetComponent<Item>().name;
+        crew3.GetComponent<SimpleCard>().agility = ACrew3.GetComponent<Item>().agility;
+        crew3.GetComponent<SimpleCard>().brawl = ACrew3.GetComponent<Item>().brawl;
+        crew3.GetComponent<SimpleCard>().cunning = ACrew3.GetComponent<Item>().cunning;
+        crew3.GetComponent<SimpleCard>().idealPressure = ACrew3.GetComponent<Item>().idealPressure;
+        crew3.GetComponent<SimpleCard>().tribe = ACrew3.GetComponent<Item>().tribe;
+        crew3.GetComponent<SimpleCard>().rarity = ACrew3.GetComponent<Item>().rarity;
+
+        crew4.GetComponent<SimpleCard>().name = ACrew4.GetComponent<Item>().name;
+        crew4.GetComponent<SimpleCard>().agility = ACrew4.GetComponent<Item>().agility;
+        crew4.GetComponent<SimpleCard>().brawl = ACrew4.GetComponent<Item>().brawl;
+        crew4.GetComponent<SimpleCard>().cunning = ACrew4.GetComponent<Item>().cunning;
+        crew4.GetComponent<SimpleCard>().idealPressure = ACrew4.GetComponent<Item>().idealPressure;
+        crew4.GetComponent<SimpleCard>().tribe = ACrew4.GetComponent<Item>().tribe;
+        crew4.GetComponent<SimpleCard>().rarity = ACrew4.GetComponent<Item>().rarity;
+    }
     public void Pollution()
     {
         if (PollutionLevel == 0)
@@ -185,17 +236,17 @@ public class TrainingMode : MonoBehaviour
             Pollution6.SetActive(true);
             Pollution7.SetActive(true);
         }
-        PollutionText.GetComponent<Text>().text = (-1 * (PressureLevel * 5)).ToString();
+        PollutionText.GetComponent<Text>().text = (-1 * (PollutionLevel * 5)).ToString();
     }
     public void CrewUpdateImage()
     {
         GetBotCards();
         UpdateActiveChampionB();
-        UpdateActiveChampionA();
-        UpdateChampionImage(TeamACrew1, 1);
-        UpdateChampionImage(TeamACrew2, 2);
-        UpdateChampionImage(TeamACrew3, 3);
-        UpdateChampionImage(TeamACrew4, 4);
+        UpdateActiveChampion();
+        UpdateChampionImage(TeamACrew1);
+        UpdateChampionImage(TeamACrew2);
+        UpdateChampionImage(TeamACrew3);
+        UpdateChampionImage(TeamACrew4);
     }
 
     public void PointierRotation(int Target)
@@ -295,11 +346,14 @@ public class TrainingMode : MonoBehaviour
                 Debug.Log("Action Switch Card");
 
                 break;
-
+        
         }
-        BotAction();
+        Pollution();
+       // BotAction();
+        
 
     }
+   
     public void Tribeskill() { Action = 1; }
     public void GoDown() { Action = 2; }
     public void GoUp() { Action = 3; }
@@ -307,10 +361,11 @@ public class TrainingMode : MonoBehaviour
     public void CleaningPlus() { Action = 5; }
     public void Switch() { Action = 6; }
 
-    //Starte and and funciontio
+    //Starte and end funciontio
     public void Starter()
     {
         Started = true;
+
     }
     public void Ended()
     {
@@ -318,12 +373,12 @@ public class TrainingMode : MonoBehaviour
     }
 
     //Main function to Update The visual of the card on Fight, iniciated as the commander of the team 
-    public void UpdateActiveChampionA()
+    public void UpdateActiveChampion()
     {
         UpdateAtributes();
         UpdateTribeIcon();
         UpdateChampionPressure();
-        UpdateChampionImage(TeamAActive, 0);
+        UpdateChampionImage(TeamAActive);
         UpdateName(TeamAActiveName);
         UpdateRaityA(ACommander);
     }
@@ -407,34 +462,49 @@ public class TrainingMode : MonoBehaviour
     }
     public void UpdateAtributes()
     {
-        switch (Position)
-        {
-            case 0:
-                AgilityA.GetComponent<Text>().text = ACommander.GetComponent<Item>().agility.ToString();
-                BrawnA.GetComponent<Text>().text = ACommander.GetComponent<Item>().brawl.ToString();
-                CunnigA.GetComponent<Text>().text = ACommander.GetComponent<Item>().cunning.ToString();
-                break;
-            case 1:
-                AgilityA.GetComponent<Text>().text = ACrew1.GetComponent<Item>().agility.ToString();
-                BrawnA.GetComponent<Text>().text = ACrew1.GetComponent<Item>().brawl.ToString();
-                CunnigA.GetComponent<Text>().text = ACrew1.GetComponent<Item>().cunning.ToString();
-                break;
-            case 2:
-                AgilityA.GetComponent<Text>().text = ACrew2.GetComponent<Item>().agility.ToString();
-                BrawnA.GetComponent<Text>().text = ACrew2.GetComponent<Item>().brawl.ToString();
-                CunnigA.GetComponent<Text>().text = ACrew2.GetComponent<Item>().cunning.ToString();
-                break;
-            case 3:
-                AgilityA.GetComponent<Text>().text = ACrew3.GetComponent<Item>().agility.ToString();
-                BrawnA.GetComponent<Text>().text = ACrew3.GetComponent<Item>().brawl.ToString();
-                CunnigA.GetComponent<Text>().text = ACrew3.GetComponent<Item>().cunning.ToString();
-                break;
-            case 4:
-                AgilityA.GetComponent<Text>().text = ACrew4.GetComponent<Item>().agility.ToString();
-                BrawnA.GetComponent<Text>().text = ACrew4.GetComponent<Item>().brawl.ToString();
-                CunnigA.GetComponent<Text>().text = ACrew4.GetComponent<Item>().cunning.ToString();
-                break;
-        }
+
+        AidealPressure = TeamAActive.GetComponent<SimpleCard>().idealPressure;
+        Aagility = TeamAActive.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f));
+        Abrawl = TeamAActive.GetComponent<SimpleCard>().brawl * (1 -(PollutionLevel * 0.05f)) * (1 -(0.1f * Mathf.Abs(AidealPressure - PressureLevel)));
+        Acunning = TeamAActive.GetComponent<SimpleCard>().cunning;
+
+
+        BidealPressure = TeamBActive.GetComponent<SimpleCard>().idealPressure;
+        Bagility = TeamBActive.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f));
+        Bbrawl = TeamBActive.GetComponent<SimpleCard>().brawl * (1 - (PollutionLevel * 0.05f)) * (1 - (0.1f * Mathf.Abs(BidealPressure - PressureLevel)));
+        Bcunning = TeamBActive.GetComponent<SimpleCard>().cunning;
+
+
+        if (Aagility > Abrawl & Aagility > Acunning) { BigAtributeA = AagilityPlate; Abig = Aagility; }
+        if (Abrawl > Aagility & Abrawl > Acunning) { BigAtributeA = AbrawlPlate; Abig = Acunning; }
+        if (Acunning > Abrawl & Acunning > Aagility) { BigAtributeA = AcunningPlate; Abig = Abrawl; }
+
+        if (Bagility > Bbrawl & Bagility > Bcunning) { BigAtributeB = BagilityPlate; Bbig = Bagility; }
+        if (Bbrawl > Bagility & Bbrawl > Bcunning) { BigAtributeB = BbrawlPlate; Bbig = Bbrawl; }
+        if (Bcunning > Bbrawl & Bcunning > Bagility) { BigAtributeB = BcunningPlate; Bbig = Bcunning; }
+
+        AagilityPlate.transform.localScale = new Vector3(1, 1, 1);
+        AbrawlPlate.transform.localScale = new Vector3(1, 1, 1);
+        AcunningPlate.transform.localScale = new Vector3(1, 1, 1);
+        BagilityPlate.transform.localScale = new Vector3(1, 1, 1);
+        BbrawlPlate.transform.localScale = new Vector3(1, 1, 1);
+        BcunningPlate.transform.localScale = new Vector3(1, 1, 1);
+
+
+
+        BigAtributeA.transform.localScale = new Vector3(1.4f, 1.4f, 1);
+        BigAtributeB.transform.localScale = new Vector3(1.4f, 1.4f, 1);
+
+        AgilityA.GetComponent<Text>().text = Aagility.ToString();
+        BrawnA.GetComponent<Text>().text = Abrawl.ToString();
+        CunningA.GetComponent<Text>().text = Acunning.ToString();
+
+        AgilityB.GetComponent<Text>().text = Bagility.ToString();
+        BrawnB.GetComponent<Text>().text = Bbrawl.ToString();
+        CunningB.GetComponent<Text>().text = Bcunning.ToString();
+
+
+
 
 
     }
@@ -553,32 +623,9 @@ public class TrainingMode : MonoBehaviour
 
         }
     }
-    public void UpdateChampionImage(GameObject Champion,int position)
+    public void UpdateChampionImage(GameObject Champion)
     {
-
-        switch (position)
-        {
-
-            case 0:
-                Name = ACommander.GetComponent<Item>().name;
-                break;
-            case 1:
-                Name = ACrew1.GetComponent<Item>().name;
-                break;
-            case 2:
-                Name = ACrew2.GetComponent<Item>().name;
-                break;
-            case 3:
-                Name = ACrew3.GetComponent<Item>().name;
-                break;
-            case 4:
-                Name = ACrew4.GetComponent<Item>().name;
-                break;
-            case 5:
-                Name = Champion.GetComponent<SimpleCard>().name;
-                break;
-
-        }
+        Name = Champion.GetComponent<SimpleCard>().name;
         switch (Name)
         {
             case "John Fango the Tactical Megalodon":
@@ -758,129 +805,27 @@ public class TrainingMode : MonoBehaviour
 
     }
 
-    //INtantiate and Destroy Card Overlay os the crew
-    public void ShowCardOver(int position)
+    //Instantiate and Destroy Card Overlay os the crew
+    public void ShowCardOver(GameObject card)
     {
         var CardOverlay = Instantiate(CardChampion);
         CardOverlay.transform.SetParent(GameObject.Find("Canvas_TrainingMode").transform, false);
         CardOverlay.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-        switch (position)
-        {
-            
-            case 1:
-                CardOverlay.transform.position = TeamACrew1.transform.position;
-                CardOverlay.GetComponent<CardChapion>().id = ACrew1.GetComponent<Item>().id;
-                CardOverlay.GetComponent<CardChapion>().name = ACrew1.GetComponent<Item>().name;
-              //  CardOverlay.GetComponent<CardChapion>().image = ACrew1.GetComponent<Item>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = ACrew1.GetComponent<Item>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = ACrew1.GetComponent<Item>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = ACrew1.GetComponent<Item>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = ACrew1.GetComponent<Item>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = ACrew1.GetComponent<Item>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = ACrew1.GetComponent<Item>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = ACrew1.GetComponent<Item>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = ACrew1.GetComponent<Item>().battlePower;
-                break;
+        
+                CardOverlay.transform.position = card.transform.position;
+                CardOverlay.GetComponent<CardChapion>().name = card.GetComponent<SimpleCard>().name;
+                CardOverlay.GetComponent<CardChapion>().tribe = card.GetComponent<SimpleCard>().tribe;
+                CardOverlay.GetComponent<CardChapion>().rarity = card.GetComponent<SimpleCard>().rarity;
+                CardOverlay.GetComponent<CardChapion>().elite = card.GetComponent<SimpleCard>().elite;
+                CardOverlay.GetComponent<CardChapion>().idealPressure = card.GetComponent<SimpleCard>().idealPressure;
+                int localpressure = card.GetComponent<SimpleCard>().idealPressure;
+                CardOverlay.GetComponent<CardChapion>().brawl = card.GetComponent<SimpleCard>().brawl * (1-(PollutionLevel*0.05f))*(1-(0.1f*Mathf.Abs(localpressure - PressureLevel)));
+                CardOverlay.GetComponent<CardChapion>().agility = card.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f)); ;
+                CardOverlay.GetComponent<CardChapion>().cunning = card.GetComponent<SimpleCard>().cunning;
+                CardOverlay.GetComponent<CardChapion>().battlePower = card.GetComponent<SimpleCard>().battlePower;
 
-            case 2:
-                CardOverlay.transform.position = TeamACrew2.transform.position;
-                CardOverlay.GetComponent<CardChapion>().id = ACrew2.GetComponent<Item>().id;
-                CardOverlay.GetComponent<CardChapion>().name = ACrew2.GetComponent<Item>().name;
-              //  CardOverlay.GetComponent<CardChapion>().image = ACrew2.GetComponent<Item>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = ACrew2.GetComponent<Item>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = ACrew2.GetComponent<Item>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = ACrew2.GetComponent<Item>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = ACrew2.GetComponent<Item>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = ACrew2.GetComponent<Item>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = ACrew2.GetComponent<Item>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = ACrew2.GetComponent<Item>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = ACrew2.GetComponent<Item>().battlePower;
-                break;
+        
 
-            case 3:
-                CardOverlay.transform.position = TeamACrew3.transform.position;
-                CardOverlay.GetComponent<CardChapion>().id = ACrew3.GetComponent<Item>().id;
-                CardOverlay.GetComponent<CardChapion>().name = ACrew3.GetComponent<Item>().name;
-              //  CardOverlay.GetComponent<CardChapion>().image = ACrew3.GetComponent<Item>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = ACrew3.GetComponent<Item>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = ACrew3.GetComponent<Item>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = ACrew3.GetComponent<Item>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = ACrew3.GetComponent<Item>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = ACrew3.GetComponent<Item>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = ACrew3.GetComponent<Item>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = ACrew3.GetComponent<Item>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = ACrew3.GetComponent<Item>().battlePower;
-                break;
-
-            case 4:
-                CardOverlay.transform.position = TeamACrew4.transform.position;                
-                CardOverlay.GetComponent<CardChapion>().id = ACrew4.GetComponent<Item>().id;
-                CardOverlay.GetComponent<CardChapion>().name = ACrew4.GetComponent<Item>().name;
-                //CardOverlay.GetComponent<CardChapion>().image = ACrew4.GetComponent<Item>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = ACrew4.GetComponent<Item>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = ACrew4.GetComponent<Item>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = ACrew4.GetComponent<Item>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = ACrew4.GetComponent<Item>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = ACrew4.GetComponent<Item>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = ACrew4.GetComponent<Item>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = ACrew4.GetComponent<Item>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = ACrew4.GetComponent<Item>().battlePower;
-                break;
-
-            case 5:
-                CardOverlay.transform.position = TeamBCrew1.transform.position;
-                CardOverlay.GetComponent<CardChapion>().name = TeamBCrew1.GetComponent<SimpleCard>().name;
-                CardOverlay.GetComponent<CardChapion>().sprite = TeamBCrew1.GetComponent<SimpleCard>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = TeamBCrew1.GetComponent<SimpleCard>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = TeamBCrew1.GetComponent<SimpleCard>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = TeamBActive.GetComponent<SimpleCard>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = TeamBCrew1.GetComponent<SimpleCard>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = TeamBCrew1.GetComponent<SimpleCard>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = TeamBCrew1.GetComponent<SimpleCard>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = TeamBCrew1.GetComponent<SimpleCard>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = TeamBCrew1.GetComponent<SimpleCard>().battlePower;
-                break;
-            case 6:
-                CardOverlay.transform.position = TeamBCrew2.transform.position;
-                CardOverlay.GetComponent<CardChapion>().name = TeamBCrew2.GetComponent<SimpleCard>().name;
-                CardOverlay.GetComponent<CardChapion>().sprite = TeamBCrew2.GetComponent<SimpleCard>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = TeamBCrew2.GetComponent<SimpleCard>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = TeamBCrew2.GetComponent<SimpleCard>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = TeamBCrew2.GetComponent<SimpleCard>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = TeamBCrew2.GetComponent<SimpleCard>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = TeamBCrew2.GetComponent<SimpleCard>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = TeamBCrew2.GetComponent<SimpleCard>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = TeamBCrew2.GetComponent<SimpleCard>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = TeamBCrew2.GetComponent<SimpleCard>().battlePower;
-                break;
-            case 7:
-                CardOverlay.transform.position = TeamBCrew3.transform.position;
-                CardOverlay.GetComponent<CardChapion>().name = TeamBCrew3.GetComponent<SimpleCard>().name;
-                CardOverlay.GetComponent<CardChapion>().sprite = TeamBCrew3.GetComponent<SimpleCard>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = TeamBCrew3.GetComponent<SimpleCard>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = TeamBCrew3.GetComponent<SimpleCard>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = TeamBCrew3.GetComponent<SimpleCard>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = TeamBCrew3.GetComponent<SimpleCard>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = TeamBCrew3.GetComponent<SimpleCard>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = TeamBCrew3.GetComponent<SimpleCard>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = TeamBCrew3.GetComponent<SimpleCard>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = TeamBCrew3.GetComponent<SimpleCard>().battlePower;
-                break;
-            case 8:
-                CardOverlay.transform.position = TeamBCrew4.transform.position;
-                CardOverlay.GetComponent<CardChapion>().name = TeamBCrew4.GetComponent<SimpleCard>().name;
-                CardOverlay.GetComponent<CardChapion>().sprite = TeamBCrew4.GetComponent<SimpleCard>().image;
-                CardOverlay.GetComponent<CardChapion>().tribe = TeamBCrew4.GetComponent<SimpleCard>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = TeamBCrew4.GetComponent<SimpleCard>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = TeamBCrew4.GetComponent<SimpleCard>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = TeamBCrew4.GetComponent<SimpleCard>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = TeamBCrew4.GetComponent<SimpleCard>().brawl;
-                CardOverlay.GetComponent<CardChapion>().agility = TeamBCrew4.GetComponent<SimpleCard>().agility;
-                CardOverlay.GetComponent<CardChapion>().cunning = TeamBCrew4.GetComponent<SimpleCard>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = TeamBCrew4.GetComponent<SimpleCard>().battlePower;
-                break;
-           
-        }
     }
     public void DestroyCardOver()
     {
@@ -901,10 +846,7 @@ public class TrainingMode : MonoBehaviour
 
 
     //Bot Instructions and settings
-    public void BotAction()
-    {
-
-    }
+    
     public void GetBotCards()
     {
         TotalBpTeamA = ACommander.GetComponent<Item>().battlePower + ACrew1.GetComponent<Item>().battlePower + ACrew2.GetComponent<Item>().battlePower + ACrew3.GetComponent<Item>().battlePower + ACrew4.GetComponent<Item>().battlePower;
@@ -1271,13 +1213,10 @@ public class TrainingMode : MonoBehaviour
                     break;
             }
         card.GetComponent<SimpleCard>().battlePower = card.GetComponent<SimpleCard>().agility + (card.GetComponent<SimpleCard>().brawl * 0.8f) + (card.GetComponent<SimpleCard>().cunning * 1.2f);
-        UpdateChampionImage(TeamBActive, 5);
-        UpdateChampionImage(TeamBCrew1, 5); 
-        UpdateChampionImage(TeamBCrew2, 5);
-        UpdateChampionImage(TeamBCrew3, 5);
-        UpdateChampionImage(TeamBCrew4, 5);
+        UpdateChampionImage(card);
 
 
     }
+    
     
 }
