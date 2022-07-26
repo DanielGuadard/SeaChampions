@@ -830,6 +830,7 @@ MonoBehaviour:
   agility: 0
   cunning: 0
   battlePower: 0
+  Flag: {fileID: 8127893746211033371}
   JOHN_FANGO: {fileID: 21300000, guid: 0107f52eb68dfba44aa19629384528b0, type: 3}
   CAPTAIN: {fileID: 21300000, guid: cacd58053c2134b4fa78c94e8cf65187, type: 3}
   TED: {fileID: 21300000, guid: 97278c9966b479648a180db1234c16a4, type: 3}
@@ -863,6 +864,11 @@ MonoBehaviour:
   RICHARD: {fileID: 21300000, guid: ee2669c5c56ac8249981dbc4d1fdc6f8, type: 3}
   ED: {fileID: 21300000, guid: daf22562c4c0a6e47ba9a30619d8b0f6, type: 3}
   ADAM: {fileID: 21300000, guid: 2898890dd0a54ff40a4383cdcb0c2c46, type: 3}
+  FlagBrazil: {fileID: 21300000, guid: 9399347fd2c14fd4cbed780dc0a69dba, type: 3}
+  FlagIndian: {fileID: 21300000, guid: 49bf23134ccd48d4fbdb25ad75c0edf1, type: 3}
+  FlagIndonesia: {fileID: 21300000, guid: 64a0465286d13694c9868048a196bba8, type: 3}
+  FlagUk: {fileID: 21300000, guid: c48adc909a0980a40b37f61d6cb920fd, type: 3}
+  FlagUsa: {fileID: 21300000, guid: 8f2a5b56fdff17948894681b3a2e1da1, type: 3}
   CardOffSet: {x: 0, y: 0, z: 0}
 --- !u!1 &4398365541945539486
 GameObject:

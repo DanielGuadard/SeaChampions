@@ -2,66 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class TrainingMode : MonoBehaviour
-{ 
+{
     public float Timer;
     [SerializeField]
-    private float  TotalBpTeamA,TotalBpTeamB;
+    private float TotalBpTeamA, TotalBpTeamB;
     [SerializeField]
-    private int PollutionLevel, PressureLevel, Round, Match, Action, CleanPlus;
+    private int PollutionLevel, PressureLevel, Round, Match, ActionA, ActionB, CleanPlus;
 
-    public bool Started, ConfirmationButton;
+    public bool Started, ConfirmationButton, SwitchAction, OnSwitch;
     public string tribe, ChampionName, Name;
     public float speed, smooth, PointearC;
-    public int Position, Dificult, Current;
+    public int PositionA, PositionB, Dificult, Current, Fail;
 
     [SerializeField]
-    private float AidealPressure, Aagility, Abrawl, Acunning, BidealPressure, Bagility, Bbrawl, Bcunning, Abig, Bbig;
+    private float AidealPressure, Aagility, Abrawl, Acunning, BIdealPressure, BAgility, BBrawl, BCunning, Abig, Bbig;
 
     [SerializeField]
     private GameObject TimerObj, PollutionText, PressureCompass, RoundTextA, RoundTextB, Pointier, Motor, CardChampion, Pollution1, Pollution2, Pollution3, Pollution4, Pollution5, Pollution6, Pollution7;
     [SerializeField]
     private GameObject MatchCount, Match1, Match2, Match3, Match4, Match5;
     [SerializeField]
-    private Sprite Motor1, Motor2, Motor3, RoundWin, RoundLose, RoundNone, MatchWin, MatchLose, MatchNone, MatchCount1, MatchCount2, MatchCount3, MatchCount4, MatchCount5;
+    private Sprite RoundWin, RoundLose, RoundNone, MatchWin, MatchLose, MatchNone, MatchCount1, MatchCount2, MatchCount3, MatchCount4, MatchCount5;
     [SerializeField]
-    private bool CrewImage;
+    private bool StartPreparation;
+    [SerializeField]
+    private string Ocean;
 
-    private float BPlow,BPhigh;
+    private float BPlow, BPhigh;
 
     [SerializeField]
     private GameObject BigAtributeA, BigAtributeB, AagilityPlate, AbrawlPlate, AcunningPlate, BagilityPlate, BbrawlPlate, BcunningPlate;
-    
+    [SerializeField]
+    private GameObject FlagA, FlagB;
+    [SerializeField]
+    private Sprite FlagBrazil, FlagIndian, FlagIndonesia, FlagUk, FlagUsa;
 
 
     public GameObject ACommander, ACrew1, ACrew2, ACrew3, ACrew4;
     public GameObject TeamAActive, TeamACrew1, TeamACrew2, TeamACrew3, TeamACrew4;
     //public GameObject BCommander, BCrew1,BCrew2, BCrew3, BCrew4;
-    public GameObject TeamBActive, TeamBCrew1,TeamBCrew2, TeamBCrew3, TeamBCrew4;
+    public GameObject TeamBActive, TeamBCrew1, TeamBCrew2, TeamBCrew3, TeamBCrew4;
     public GameObject IdealPressureA1, IdealPressureA2, IdealPressureA3, IdealPressureA4, IdealPressureA5;
     public GameObject IdealPressureB1, IdealPressureB2, IdealPressureB3, IdealPressureB4, IdealPressureB5;
-    public GameObject TeamAActiveName, teamBActiveName;
+    public GameObject TeamAActiveName, teamBActiveName, OceanName, CurrentText, ChampionSelection;
     public GameObject levelA, MedalIconA, LevelB, MedalIconB, TribeA, TribeB, HabilityA, habilityB, BrawnA, AgilityA, CunningA, BrawnB, AgilityB, CunningB;
-    public Sprite TribecaseManylimbs, TribeSeasinger, TribeClawbeasts, TribeRoughskins, TribeJellies, TribeShellbearers, TribeScalefins,Common, Uncommon, Rare, RareVery, Legendary;
+    public Sprite TribecaseManylimbs, TribeSeasinger, TribeClawbeasts, TribeRoughskins, TribeJellies, TribeShellbearers, TribeScalefins, Common, Uncommon, Rare, RareVery, Legendary;
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
    ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
    RICHARD, ED, ADAM;
 
     // Start is called before the first frame update
-    private void Awake()
-    {
-        Timer = 45;
-        CrewImage = false;
-        Pollution1.SetActive(false);
-        Pollution2.SetActive(false);
-        Pollution3.SetActive(false);
-        Pollution4.SetActive(false);
-        Pollution5.SetActive(false);
-        Pollution6.SetActive(false);
-        Pollution7.SetActive(false); 
-    }
-    
+
+
     // Update is called once per frame
     void Update()
     {
@@ -74,18 +69,12 @@ public class TrainingMode : MonoBehaviour
                 UpdateDisplay(Timer);
             }
 
-            else 
+            else
             {
-                Timer = 0; 
+                Timer = 0;
             }
-           
-            if (CrewImage == false)
-            {
-                SetupPlayerCards(TeamAActive, TeamACrew1, TeamACrew2, TeamACrew3, TeamACrew4);
-                CrewUpdateImage();               
-               
-                CrewImage = true;
-            }
+
+
             switch (PressureLevel)
             {
                 case 1:
@@ -110,8 +99,24 @@ public class TrainingMode : MonoBehaviour
                     break;
             }
         }
-       
+
+
+
     }
+    public void SetPreparation()
+    {
+        Timer = 45;
+        PollutionLevel = 0;
+        SetupPlayerCards(TeamAActive, TeamACrew1, TeamACrew2, TeamACrew3, TeamACrew4);
+        GetBotCards();
+        UpdateImage();
+        SetOceanPressure();
+        SetCurrent();
+        Pollution();
+
+    }
+
+
     public void SetupPlayerCards(GameObject commander, GameObject crew1, GameObject crew2, GameObject crew3, GameObject crew4)
     {
         commander.GetComponent<SimpleCard>().name = ACommander.GetComponent<Item>().name;
@@ -238,41 +243,25 @@ public class TrainingMode : MonoBehaviour
         }
         PollutionText.GetComponent<Text>().text = (-1 * (PollutionLevel * 5)).ToString();
     }
-    public void CrewUpdateImage()
+    public void UpdateImage()
     {
-        GetBotCards();
+
         UpdateActiveChampionB();
         UpdateActiveChampion();
         UpdateChampionImage(TeamACrew1);
         UpdateChampionImage(TeamACrew2);
         UpdateChampionImage(TeamACrew3);
-        UpdateChampionImage(TeamACrew4);
+        UpdateChampionImage(TeamBCrew4);
+        UpdateChampionImage(TeamBCrew4);
+        UpdateChampionImage(TeamBCrew4);
+        UpdateChampionImage(TeamBCrew4);
+        UpdateChampionImage(TeamBCrew4);
     }
 
     public void PointierRotation(int Target)
     {
         var TargetF = Quaternion.Euler(Pointier.transform.eulerAngles.y, Pointier.transform.eulerAngles.x, Target);
         Pointier.transform.rotation = Quaternion.Lerp(Pointier.transform.rotation, TargetF, Time.deltaTime * smooth);
-    }
-    private void MotorFrame()
-    {
-        if (Motor.GetComponent<Image>().sprite == Motor1)
-        {
-            Motor.GetComponent<Image>().sprite = Motor2;
-            new WaitForSeconds(3);
-        }
-        if (Motor.GetComponent<Image>().sprite == Motor2)
-        {
-            Motor.GetComponent<Image>().sprite = Motor3;
-            new WaitForSeconds(3);
-        }
-        if (Motor.GetComponent<Image>().sprite == Motor3)
-        {
-            Motor.GetComponent<Image>().sprite = Motor1;
-            new WaitForSeconds(3);
-        }
-
-
     }
 
     //Timer relateted funcitions
@@ -293,73 +282,193 @@ public class TrainingMode : MonoBehaviour
 
     }
 
-    //Action confirmation and action Buttons 
-    public void ExecuteAction()
+
+    //Action Button
+    public void Tribeskill() { ActionA = 1; }
+    public void GoDown() { ActionA = 2; }
+    public void GoUp() { ActionA = 3; }
+    public void Cleaning() { ActionA = 4; }
+    public void CleaningPlus() { ActionA = 5; }
+    public void Switch()
     {
+        ActionA = 6;
+        ChampionSelection.SetActive(true);
+        OnSwitch = true;
+    }
 
-        switch (Action)
+    //--------------
+    public void SwitchCardsA()
+    {
+        Button crew1;
+        //Store information on local variable
+        string Activename = TeamAActive.GetComponent<SimpleCard>().name;
+        float Activeagility = TeamAActive.GetComponent<SimpleCard>().agility;
+        float Activebrawl = TeamAActive.GetComponent<SimpleCard>().brawl;
+        float Activecunning = TeamAActive.GetComponent<SimpleCard>().cunning;
+        int ActiveidealPressure = TeamAActive.GetComponent<SimpleCard>().idealPressure;
+        string ActiveTribe = TeamAActive.GetComponent<SimpleCard>().tribe;
+        string ActiveRarity = TeamAActive.GetComponent<SimpleCard>().rarity;
+        switch (PositionA)
         {
-            case 1://tribeskill
-                Debug.Log("Action TribeSkill");
-                break;
-
-
-            case 2://Go Donw
-                Debug.Log("Action Go Down");
-                if (PressureLevel > 1)
-                {
-                    PressureLevel -= 1;
-                }
-                break;
-
-            case 3://Go Up
-                Debug.Log("Action Go Up");
-                if (PressureLevel < 5)
-                {
-                    PressureLevel += 1;
-                }
-                break;
-
-            case 4://Cleaning
-                Debug.Log("Action Clean");
-                if (PollutionLevel > 1)
-                {
-                    PollutionLevel -= 1;
-                }
-                break;
-
-
-            case 5://Cleanig Plus+
-                Debug.Log("Action CleanPlus");
-                if (PollutionLevel > 1)
-                {
-                    PollutionLevel -= 3;
-                    if (PollutionLevel < 0)
-                    {
-                        PollutionLevel = 0;
-                    }
-                    CleanPlus = 1;
-                }
-                break;
-
-            case 6://Switch
-                Debug.Log("Action Switch Card");
+            case 1:
+                //Get the choosen champion to active combate position
+                TeamAActive.GetComponent<SimpleCard>().name = TeamACrew1.GetComponent<SimpleCard>().name;
+                TeamAActive.GetComponent<SimpleCard>().agility = TeamACrew1.GetComponent<SimpleCard>().agility;
+                TeamAActive.GetComponent<SimpleCard>().brawl = TeamACrew1.GetComponent<SimpleCard>().brawl;
+                TeamAActive.GetComponent<SimpleCard>().cunning = TeamACrew1.GetComponent<SimpleCard>().cunning;
+                TeamAActive.GetComponent<SimpleCard>().idealPressure = TeamACrew1.GetComponent<SimpleCard>().idealPressure;
+                TeamAActive.GetComponent<SimpleCard>().tribe = TeamACrew1.GetComponent<SimpleCard>().tribe;
+                TeamAActive.GetComponent<SimpleCard>().rarity = TeamACrew1.GetComponent<SimpleCard>().rarity;
+                //Get the local saved Champion to the reserve bench
+                TeamACrew1.GetComponent<SimpleCard>().name = Activename;
+                TeamACrew1.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamACrew1.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamACrew1.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamACrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamACrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamACrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
 
                 break;
-        
+            case 2:
+                TeamAActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<SimpleCard>().name;
+                TeamAActive.GetComponent<SimpleCard>().agility = TeamACrew2.GetComponent<SimpleCard>().agility;
+                TeamAActive.GetComponent<SimpleCard>().brawl = TeamACrew2.GetComponent<SimpleCard>().brawl;
+                TeamAActive.GetComponent<SimpleCard>().cunning = TeamACrew2.GetComponent<SimpleCard>().cunning;
+                TeamAActive.GetComponent<SimpleCard>().idealPressure = TeamACrew2.GetComponent<SimpleCard>().idealPressure;
+                TeamAActive.GetComponent<SimpleCard>().tribe = TeamACrew2.GetComponent<SimpleCard>().tribe;
+                TeamAActive.GetComponent<SimpleCard>().rarity = TeamACrew2.GetComponent<SimpleCard>().rarity;
+
+                TeamACrew2.GetComponent<SimpleCard>().name = Activename;
+                TeamACrew2.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamACrew2.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamACrew2.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamACrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamACrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamACrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
+            case 3:
+                TeamAActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<SimpleCard>().name;
+                TeamAActive.GetComponent<SimpleCard>().agility = TeamACrew3.GetComponent<SimpleCard>().agility;
+                TeamAActive.GetComponent<SimpleCard>().brawl = TeamACrew3.GetComponent<SimpleCard>().brawl;
+                TeamAActive.GetComponent<SimpleCard>().cunning = TeamACrew3.GetComponent<SimpleCard>().cunning;
+                TeamAActive.GetComponent<SimpleCard>().idealPressure = TeamACrew3.GetComponent<SimpleCard>().idealPressure;
+                TeamAActive.GetComponent<SimpleCard>().tribe = TeamACrew3.GetComponent<SimpleCard>().tribe;
+                TeamAActive.GetComponent<SimpleCard>().rarity = TeamACrew3.GetComponent<SimpleCard>().rarity;
+
+                TeamACrew3.GetComponent<SimpleCard>().name = Activename;
+                TeamACrew3.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamACrew3.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamACrew3.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamACrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamACrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamACrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
+            case 4:
+                TeamAActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<SimpleCard>().name;
+                TeamAActive.GetComponent<SimpleCard>().agility = TeamACrew4.GetComponent<SimpleCard>().agility;
+                TeamAActive.GetComponent<SimpleCard>().brawl = TeamACrew4.GetComponent<SimpleCard>().brawl;
+                TeamAActive.GetComponent<SimpleCard>().cunning = TeamACrew4.GetComponent<SimpleCard>().cunning;
+                TeamAActive.GetComponent<SimpleCard>().idealPressure = TeamACrew4.GetComponent<SimpleCard>().idealPressure;
+                TeamAActive.GetComponent<SimpleCard>().tribe = TeamACrew4.GetComponent<SimpleCard>().tribe;
+                TeamAActive.GetComponent<SimpleCard>().rarity = TeamACrew4.GetComponent<SimpleCard>().rarity;
+
+                TeamACrew4.GetComponent<SimpleCard>().name = Activename;
+                TeamACrew4.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamACrew4.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamACrew4.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamACrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamACrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamACrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
         }
-        Pollution();
-       // BotAction();
-        
 
     }
-   
-    public void Tribeskill() { Action = 1; }
-    public void GoDown() { Action = 2; }
-    public void GoUp() { Action = 3; }
-    public void Cleaning() { Action = 4; }
-    public void CleaningPlus() { Action = 5; }
-    public void Switch() { Action = 6; }
+    public void SwitchCardsB()
+    {
+        //Store information on local variable
+        string Activename = TeamBActive.GetComponent<SimpleCard>().name;
+        float Activeagility = TeamBActive.GetComponent<SimpleCard>().agility;
+        float Activebrawl = TeamBActive.GetComponent<SimpleCard>().brawl;
+        float Activecunning = TeamBActive.GetComponent<SimpleCard>().cunning;
+        int ActiveidealPressure = TeamBActive.GetComponent<SimpleCard>().idealPressure;
+        string ActiveTribe = TeamBActive.GetComponent<SimpleCard>().tribe;
+        string ActiveRarity = TeamBActive.GetComponent<SimpleCard>().rarity;
+
+        switch (PositionB)
+        {
+            case 1:
+                //Get the choosen champion to active combate position
+                TeamBActive.GetComponent<SimpleCard>().name = TeamACrew1.GetComponent<Item>().name;
+                TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew1.GetComponent<Item>().agility;
+                TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew1.GetComponent<Item>().brawl;
+                TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew1.GetComponent<Item>().cunning;
+                TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew1.GetComponent<Item>().idealPressure;
+                TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew1.GetComponent<Item>().tribe;
+                TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew1.GetComponent<Item>().rarity;
+                //Get the local saved Champion to the reserve bench
+                TeamBCrew1.GetComponent<SimpleCard>().name = Activename;
+                TeamBCrew1.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamBCrew1.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamBCrew1.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamBCrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamBCrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamBCrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
+
+                break;
+            case 2:
+                TeamBActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<Item>().name;
+                TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew2.GetComponent<Item>().agility;
+                TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew2.GetComponent<Item>().brawl;
+                TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew2.GetComponent<Item>().cunning;
+                TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew2.GetComponent<Item>().idealPressure;
+                TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew2.GetComponent<Item>().tribe;
+                TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew2.GetComponent<Item>().rarity;
+
+                TeamBCrew2.GetComponent<SimpleCard>().name = Activename;
+                TeamBCrew2.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamBCrew2.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamBCrew2.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamBCrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamBCrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamBCrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
+            case 3:
+                TeamBActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<Item>().name;
+                TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew3.GetComponent<Item>().agility;
+                TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew3.GetComponent<Item>().brawl;
+                TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew3.GetComponent<Item>().cunning;
+                TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew3.GetComponent<Item>().idealPressure;
+                TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew3.GetComponent<Item>().tribe;
+                TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew3.GetComponent<Item>().rarity;
+
+                TeamBCrew3.GetComponent<SimpleCard>().name = Activename;
+                TeamBCrew3.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamBCrew3.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamBCrew3.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamBCrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamBCrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamBCrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
+            case 4:
+                TeamBActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<Item>().name;
+                TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew4.GetComponent<Item>().agility;
+                TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew4.GetComponent<Item>().brawl;
+                TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew4.GetComponent<Item>().cunning;
+                TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew4.GetComponent<Item>().idealPressure;
+                TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew4.GetComponent<Item>().tribe;
+                TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew4.GetComponent<Item>().rarity;
+
+                TeamBCrew4.GetComponent<SimpleCard>().name = Activename;
+                TeamBCrew4.GetComponent<SimpleCard>().agility = Activeagility;
+                TeamBCrew4.GetComponent<SimpleCard>().brawl = Activebrawl;
+                TeamBCrew4.GetComponent<SimpleCard>().cunning = Activecunning;
+                TeamBCrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
+                TeamBCrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
+                TeamBCrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                break;
+        }
+    }
+    //---------------
 
     //Starte and end funciontio
     public void Starter()
@@ -372,25 +481,29 @@ public class TrainingMode : MonoBehaviour
         Started = false;
     }
 
-    //Main function to Update The visual of the card on Fight, iniciated as the commander of the team 
+
+
+    //Main function to Update The visual of the card on Fight
     public void UpdateActiveChampion()
     {
         UpdateAtributes();
         UpdateTribeIcon();
         UpdateChampionPressure();
         UpdateChampionImage(TeamAActive);
-        UpdateName(TeamAActiveName);
+        UpdateName();
         UpdateRaityA(ACommander);
+        UpdateFlag(TeamAActive, FlagA);
+        UpdateFlag(TeamBActive, FlagB);
     }
     public void UpdateActiveChampionB()
     {
         AgilityB.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().agility.ToString();
         BrawnB.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().brawl.ToString();
         CunningB.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().cunning.ToString();
-        switch(TeamBActive.GetComponent<SimpleCard>().tribe)
+        switch (TeamBActive.GetComponent<SimpleCard>().tribe)
         {
             case "Scalefins":
-                TribeB.GetComponent<Image>().sprite = TribeScalefins; 
+                TribeB.GetComponent<Image>().sprite = TribeScalefins;
                 break;
 
             case "Seasingers":
@@ -455,9 +568,9 @@ public class TrainingMode : MonoBehaviour
                 IdealPressureB4.SetActive(true);
                 IdealPressureB5.SetActive(true);
                 break;
-                
+
         }
-       teamBActiveName.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().name.ToString();
+        teamBActiveName.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().name.ToString();
         UpdateRaityB(TeamBActive);
     }
     public void UpdateAtributes()
@@ -465,23 +578,24 @@ public class TrainingMode : MonoBehaviour
 
         AidealPressure = TeamAActive.GetComponent<SimpleCard>().idealPressure;
         Aagility = TeamAActive.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f));
-        Abrawl = TeamAActive.GetComponent<SimpleCard>().brawl * (1 -(PollutionLevel * 0.05f)) * (1 -(0.1f * Mathf.Abs(AidealPressure - PressureLevel)));
+        Abrawl = TeamAActive.GetComponent<SimpleCard>().brawl * (1 - (PollutionLevel * 0.05f)) * (1 - (0.1f * Mathf.Abs(AidealPressure - PressureLevel)));
         Acunning = TeamAActive.GetComponent<SimpleCard>().cunning;
 
 
-        BidealPressure = TeamBActive.GetComponent<SimpleCard>().idealPressure;
-        Bagility = TeamBActive.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f));
-        Bbrawl = TeamBActive.GetComponent<SimpleCard>().brawl * (1 - (PollutionLevel * 0.05f)) * (1 - (0.1f * Mathf.Abs(BidealPressure - PressureLevel)));
-        Bcunning = TeamBActive.GetComponent<SimpleCard>().cunning;
+        BIdealPressure = TeamBActive.GetComponent<SimpleCard>().idealPressure;
+        BAgility = TeamBActive.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f));
+        BBrawl = TeamBActive.GetComponent<SimpleCard>().brawl * (1 - (PollutionLevel * 0.05f)) * (1 - (0.1f * Mathf.Abs(BIdealPressure - PressureLevel)));
+        BCunning = TeamBActive.GetComponent<SimpleCard>().cunning;
 
 
         if (Aagility > Abrawl & Aagility > Acunning) { BigAtributeA = AagilityPlate; Abig = Aagility; }
         if (Abrawl > Aagility & Abrawl > Acunning) { BigAtributeA = AbrawlPlate; Abig = Acunning; }
         if (Acunning > Abrawl & Acunning > Aagility) { BigAtributeA = AcunningPlate; Abig = Abrawl; }
 
-        if (Bagility > Bbrawl & Bagility > Bcunning) { BigAtributeB = BagilityPlate; Bbig = Bagility; }
-        if (Bbrawl > Bagility & Bbrawl > Bcunning) { BigAtributeB = BbrawlPlate; Bbig = Bbrawl; }
-        if (Bcunning > Bbrawl & Bcunning > Bagility) { BigAtributeB = BcunningPlate; Bbig = Bcunning; }
+        if (BAgility > BBrawl & BAgility > BCunning) { BigAtributeB = BagilityPlate; Bbig = BAgility; }
+        else if (BBrawl > BAgility & BBrawl > BCunning) { BigAtributeB = BbrawlPlate; Bbig = BBrawl; }
+        else if (BCunning > BBrawl & BCunning > BAgility) { BigAtributeB = BcunningPlate; Bbig = BCunning; }
+        else { BigAtributeB = BcunningPlate; Bbig = BCunning; }
 
         AagilityPlate.transform.localScale = new Vector3(1, 1, 1);
         AbrawlPlate.transform.localScale = new Vector3(1, 1, 1);
@@ -499,9 +613,9 @@ public class TrainingMode : MonoBehaviour
         BrawnA.GetComponent<Text>().text = Abrawl.ToString();
         CunningA.GetComponent<Text>().text = Acunning.ToString();
 
-        AgilityB.GetComponent<Text>().text = Bagility.ToString();
-        BrawnB.GetComponent<Text>().text = Bbrawl.ToString();
-        CunningB.GetComponent<Text>().text = Bcunning.ToString();
+        AgilityB.GetComponent<Text>().text = BAgility.ToString();
+        BrawnB.GetComponent<Text>().text = BBrawl.ToString();
+        CunningB.GetComponent<Text>().text = BCunning.ToString();
 
 
 
@@ -511,7 +625,7 @@ public class TrainingMode : MonoBehaviour
     public void UpdateTribeIcon()
     {
 
-        switch (Position)
+        switch (PositionA)
         {
             case 0:
                 tribe = ACommander.GetComponent<Item>().tribe;
@@ -562,7 +676,7 @@ public class TrainingMode : MonoBehaviour
     public void UpdateChampionPressure()
     {
         int pressure = 6;
-        switch (Position)
+        switch (PositionA)
         {
             case 0:
                 pressure = ACommander.GetComponent<Item>().idealPressure;
@@ -729,54 +843,36 @@ public class TrainingMode : MonoBehaviour
                 break;
         }
     }
-    public void UpdateName(GameObject Champion)
+    public void UpdateName()
     {
-        switch (Position)
-        {
-
-            case 0:
-                TeamAActiveName.GetComponent<Text>().text = ACommander.GetComponent<Item>().name.ToString();
-                break;
-            case 1:
-                TeamAActiveName.GetComponent<Text>().text = ACrew1.GetComponent<Item>().name.ToString();
-                break;
-            case 2:
-                TeamAActiveName.GetComponent<Text>().text = ACrew2.GetComponent<Item>().name.ToString();
-                break;
-            case 3:
-                TeamAActiveName.GetComponent<Text>().text = ACrew3.GetComponent<Item>().name.ToString();
-                break;
-            case 4:
-                TeamAActiveName.GetComponent<Text>().text = ACrew4.GetComponent<Item>().name.ToString();
-                break;
-        }
+        TeamAActiveName.GetComponent<Text>().text = TeamAActive.GetComponent<SimpleCard>().name.ToString();
+        teamBActiveName.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().name.ToString();
     }
-
     public void UpdateRaityA(GameObject Champion)
     {
-            switch (Champion.GetComponent<Item>().rarity.ToString())
-            {
-                case "Common":
-                    MedalIconA.GetComponent<Image>().sprite = Common;
-                    break;
+        switch (Champion.GetComponent<Item>().rarity.ToString())
+        {
+            case "Common":
+                MedalIconA.GetComponent<Image>().sprite = Common;
+                break;
 
-                case "Uncommon":
-                    MedalIconA.GetComponent<Image>().sprite = Uncommon;
-                    break;
+            case "Uncommon":
+                MedalIconA.GetComponent<Image>().sprite = Uncommon;
+                break;
 
-                case "Rare":
-                    MedalIconA.GetComponent<Image>().sprite = Rare;
-                    break;
+            case "Rare":
+                MedalIconA.GetComponent<Image>().sprite = Rare;
+                break;
 
-                case "Very Rare":
-                    MedalIconA.GetComponent<Image>().sprite = RareVery;
-                    break;
+            case "Very Rare":
+                MedalIconA.GetComponent<Image>().sprite = RareVery;
+                break;
 
-                case "Legendary":
-                    MedalIconA.GetComponent<Image>().sprite = Legendary;
-                    break;
-            }
-        
+            case "Legendary":
+                MedalIconA.GetComponent<Image>().sprite = Legendary;
+                break;
+        }
+
     }
     public void UpdateRaityB(GameObject Champion)
     {
@@ -804,6 +900,114 @@ public class TrainingMode : MonoBehaviour
         }
 
     }
+    private void UpdateFlag(GameObject Champion, GameObject Flag)
+    {
+        switch (Champion.GetComponent<SimpleCard>().name)
+        {
+            case "John Fango the Tactical Megalodon":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Captain Costa the Man O’War":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Ted Righty the Boxer Whale":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Nenrung the Dragon":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Rezaul the Master Octopus":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Garrincha the Tough Blue Lobster":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Luke Leatherback the Turtle":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Ray the Whipping Manta":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sir Westley the Fencing Dolphin":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Liza the Carrier Crab":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Hanis the Menacing Flatfish":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sargeant Hartman the Navy Seal":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Ridley the Olive Turtle":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Arsella the Sea Nettle":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Rocus Shades the Blue Shark":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Aaron the Ramming Crab":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Wanderley the Grappling Octopus":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Lola the Buff Blowfish":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Todd the Barber Eel":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Johnny the Sailor Squid":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Soorya the Needling Box Jellyfish":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Irfan the Bladed Lobster":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Danilo the Piercing Tatui":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Ze Pereira the Sandbar Shark":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Bob Saw the Anchovy":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Tisya the Spotted Blademaster":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sasha the Wrestling Beluga":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Medhansh the Swordsman Octopus":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Sirilo the Marbled Swim Crab":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Mahesh the Slashing Mackerel":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Richard the Opportunist Cockle":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Ed the Punk Salmon":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Adam Risso the Dolphin":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            default:
+                break;
+        }
+    }
+
 
     //Instantiate and Destroy Card Overlay os the crew
     public void ShowCardOver(GameObject card)
@@ -811,20 +1015,20 @@ public class TrainingMode : MonoBehaviour
         var CardOverlay = Instantiate(CardChampion);
         CardOverlay.transform.SetParent(GameObject.Find("Canvas_TrainingMode").transform, false);
         CardOverlay.transform.localScale = new Vector3(0.5f, 0.5f, 1);
-        
-                CardOverlay.transform.position = card.transform.position;
-                CardOverlay.GetComponent<CardChapion>().name = card.GetComponent<SimpleCard>().name;
-                CardOverlay.GetComponent<CardChapion>().tribe = card.GetComponent<SimpleCard>().tribe;
-                CardOverlay.GetComponent<CardChapion>().rarity = card.GetComponent<SimpleCard>().rarity;
-                CardOverlay.GetComponent<CardChapion>().elite = card.GetComponent<SimpleCard>().elite;
-                CardOverlay.GetComponent<CardChapion>().idealPressure = card.GetComponent<SimpleCard>().idealPressure;
-                int localpressure = card.GetComponent<SimpleCard>().idealPressure;
-                CardOverlay.GetComponent<CardChapion>().brawl = card.GetComponent<SimpleCard>().brawl * (1-(PollutionLevel*0.05f))*(1-(0.1f*Mathf.Abs(localpressure - PressureLevel)));
-                CardOverlay.GetComponent<CardChapion>().agility = card.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f)); ;
-                CardOverlay.GetComponent<CardChapion>().cunning = card.GetComponent<SimpleCard>().cunning;
-                CardOverlay.GetComponent<CardChapion>().battlePower = card.GetComponent<SimpleCard>().battlePower;
 
-        
+        CardOverlay.transform.position = card.transform.position;
+        CardOverlay.GetComponent<CardChapion>().name = card.GetComponent<SimpleCard>().name;
+        CardOverlay.GetComponent<CardChapion>().tribe = card.GetComponent<SimpleCard>().tribe;
+        CardOverlay.GetComponent<CardChapion>().rarity = card.GetComponent<SimpleCard>().rarity;
+        CardOverlay.GetComponent<CardChapion>().elite = card.GetComponent<SimpleCard>().elite;
+        CardOverlay.GetComponent<CardChapion>().idealPressure = card.GetComponent<SimpleCard>().idealPressure;
+        int localpressure = card.GetComponent<SimpleCard>().idealPressure;
+        CardOverlay.GetComponent<CardChapion>().brawl = card.GetComponent<SimpleCard>().brawl * (1 - (PollutionLevel * 0.05f)) * (1 - (0.1f * Mathf.Abs(localpressure - PressureLevel)));
+        CardOverlay.GetComponent<CardChapion>().agility = card.GetComponent<SimpleCard>().agility * (1 - (PollutionLevel * 0.05f)) * (1 + (Current * 0.01f)); ;
+        CardOverlay.GetComponent<CardChapion>().cunning = card.GetComponent<SimpleCard>().cunning;
+        CardOverlay.GetComponent<CardChapion>().battlePower = card.GetComponent<SimpleCard>().battlePower;
+
+
 
     }
     public void DestroyCardOver()
@@ -836,26 +1040,336 @@ public class TrainingMode : MonoBehaviour
         }
     }
 
+
+
     //Get the cards by position on team
-    public void GetCommander() { Position = 0; }
-    public void GetCrew1() { Position = 1; }
-    public void GetCrew2() { Position = 2; }
-    public void GetCrew3() { Position = 3; }
-    public void GetCrew4() { Position = 4; }
+    public void GetCommander() { if (OnSwitch == true) { PositionA = 0; } }
+    public void GetCrew1() { if (OnSwitch == true) { PositionA = 1; } }
+    public void GetCrew2() { if (OnSwitch == true) { PositionA = 2; } }
+    public void GetCrew3() { if (OnSwitch == true) { PositionA = 3; } }
+    public void GetCrew4() { if (OnSwitch == true) { PositionA = 4; } }
 
 
+    //Itial Pressure and Ocean with Current
+    public void SetOceanPressure()
+    {
+        int team = Random.RandomRange(0, 1);
 
-    //Bot Instructions and settings
-    
+        switch (team)
+        {
+            case 0:
+                switch (TeamAActive.GetComponent<SimpleCard>().name)
+                {
+                    case "John Fango the Tactical Megalodon":
+                        Ocean = "Usa";
+                        break;
+                    case "Captain Costa the Man O’War":
+                        Ocean = "Brazil";
+                        break;
+                    case "Ted Righty the Boxer Whale":
+                        Ocean = "Brazil";
+                        break;
+                    case "Nenrung the Dragon":
+                        Ocean = "UK";
+                        break;
+                    case "Rezaul the Master Octopus":
+                        Ocean = "Indian";
+                        break;
+                    case "Garrincha the Tough Blue Lobster":
+                        Ocean = "Brazil";
+                        break;
+                    case "Luke Leatherback the Turtle":
+                        Ocean = "Usa";
+                        break;
+                    case "Ray the Whipping Manta":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sir Westley the Fencing Dolphin":
+                        Ocean = "UK";
+                        break;
+                    case "Liza the Carrier Crab":
+                        Ocean = "UK";
+                        break;
+                    case "Hanis the Menacing Flatfish":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sargeant Hartman the Navy Seal":
+                        Ocean = "Usa";
+                        break;
+                    case "Ridley the Olive Turtle":
+                        Ocean = "Indian";
+                        break;
+                    case "Arsella the Sea Nettle":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Rocus Shades the Blue Shark":
+                        Ocean = "Indian";
+                        break;
+                    case "Aaron the Ramming Crab":
+                        Ocean = "Usa";
+                        break;
+                    case "Wanderley the Grappling Octopus":
+                        Ocean = "Brazil";
+                        break;
+                    case "Lola the Buff Blowfish":
+                        Ocean = "Brazil";
+                        break;
+                    case "Todd the Barber Eel":
+                        Ocean = "UK";
+                        break;
+                    case "Johnny the Sailor Squid":
+                        Ocean = "Usa";
+                        break;
+                    case "Soorya the Needling Box Jellyfish":
+                        Ocean = "Indian";
+                        break;
+                    case "Irfan the Bladed Lobster":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Danilo the Piercing Tatui":
+                        Ocean = "Brazil";
+                        break;
+                    case "Ze Pereira the Sandbar Shark":
+                        Ocean = "Brazil";
+                        break;
+                    case "Bob Saw the Anchovy":
+                        Ocean = "Usa";
+                        break;
+                    case "Tisya the Spotted Blademaster":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sasha the Wrestling Beluga":
+                        Ocean = "Usa";
+                        break;
+                    case "Medhansh the Swordsman Octopus":
+                        Ocean = "Indian";
+                        break;
+                    case "Sirilo the Marbled Swim Crab":
+                        Ocean = "Usa";
+                        break;
+                    case "Mahesh the Slashing Mackerel":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Richard the Opportunist Cockle":
+                        Ocean = "UK";
+                        break;
+                    case "Ed the Punk Salmon":
+                        Ocean = "UK";
+                        break;
+                    case "Adam Risso the Dolphin":
+                        Ocean = "Indonesia";
+                        break;
+                    default:
+                        break;
+                }
+                PressureLevel = TeamBActive.GetComponent<SimpleCard>().idealPressure;
+                break;
+            case 1:
+                switch (TeamBActive.GetComponent<SimpleCard>().name)
+                {
+                    case "John Fango the Tactical Megalodon":
+                        Ocean = "Usa";
+                        break;
+                    case "Captain Costa the Man O’War":
+                        Ocean = "Brazil";
+                        break;
+                    case "Ted Righty the Boxer Whale":
+                        Ocean = "Brazil";
+                        break;
+                    case "Nenrung the Dragon":
+                        Ocean = "UK";
+                        break;
+                    case "Rezaul the Master Octopus":
+                        Ocean = "Indian";
+                        break;
+                    case "Garrincha the Tough Blue Lobster":
+                        Ocean = "Brazil";
+                        break;
+                    case "Luke Leatherback the Turtle":
+                        Ocean = "Usa";
+                        break;
+                    case "Ray the Whipping Manta":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sir Westley the Fencing Dolphin":
+                        Ocean = "UK";
+                        break;
+                    case "Liza the Carrier Crab":
+                        Ocean = "UK";
+                        break;
+                    case "Hanis the Menacing Flatfish":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sargeant Hartman the Navy Seal":
+                        Ocean = "Usa";
+                        break;
+                    case "Ridley the Olive Turtle":
+                        Ocean = "Indian";
+                        break;
+                    case "Arsella the Sea Nettle":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Rocus Shades the Blue Shark":
+                        Ocean = "Indian";
+                        break;
+                    case "Aaron the Ramming Crab":
+                        Ocean = "Usa";
+                        break;
+                    case "Wanderley the Grappling Octopus":
+                        Ocean = "Brazil";
+                        break;
+                    case "Lola the Buff Blowfish":
+                        Ocean = "Brazil";
+                        break;
+                    case "Todd the Barber Eel":
+                        Ocean = "UK";
+                        break;
+                    case "Johnny the Sailor Squid":
+                        Ocean = "Usa";
+                        break;
+                    case "Soorya the Needling Box Jellyfish":
+                        Ocean = "Indian";
+                        break;
+                    case "Irfan the Bladed Lobster":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Danilo the Piercing Tatui":
+                        Ocean = "Brazil";
+                        break;
+                    case "Ze Pereira the Sandbar Shark":
+                        Ocean = "Brazil";
+                        break;
+                    case "Bob Saw the Anchovy":
+                        Ocean = "Usa";
+                        break;
+                    case "Tisya the Spotted Blademaster":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Sasha the Wrestling Beluga":
+                        Ocean = "Usa";
+                        break;
+                    case "Medhansh the Swordsman Octopus":
+                        Ocean = "Indian";
+                        break;
+                    case "Sirilo the Marbled Swim Crab":
+                        Ocean = "Usa";
+                        break;
+                    case "Mahesh the Slashing Mackerel":
+                        Ocean = "Indonesia";
+                        break;
+                    case "Richard the Opportunist Cockle":
+                        Ocean = "UK";
+                        break;
+                    case "Ed the Punk Salmon":
+                        Ocean = "UK";
+                        break;
+                    case "Adam Risso the Dolphin":
+                        Ocean = "Indonesia";
+                        break;
+                    default:
+                        break;
+                }
+                PressureLevel = TeamAActive.GetComponent<SimpleCard>().idealPressure;
+                break;
+        }        
+        OceanName.GetComponent<Text>().text = Ocean;
+    }
+    public void SetCurrent()
+    {
+        switch (Ocean, PressureLevel)
+        {
+            case ("Brazil", 1):
+                Current = -15;
+                break;
+            case ("Brazil", 2)
+            :Current = -10;
+                break;
+            case ("Brazil", 3):
+                Current = 0;
+                break;
+            case ("Brazil", 4):
+                Current = 15;
+                break;
+            case ("Brazil", 5):
+                Current = 20;
+                break;
+            case ("Usa", 1):
+                Current = 20;
+                break;
+            case ("Usa", 2):
+                Current = 15;
+                break;
+            case ("Usa", 3):
+                Current = 0;
+                break;
+            case ("Usa", 4):
+                Current = -10;
+                break;
+            case ("Usa", -15):
+                Current = -15;
+                break;
+            case ("Indian", 1):
+                Current = 5;
+                break;
+            case ("Indian", 2):
+                Current = 5;
+                break;
+            case ("Indian", 3):
+                Current = 10;
+                break;
+            case ("Indian", 4):
+                Current = 10;
+                break;
+            case ("Indian", 5):
+                Current = 15;
+                break;
+            case ("Indonesia", 1):
+                Current = 10;
+                break;
+            case ("Indonesia", 2):
+                Current = -15;
+                break;
+            case ("Indonesia", 3):
+                Current = 15;
+                break;
+            case ("Indonesia", 4):
+                Current = -10;
+                break;
+            case ("Indonesia", 5):
+                Current = 20;
+                break;
+            case ("UK", 1):
+                Current = -10;
+                break;
+            case ("UK", 2):
+                Current = 20;
+                break;
+            case ("UK", 3):
+                Current = -10;
+                break;
+            case ("UK", 4):
+                Current = 20;
+                break;
+            case ("UK", 5):
+                Current = -10;
+                break;
+
+        }
+        if (Current < 0) { CurrentText.GetComponent<Text>().text = Current.ToString(); }
+        if (Current >= 0) { CurrentText.GetComponent<Text>().text = "+" + Current.ToString(); }
+    }
+
+
+    //Bot Instructions and settings    
     public void GetBotCards()
     {
         TotalBpTeamA = ACommander.GetComponent<Item>().battlePower + ACrew1.GetComponent<Item>().battlePower + ACrew2.GetComponent<Item>().battlePower + ACrew3.GetComponent<Item>().battlePower + ACrew4.GetComponent<Item>().battlePower;
 
         switch (Dificult)
         {
-            case 1:  BPlow = TotalBpTeamA * 0.0f;  BPhigh = TotalBpTeamA;break;
+            case 1:  BPlow = TotalBpTeamA * 0.1f;  BPhigh = TotalBpTeamA;break;
             case 2:  BPlow = TotalBpTeamA * 0.85f; BPhigh = TotalBpTeamA *1.15f;break;
-            case 3:  BPlow = TotalBpTeamA * 1.25f; BPhigh = TotalBpTeamA *1.75f;break;
+            case 3:  BPlow = TotalBpTeamA * 0.9f; BPhigh = TotalBpTeamA *2;break;
         }
         {
             GetRandonCard(TeamBActive);
@@ -863,18 +1377,28 @@ public class TrainingMode : MonoBehaviour
             GetRandonCard(TeamBCrew2);
             GetRandonCard(TeamBCrew3);
             GetRandonCard(TeamBCrew4);
-            TotalBpTeamB = TeamBActive.GetComponent<SimpleCard>().battlePower + TeamBCrew1.GetComponent<SimpleCard>().battlePower + TeamBCrew2.GetComponent<SimpleCard>().battlePower + TeamBCrew3.GetComponent<SimpleCard>().battlePower + TeamBCrew4.GetComponent<SimpleCard>().battlePower;
+            TotalBpTeamB =
+                TeamBActive.GetComponent<SimpleCard>().battlePower +
+                TeamBCrew1.GetComponent<SimpleCard>().battlePower +
+                TeamBCrew2.GetComponent<SimpleCard>().battlePower +
+                TeamBCrew3.GetComponent<SimpleCard>().battlePower +
+                TeamBCrew4.GetComponent<SimpleCard>().battlePower;
 
             if ((BPlow < TotalBpTeamB) & (TotalBpTeamB < BPhigh))
             {
-                Debug.Log("funcionou");
+                Debug.Log("Success");
+                StartPreparation = true;
             }
-            else { Debug.Log("falhou"); GetBotCards(); }
+            else 
+            {   Fail++;
+                Debug.Log("Fail: "+Fail.ToString());
+                GetBotCards();
+
+            }
             
         }
 
     }
-
     private void GetRandonCard(GameObject card)
     {  
         int number = Random.Range(1, 34);
@@ -1217,6 +1741,184 @@ public class TrainingMode : MonoBehaviour
 
 
     }
-    
-    
+
+    //Action confirmation and action Buttons 
+    public void ExecuteAction()
+    {
+        if (OnSwitch == false)
+        {
+            //Player action
+
+            switch (ActionA)
+            {
+                case 1://tribeskill
+                    Debug.Log("Action TribeSkill");
+                    break;
+
+
+                case 2://Go Donw
+                    Debug.Log("Action Go Down");
+                    if (PressureLevel > 1)
+                    {
+                        PressureLevel -= 1;
+                    }
+                    break;
+
+                case 3://Go Up
+                    Debug.Log("Action Go Up");
+                    if (PressureLevel < 5)
+                    {
+                        PressureLevel += 1;
+                    }
+                    break;
+
+                case 4://Cleaning
+                    Debug.Log("Action Clean");
+                    if (PollutionLevel > 1)
+                    {
+                        PollutionLevel -= 1;
+                    }
+                    break;
+
+
+                case 5://Cleanig Plus+
+                    Debug.Log("Action CleanPlus");
+                    if (PollutionLevel > 1)
+                    {
+                        PollutionLevel -= 3;
+                        if (PollutionLevel < 0)
+                        {
+                            PollutionLevel = 0;
+                        }
+                        CleanPlus = 1;
+                    }
+                    break;
+
+                case 6://Switch
+                    Debug.Log("Action Switch Card");
+                    SwitchCardsA();
+                    break;
+
+            }
+
+            // BotAction(); 
+            {
+                /*
+               if (Abig > Bbig)
+               {
+                   if (Abig == Aagility) { }
+                   if (Abig == Abrawl)
+                   {
+                       switch (AidealPressure)
+                       {
+                           case 1:
+                               if (PressureLevel <= 1) { ActionB = 3; }
+                               break;
+
+                           case 2:
+                               if (PressureLevel <= 1) { ActionB = 3; }
+                               break;
+
+                           case 3:
+                               if (PressureLevel <= 1) { ActionB = Random.Range(2, 4); }
+                               break;
+
+                           case 4:
+                               if (PressureLevel <= 1) { ActionB = 3; }
+                               break;
+
+                           case 5:
+                               if (PressureLevel <= 1) { ActionB = 3; }
+                               break;
+                       }
+                   }
+                   if (Abig == Acunning)
+                   {
+                       if (SwitchAction == true)
+                       {
+                           if (TeamBCrew1.GetComponent<SimpleCard>().agility > Abig || TeamBCrew1.GetComponent<SimpleCard>().brawl > Abig || TeamBCrew1.GetComponent<SimpleCard>().cunning > Abig)
+                           { }
+                           else if (TeamBCrew2.GetComponent<SimpleCard>().agility > Abig || TeamBCrew2.GetComponent<SimpleCard>().brawl > Abig || TeamBCrew2.GetComponent<SimpleCard>().cunning > Abig)
+                           { }
+                           else if (TeamBCrew3.GetComponent<SimpleCard>().agility > Abig || TeamBCrew3.GetComponent<SimpleCard>().brawl > Abig || TeamBCrew3.GetComponent<SimpleCard>().cunning > Abig)
+                           { }
+                           else if (TeamBCrew4.GetComponent<SimpleCard>().agility > Abig || TeamBCrew4.GetComponent<SimpleCard>().brawl > Abig || TeamBCrew4.GetComponent<SimpleCard>().cunning > Abig)
+                           { }
+                       }
+                   }
+
+               }
+               */
+            }
+            switch (ActionB)
+            {
+                case 1://tribeskill
+                    Debug.Log("Action TribeSkill");
+                    break;
+
+
+                case 2://Go Donw
+                    Debug.Log("Action Go Down");
+                    if (PressureLevel > 1)
+                    {
+                        PressureLevel -= 1;
+                    }
+                    break;
+
+                case 3://Go Up
+                    Debug.Log("Action Go Up");
+                    if (PressureLevel < 5)
+                    {
+                        PressureLevel += 1;
+                    }
+                    break;
+
+                case 4://Cleaning
+                    Debug.Log("Action Clean");
+                    if (PollutionLevel > 1)
+                    {
+                        PollutionLevel -= 1;
+                    }
+                    break;
+
+
+                case 5://Cleanig Plus+
+                    Debug.Log("Action CleanPlus");
+                    if (PollutionLevel > 1)
+                    {
+                        PollutionLevel -= 3;
+                        if (PollutionLevel < 0)
+                        {
+                            PollutionLevel = 0;
+                        }
+                        CleanPlus = 1;
+                    }
+                    break;
+
+                case 6://Switch
+                    Debug.Log("Action Switch Card");
+
+                    break;
+
+            }
+
+            UpdateAtributes();
+            Pollution();
+            SetCurrent();
+            UpdateImage();
+            UpdateName();
+        }
+        if(OnSwitch == true) 
+        {
+            ChampionSelection.SetActive(false);
+            OnSwitch = false;
+        }
+    }
+
+    public IEnumerator WaitForPlayer()
+    {
+        OnSwitch = true;
+        while (OnSwitch == true) { yield return null; }
+    }
+
 }

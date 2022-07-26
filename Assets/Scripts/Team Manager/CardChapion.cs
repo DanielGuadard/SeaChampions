@@ -31,12 +31,12 @@ public class CardChapion : MonoBehaviour
     public float agility;
     public float cunning;
     public float battlePower;
-    public Sprite sprite;
+    public GameObject Flag;
 
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
     ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
     RICHARD, ED, ADAM;
-
+    public Sprite FlagBrazil, FlagIndian,FlagIndonesia,FlagUk, FlagUsa;
     
 
     [SerializeField]
@@ -51,28 +51,10 @@ public class CardChapion : MonoBehaviour
         BrawlObj.GetComponent<Text>().text = brawl.ToString();
         CunningObj.GetComponent<Text>().text = cunning.ToString();
         NameObj.GetComponent<Text>().text = name;
-        Pressure2.SetActive(false);
-        Pressure3.SetActive(false);
-        Pressure4.SetActive(false);
-        Pressure5.SetActive(false);
-        if (idealPressure >= 2)
-        {
-            Pressure2.SetActive(true);
-        }
-        if (idealPressure >= 3)
-        {
-            Pressure3.SetActive(true);
-        }
-        if (idealPressure >= 4)
-        {
-            Pressure4.SetActive(true);
-        }
-        if (idealPressure >= 5)
-        {
-            Pressure5.SetActive(true);
-        }
+        SetPressure();
         SetRarity();
         SetTribe();
+        SetFlag();
     }
     private void SetCardImage()
     {
@@ -274,5 +256,135 @@ public class CardChapion : MonoBehaviour
                 break;
         }
     }
+    private void SetFlag()
+    {
+        switch (name)
+        {
+            case "John Fango the Tactical Megalodon":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Captain Costa the Man O’War":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Ted Righty the Boxer Whale":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Nenrung the Dragon":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Rezaul the Master Octopus":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Garrincha the Tough Blue Lobster":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Luke Leatherback the Turtle":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Ray the Whipping Manta":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sir Westley the Fencing Dolphin":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Liza the Carrier Crab":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Hanis the Menacing Flatfish":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sargeant Hartman the Navy Seal":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Ridley the Olive Turtle":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Arsella the Sea Nettle":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Rocus Shades the Blue Shark":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Aaron the Ramming Crab":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Wanderley the Grappling Octopus":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Lola the Buff Blowfish":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Todd the Barber Eel":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Johnny the Sailor Squid":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Soorya the Needling Box Jellyfish":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Irfan the Bladed Lobster":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Danilo the Piercing Tatui":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Ze Pereira the Sandbar Shark":
+                Flag.GetComponent<Image>().sprite = FlagBrazil;
+                break;
+            case "Bob Saw the Anchovy":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Tisya the Spotted Blademaster":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Sasha the Wrestling Beluga":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Medhansh the Swordsman Octopus":
+                Flag.GetComponent<Image>().sprite = FlagIndian;
+                break;
+            case "Sirilo the Marbled Swim Crab":
+                Flag.GetComponent<Image>().sprite = FlagUsa;
+                break;
+            case "Mahesh the Slashing Mackerel":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            case "Richard the Opportunist Cockle":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Ed the Punk Salmon":
+                Flag.GetComponent<Image>().sprite = FlagUk;
+                break;
+            case "Adam Risso the Dolphin":
+                Flag.GetComponent<Image>().sprite = FlagIndonesia;
+                break;
+            default:
+                break;
+        }
+    }
 
+    private void SetPressure()
+    {
+        Pressure2.SetActive(false);
+        Pressure3.SetActive(false);
+        Pressure4.SetActive(false);
+        Pressure5.SetActive(false);
+        if (idealPressure >= 2)
+        {
+            Pressure2.SetActive(true);
+        }
+        if (idealPressure >= 3)
+        {
+            Pressure3.SetActive(true);
+        }
+        if (idealPressure >= 4)
+        {
+            Pressure4.SetActive(true);
+        }
+        if (idealPressure >= 5)
+        {
+            Pressure5.SetActive(true);
+        }
+    }
 }

@@ -15,7 +15,7 @@ public class SimpleCard : MonoBehaviour
     public float agility;
     public float cunning;
     public float battlePower;
-
+    public Sprite Flag;
 }
 
 

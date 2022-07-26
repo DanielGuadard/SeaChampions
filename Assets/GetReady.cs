@@ -6,12 +6,15 @@ public class GetReady : MonoBehaviour
 {
     [SerializeField]
     private float Timer;
+    [SerializeField]
+    private GameObject BattleUi,TeamA,TeamB,GoButton;
     private GameObject TimerTxt;
     // Start is called before the first frame update
     void Start()
     {
         Timer = 3.5f;
         TimerTxt = GameObject.Find("TimeForBattle");
+        GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Invoke("SetPreparation", 0);
     }
 
     // Update is called once per frame
@@ -19,7 +22,15 @@ public class GetReady : MonoBehaviour
     {
         UpdateDisplay(TimerTxt);
         Timer -= Time.deltaTime;
-        if (Timer <= 0) { this.gameObject.SetActive(false);GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Started = true; }
+        if (Timer <= 0) 
+        {
+            this.gameObject.SetActive(false);
+            GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Started = true;
+            BattleUi.SetActive(true);
+            TeamA.SetActive(true);
+            TeamB.SetActive(true);
+            GoButton.SetActive(true);
+        }
     }
     private void UpdateDisplay(GameObject Display)
     {

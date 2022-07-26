@@ -112,8 +112,8 @@ public class Navigation : MonoBehaviour
             case 1://TrainigMode
                 MainWindow.SetActive(false);
                 TrainingMode.SetActive(true);
-                GameObject.Find("ScriptHolder").GetComponent<TrainingMode>().Timer = 50;
-
+                GameObject.Find("BattleUi").SetActive(false);
+                GameObject.Find("GetReady").SetActive(true);
                 break;
 
             case 2: //Tutorial
