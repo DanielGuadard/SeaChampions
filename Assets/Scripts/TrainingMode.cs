@@ -12,7 +12,7 @@ public class TrainingMode : MonoBehaviour
     [SerializeField]
     private int PollutionLevel, PressureLevel, Match, MatchA, MatchB, Round, RoundA,RoundB, ActionA, ActionB, CleanPlus;
 
-    public bool Started, ConfirmationButton, SwitchActionA, SwitchActionB, OnSwitch,A1, ValidCrewA1, ValidCrewA2, ValidCrewA3, ValidCrewA4, ValidCrewB1, ValidCrewB2, ValidCrewB3, ValidCrewB4;
+    public bool Started, ConfirmationButton, SwitchActionA, SwitchActionB, OnSwitch,ValidCrewA1, ValidCrewA2, ValidCrewA3, ValidCrewA4, ValidCrewB1, ValidCrewB2, ValidCrewB3, ValidCrewB4;
     public string tribe, ChampionName, Name;
     public float speed, smooth, PointearC;
     public int PositionA, PositionB, Dificult, Current, Fail;
@@ -49,7 +49,7 @@ public class TrainingMode : MonoBehaviour
     public GameObject TeamBActive, TeamBCrew1, TeamBCrew2, TeamBCrew3, TeamBCrew4;
     public GameObject IdealPressureA1, IdealPressureA2, IdealPressureA3, IdealPressureA4, IdealPressureA5;
     public GameObject IdealPressureB1, IdealPressureB2, IdealPressureB3, IdealPressureB4, IdealPressureB5;
-    public GameObject TeamAActiveName, teamBActiveName, OceanName, CurrentText, ChampionSelection,MatchOverlay,MatchText;
+    public GameObject TeamAActiveName, teamBActiveName, OceanName, CurrentText, ChampionSelection,MatchOverlay,MatchText,TribeButton,GoDownButton,GoUpButton,CleaButton,CleanPlusButton,SwitchButton;
     public GameObject levelA, MedalIconA, LevelB, MedalIconB, TribeA, TribeB, HabilityA, habilityB, BrawnA, AgilityA, CunningA, BrawnB, AgilityB, CunningB;
     public Sprite TribecaseManylimbs, TribeSeasinger, TribeClawbeasts, TribeRoughskins, TribeJellies, TribeShellbearers, TribeScalefins, Common, Uncommon, Rare, RareVery, Legendary;
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
@@ -118,10 +118,10 @@ public class TrainingMode : MonoBehaviour
         SetOceanPressure();
         SetCurrent();
         Pollution();
-
+        ValidCrewA1 = true; ValidCrewA2 = true; ValidCrewA3 = true; ValidCrewA4 = true; ValidCrewB1 = true; ValidCrewB2 = true; ValidCrewB3 = true; ValidCrewB4 = true;
     }
 
-
+    
     public void SetupPlayerCards(GameObject commander, GameObject crew1, GameObject crew2, GameObject crew3, GameObject crew4)
     {
         commander.GetComponent<SimpleCard>().name = ACommander.GetComponent<Item>().name;
@@ -341,6 +341,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
                 ValidCrewA1 = false;
+                TeamACrew1.GetComponent<Button>().interactable = false;
                 break;
             case 2:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<SimpleCard>().name;
@@ -359,6 +360,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
                 ValidCrewA2 = false;
+                TeamACrew2.GetComponent<Button>().interactable = false;
                 break;
             case 3:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<SimpleCard>().name;
@@ -377,6 +379,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
                 ValidCrewA3 = false;
+                TeamACrew3.GetComponent<Button>().interactable = false;
                 break;
             case 4:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<SimpleCard>().name;
@@ -395,6 +398,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
                 ValidCrewA4 = false;
+                TeamACrew4.GetComponent<Button>().interactable = false;
                 break;
         }
 
@@ -1029,7 +1033,7 @@ public class TrainingMode : MonoBehaviour
 
 
     //Instantiate and Destroy Card Overlay os the crew
-    public void ShowCardOver(GameObject card)
+    public void ShowCardOverlay(GameObject card)
     {
         var CardOverlay = Instantiate(CardChampion);
         CardOverlay.transform.SetParent(GameObject.Find("Canvas_TrainingMode").transform, false);
@@ -1050,7 +1054,7 @@ public class TrainingMode : MonoBehaviour
 
 
     }
-    public void DestroyCardOver()
+    public void DestroyCardOverlay()
     {
         GameObject[] Overlay = GameObject.FindGameObjectsWithTag("Overlay");
         foreach (GameObject x in Overlay)
@@ -1771,12 +1775,11 @@ public class TrainingMode : MonoBehaviour
         }
         if (OnSwitch == false)
         {
-            if (LastActionA == ActionA) { ActionA = 0; }
-            else 
-            {
                 //Player action
                 switch (ActionA)
                 {
+                    case 0:
+                        break;
                     case 1://tribeskill
                         Debug.Log("Action TribeSkill");
                         break;
@@ -1834,41 +1837,44 @@ public class TrainingMode : MonoBehaviour
                         if (Abig == Aagility) 
                         {
                             if (Ocean == "Usa") { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
-                            else if (Ocean == "Brazil") { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
-                            else if (Ocean == "Indonesia") 
+                            if (Ocean == "Brazil") { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
+                            if (Ocean == "Indonesia") 
                             {
                                 if (PressureLevel == 4) { ActionB = 4; if (LastActionB == ActionB) { ActionB = 2; } } 
-                                else if(PressureLevel == 5) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
-                                else if(PressureLevel==3) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
-                                else if (PressureLevel == 2) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
-                                else if (PressureLevel == 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if(PressureLevel == 5) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if(PressureLevel==3) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if (PressureLevel == 2) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if (PressureLevel == 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
                             }
                         }
                         if (Abig == Abrawl)
+                        
+                        switch (TeamBActive.GetComponent<SimpleCard>().idealPressure)
                         {
-                            switch (AidealPressure)
-                            {
-                                case 1:
-                                    if (PressureLevel <= 1) {  ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
-                                    break;
+                            case 1:
+                                ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } 
+                                break;
 
-                                case 2:
-                                    if (PressureLevel <= 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
-                                    break;
+                            case 2:
+                                if (PressureLevel != 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if (PressureLevel == 1) { ActionB = 4; if (LastActionB == ActionB) { ActionB = 3; } }
+                            break;
 
-                                case 3:
-                                    if (PressureLevel <= 1) { ActionB = Random.Range(2, 4); if (LastActionB == ActionB) { ActionB = 4; } }
-                                    break;
+                            case 3:
+                                if (PressureLevel == 3) { ActionB = Random.Range(2, 4); if (LastActionB == ActionB & LastActionB != 2) { ActionB = 2; } if (LastActionB == ActionB & LastActionB !=3) { ActionB = 3; } }
+                                if (PressureLevel > 3) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
+                                if (PressureLevel < 3) { ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } }
+                                break;
 
-                                case 4:
-                                    if (PressureLevel <= 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
-                                    break;
+                            case 4:
+                                ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; } 
+                                break;
 
-                                case 5:
-                                    if (PressureLevel <= 1) { ActionB = 3; if (LastActionB == ActionB) { ActionB = 4; } }
-                                    break;
+                            case 5:
+                                ActionB = 2; if (LastActionB == ActionB) { ActionB = 4; }
+                                break;
                             }
-                        }
+                        
                         if (Abig == Acunning)
                         {
                             if (SwitchActionB == true)
@@ -1940,24 +1946,57 @@ public class TrainingMode : MonoBehaviour
                         break;
 
                 }
+                if (ActionA != 0) 
+                {
+                    UpdateAtributes();
+                    Pollution();
+                    SetCurrent();
+                    UpdateImage();
+                    UpdateName();
+                    
+                    TribeButton.GetComponent<Button>().interactable = true;
+                    GoDownButton.GetComponent<Button>().interactable = true;
+                    GoUpButton.GetComponent<Button>().interactable = true;
+                    CleaButton.GetComponent<Button>().interactable = true;
+                    CleanPlusButton.GetComponent<Button>().interactable = true;
+                    SwitchButton.GetComponent<Button>().interactable = true;
+                    switch (ActionA) 
+                    {
+                        case 1:
+                            TribeButton.GetComponent<Button>().interactable = false;
+                            break;
+                        case 2:
+                            GoDownButton.GetComponent<Button>().interactable = false;
+                            break;
+                        case 3:
+                            GoUpButton.GetComponent<Button>().interactable = false;
+                            break;
+                        case 4:
+                            CleaButton.GetComponent<Button>().interactable = false;
+                            break;
+                        case 5:
+                            CleanPlusButton.GetComponent<Button>().interactable = false;
+                            break;
+                        case 6:
+                            SwitchButton.GetComponent<Button>().interactable = false;
+                            break;
+                    }
 
-                UpdateAtributes();
-                Pollution();
-                SetCurrent();
-                UpdateImage();
-                UpdateName();
-                Turno();
-                LastActionA = ActionA;
-                LastActionB = ActionB;
-                ActionA = 0;
-                ActionB = 0;
-            }
+                    LastActionA = ActionA;
+                    LastActionB = ActionB;
+                    
+                    ActionA = 0;
+                    ActionB = 0;
+                    Rounds();
+                }
+                
+            
         }
         
 
     }
 
-    private void Turno()
+    private void Rounds()
     {
         Timer = 45.5f;
         switch (Match)
@@ -1978,14 +2017,13 @@ public class TrainingMode : MonoBehaviour
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-                        Round = 1;
 
                         MatchRefresh();
-
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match1.GetComponent<Image>().sprite = MatchWin; }
                         if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match1.GetComponent<Image>().sprite = MatchLose; }
                         break;
+
                 }
                 break;
             case 2:
@@ -2004,7 +2042,6 @@ public class TrainingMode : MonoBehaviour
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-                        Round = 1;
 
                         MatchRefresh();
 
@@ -2030,7 +2067,6 @@ public class TrainingMode : MonoBehaviour
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-                        Round = 1;
 
                         MatchRefresh();
 
@@ -2056,7 +2092,6 @@ public class TrainingMode : MonoBehaviour
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-                        Round = 1;
 
                         MatchRefresh();
 
@@ -2082,7 +2117,6 @@ public class TrainingMode : MonoBehaviour
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-                        Round = 1;
 
                         MatchOverlay.SetActive(true);
 
@@ -2102,10 +2136,10 @@ public class TrainingMode : MonoBehaviour
     {
         Match++;
         MatchOverlay.SetActive(true);
-        if (Match == 2) { MatchCount.GetComponent<Image>().sprite = MatchCount2; }
-        if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
-        if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
-        if (Match == 5) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
+        if (Match == 1) { MatchCount.GetComponent<Image>().sprite = MatchCount2; }
+        if (Match == 2) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
+        if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
+        if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
         if (MatchA > MatchB) { MatchText.GetComponent < Text>().text = "You Won this Game!!";}
         if (MatchA < MatchB) { MatchText.GetComponent<Text>().text = "You Lost this Game!!"; }
         RoundA = 0;
@@ -2118,8 +2152,11 @@ public class TrainingMode : MonoBehaviour
         RoundB3.GetComponent<Image>().sprite = RoundNone;
         Timer = 50;
         ActionA = 6;
+        ActionB = 6;
         OnSwitch = true;        
         ExecuteAction();
+        Round = 1;
+        Debug.Log("Calling MatchRefresh.......");
     }
 
     
