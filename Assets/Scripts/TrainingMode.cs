@@ -12,7 +12,7 @@ public class TrainingMode : MonoBehaviour
     [SerializeField]
     private int PollutionLevel, PressureLevel, Match, MatchA, MatchB, Round, RoundA,RoundB, ActionA, ActionB, CleanPlus;
 
-    public bool Started, ConfirmationButton, SwitchActionA, SwitchActionB, OnSwitch;
+    public bool Started, ConfirmationButton, SwitchActionA, SwitchActionB, OnSwitch,A1, ValidCrewA1, ValidCrewA2, ValidCrewA3, ValidCrewA4, ValidCrewB1, ValidCrewB2, ValidCrewB3, ValidCrewB4;
     public string tribe, ChampionName, Name;
     public float speed, smooth, PointearC;
     public int PositionA, PositionB, Dificult, Current, Fail;
@@ -256,10 +256,10 @@ public class TrainingMode : MonoBehaviour
         UpdateChampionImage(TeamACrew1);
         UpdateChampionImage(TeamACrew2);
         UpdateChampionImage(TeamACrew3);
-        UpdateChampionImage(TeamBCrew4);
-        UpdateChampionImage(TeamBCrew4);
-        UpdateChampionImage(TeamBCrew4);
-        UpdateChampionImage(TeamBCrew4);
+        UpdateChampionImage(TeamACrew4);
+        UpdateChampionImage(TeamBCrew1);
+        UpdateChampionImage(TeamBCrew2);
+        UpdateChampionImage(TeamBCrew3);
         UpdateChampionImage(TeamBCrew4);
     }
 
@@ -304,6 +304,11 @@ public class TrainingMode : MonoBehaviour
     //--------------
     public void SwitchCardsA()
     {
+        if (PositionA == 1 & ValidCrewA1 == false) { PositionA = 0; }
+        if (PositionA == 2 & ValidCrewA2 == false) { PositionA = 0; }
+        if (PositionA == 3 & ValidCrewA3 == false) { PositionA = 0; }
+        if (PositionA == 4 & ValidCrewA4 == false) { PositionA = 0; }
+
         Button crew1;
         //Store information on local variable
         string Activename = TeamAActive.GetComponent<SimpleCard>().name;
@@ -315,6 +320,9 @@ public class TrainingMode : MonoBehaviour
         string ActiveRarity = TeamAActive.GetComponent<SimpleCard>().rarity;
         switch (PositionA)
         {
+            case 0:
+                ActionA = 0;
+                break;
             case 1:
                 //Get the choosen champion to active combate position
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew1.GetComponent<SimpleCard>().name;
@@ -332,7 +340,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamACrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
-
+                ValidCrewA1 = false;
                 break;
             case 2:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<SimpleCard>().name;
@@ -350,6 +358,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamACrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewA2 = false;
                 break;
             case 3:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<SimpleCard>().name;
@@ -367,6 +376,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamACrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewA3 = false;
                 break;
             case 4:
                 TeamAActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<SimpleCard>().name;
@@ -384,6 +394,7 @@ public class TrainingMode : MonoBehaviour
                 TeamACrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamACrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamACrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewA4 = false;
                 break;
         }
 
@@ -418,7 +429,7 @@ public class TrainingMode : MonoBehaviour
                 TeamBCrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamBCrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamBCrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
-
+                ValidCrewB1 = false;
                 break;
             case 2:
                 TeamBActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<Item>().name;
@@ -436,6 +447,7 @@ public class TrainingMode : MonoBehaviour
                 TeamBCrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamBCrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamBCrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewB2 = false;
                 break;
             case 3:
                 TeamBActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<Item>().name;
@@ -453,6 +465,7 @@ public class TrainingMode : MonoBehaviour
                 TeamBCrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamBCrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamBCrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewB3 = false;
                 break;
             case 4:
                 TeamBActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<Item>().name;
@@ -470,6 +483,7 @@ public class TrainingMode : MonoBehaviour
                 TeamBCrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
                 TeamBCrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
                 TeamBCrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
+                ValidCrewB4 = false;
                 break;
         }
     }
@@ -1758,7 +1772,7 @@ public class TrainingMode : MonoBehaviour
         if (OnSwitch == false)
         {
             if (LastActionA == ActionA) { ActionA = 0; }
-            else
+            else 
             {
                 //Player action
                 switch (ActionA)
@@ -1943,13 +1957,6 @@ public class TrainingMode : MonoBehaviour
 
     }
 
-    public IEnumerator WaitForPlayer()
-    {
-        OnSwitch = true;
-        while (OnSwitch == true) { yield return null; }
-    }
-    
-    
     private void Turno()
     {
         Timer = 45.5f;
@@ -1973,7 +1980,7 @@ public class TrainingMode : MonoBehaviour
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
                         Round = 1;
 
-                        MatchOverlay.SetActive(true);
+                        MatchRefresh();
 
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match1.GetComponent<Image>().sprite = MatchWin; }
@@ -1999,7 +2006,7 @@ public class TrainingMode : MonoBehaviour
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
                         Round = 1;
 
-                        MatchOverlay.SetActive(true);
+                        MatchRefresh();
 
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match2.GetComponent<Image>().sprite = MatchWin; }
@@ -2025,7 +2032,7 @@ public class TrainingMode : MonoBehaviour
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
                         Round = 1;
 
-                        MatchOverlay.SetActive(true);
+                        MatchRefresh();
 
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match3.GetComponent<Image>().sprite = MatchWin; }
@@ -2051,7 +2058,7 @@ public class TrainingMode : MonoBehaviour
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
                         Round = 1;
 
-                        MatchOverlay.SetActive(true);
+                        MatchRefresh();
 
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match4.GetComponent<Image>().sprite = MatchWin; }
@@ -2087,20 +2094,22 @@ public class TrainingMode : MonoBehaviour
                 break;
 
         }
+
         PollutionLevel++;
         if (PollutionLevel >= 7) { PollutionLevel = 7; }
     }
     public void MatchRefresh()
     {
         Match++;
+        MatchOverlay.SetActive(true);
         if (Match == 2) { MatchCount.GetComponent<Image>().sprite = MatchCount2; }
-        else if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
-        else if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
-        else if (Match == 5) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
-        else { if (MatchA > MatchB) MatchText.GetComponent<Text>().text = "You Won this Game!!"; }
+        if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
+        if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
+        if (Match == 5) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
+        if (MatchA > MatchB) { MatchText.GetComponent < Text>().text = "You Won this Game!!";}
+        if (MatchA < MatchB) { MatchText.GetComponent<Text>().text = "You Lost this Game!!"; }
         RoundA = 0;
         RoundB = 0;
-        MatchOverlay.SetActive(false);
         RoundA1.GetComponent<Image>().sprite = RoundNone;
         RoundA2.GetComponent<Image>().sprite = RoundNone;
         RoundA3.GetComponent<Image>().sprite = RoundNone;
@@ -2109,8 +2118,9 @@ public class TrainingMode : MonoBehaviour
         RoundB3.GetComponent<Image>().sprite = RoundNone;
         Timer = 50;
         ActionA = 6;
+        OnSwitch = true;        
         ExecuteAction();
-
-
     }
+
+    
 }
