@@ -55,7 +55,7 @@ public class TrainingMode : MonoBehaviour
     public Sprite JOHN_FANGO, CAPTAIN, TED, NENRUNG, REZAUL, GARRINCHA, LUKE, RAY, SIR_WESTLEY, LIZA, HANIS, SARGEANT_HARTMAN, RIDLEY, ARSELLA,
    ROCUS, AARON, WANDERLEY, LOLA, TODD, JOHNNY, SOORYA, IRFAN, DANILO, ZEPEREIRA, BOB_SAW, TISYA, SASHA, MEDHANSH, SIRILO, MAHESH,
    RICHARD, ED, ADAM;
-
+    
     // Start is called before the first frame update
 
 
@@ -71,9 +71,11 @@ public class TrainingMode : MonoBehaviour
                 UpdateDisplay(Timer);
             }
 
-            else
-            {
+            else if (Timer <= 0)
+            {   
                 Timer = 0;
+                ActionA = 0;
+                ExecuteAction();
             }
 
 
@@ -101,6 +103,19 @@ public class TrainingMode : MonoBehaviour
                     break;
             }
         }
+        if (SwitchActionA== false) 
+        {if (Round == 1)
+            {
+                SwitchButton.GetComponent<Button>().interactable = true ;
+            }
+        }
+        if (SwitchActionA == true) { SwitchButton.GetComponent<Button>().interactable = false; }
+        if (Round == 2) { SwitchButton.GetComponent<Button>().interactable = false; }
+       
+        if (ValidCrewB1 == false) { GrayColor(TeamBCrew1); }
+        if (ValidCrewB2 == false) { GrayColor(TeamBCrew2); }
+        if (ValidCrewB3 == false) { GrayColor(TeamBCrew3); }
+        if (ValidCrewB4 == false) { GrayColor(TeamBCrew4); }
 
 
 
@@ -119,6 +134,7 @@ public class TrainingMode : MonoBehaviour
         SetCurrent();
         Pollution();
         ValidCrewA1 = true; ValidCrewA2 = true; ValidCrewA3 = true; ValidCrewA4 = true; ValidCrewB1 = true; ValidCrewB2 = true; ValidCrewB3 = true; ValidCrewB4 = true;
+        NormalColor(TeamBCrew1); NormalColor(TeamBCrew2); NormalColor(TeamBCrew3); NormalColor(TeamBCrew4);
     }
 
     
@@ -294,13 +310,19 @@ public class TrainingMode : MonoBehaviour
     public void GoUp() { ActionA = 3; }
     public void Cleaning() { ActionA = 4; }
     public void CleaningPlus() { ActionA = 5; }
-    public void Switch()
-    {
-        ActionA = 6;
-        ConfirmChampion();
-    }
+
 
     //--------------
+    public void Switch()
+    {
+        ConfirmChampion();
+        SwitchButton.GetComponent<Button>().interactable = false;
+        TribeButton.GetComponent<Button>().interactable = false;
+        GoDownButton.GetComponent<Button>().interactable = false;
+        GoUpButton.GetComponent<Button>().interactable = false;
+        CleaButton.GetComponent<Button>().interactable = false;
+        CleanPlusButton.GetComponent<Button>().interactable = false;
+    }
     public void SwitchCardsA()
     {
         //Store information on local variable
@@ -394,15 +416,15 @@ public class TrainingMode : MonoBehaviour
     }
     public void SwitchCardsB()
     {
-        PositionB = Random.Range(1, 7);
-        //Store information on local variable
-        string Activename = TeamBActive.GetComponent<SimpleCard>().name;
-        float Activeagility = TeamBActive.GetComponent<SimpleCard>().agility;
-        float Activebrawl = TeamBActive.GetComponent<SimpleCard>().brawl;
-        float Activecunning = TeamBActive.GetComponent<SimpleCard>().cunning;
-        int ActiveidealPressure = TeamBActive.GetComponent<SimpleCard>().idealPressure;
-        string ActiveTribe = TeamBActive.GetComponent<SimpleCard>().tribe;
-        string ActiveRarity = TeamBActive.GetComponent<SimpleCard>().rarity;
+        PositionB = Random.Range(1, 5);
+        //Store information on local variable of Active team B Champion
+        string ActivenameB = TeamBActive.GetComponent<SimpleCard>().name;
+        float ActiveagilityB = TeamBActive.GetComponent<SimpleCard>().agility;
+        float ActivebrawlB = TeamBActive.GetComponent<SimpleCard>().brawl;
+        float ActivecunningB = TeamBActive.GetComponent<SimpleCard>().cunning;
+        int ActiveidealPressureB = TeamBActive.GetComponent<SimpleCard>().idealPressure;
+        string ActiveTribeB = TeamBActive.GetComponent<SimpleCard>().tribe;
+        string ActiveRarityB = TeamBActive.GetComponent<SimpleCard>().rarity;
 
         switch (PositionB)
         {
@@ -411,90 +433,92 @@ public class TrainingMode : MonoBehaviour
                 else
                 {
                     //Get the choosen champion to active combate position
-                    TeamBActive.GetComponent<SimpleCard>().name = TeamACrew1.GetComponent<SimpleCard>().name;
-                    TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew1.GetComponent<SimpleCard>().agility;
-                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew1.GetComponent<SimpleCard>().brawl;
-                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew1.GetComponent<SimpleCard>().cunning;
+                    TeamBActive.GetComponent<SimpleCard>().name = TeamBCrew1.GetComponent<SimpleCard>().name;
+                    TeamBActive.GetComponent<SimpleCard>().agility = TeamBCrew1.GetComponent<SimpleCard>().agility;
+                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamBCrew1.GetComponent<SimpleCard>().brawl;
+                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamBCrew1.GetComponent<SimpleCard>().cunning;
                     TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew1.GetComponent<SimpleCard>().idealPressure;
-                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew1.GetComponent<SimpleCard>().tribe;
-                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew1.GetComponent<SimpleCard>().rarity;
+                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamBCrew1.GetComponent<SimpleCard>().tribe;
+                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamBCrew1.GetComponent<SimpleCard>().rarity;
                     //Get the local saved Champion to the reserve bench
-                    TeamBCrew1.GetComponent<SimpleCard>().name = Activename;
-                    TeamBCrew1.GetComponent<SimpleCard>().agility = Activeagility;
-                    TeamBCrew1.GetComponent<SimpleCard>().brawl = Activebrawl;
-                    TeamBCrew1.GetComponent<SimpleCard>().cunning = Activecunning;
-                    TeamBCrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
-                    TeamBCrew1.GetComponent<SimpleCard>().tribe = ActiveTribe;
-                    TeamBCrew1.GetComponent<SimpleCard>().rarity = ActiveRarity;
-
-                    ValidCrewB1 = false;
+                    TeamBCrew1.GetComponent<SimpleCard>().name = ActivenameB;
+                    TeamBCrew1.GetComponent<SimpleCard>().agility = ActiveagilityB;
+                    TeamBCrew1.GetComponent<SimpleCard>().brawl = ActivebrawlB;
+                    TeamBCrew1.GetComponent<SimpleCard>().cunning = ActivecunningB;
+                    TeamBCrew1.GetComponent<SimpleCard>().idealPressure = ActiveidealPressureB;
+                    TeamBCrew1.GetComponent<SimpleCard>().tribe = ActiveTribeB;
+                    TeamBCrew1.GetComponent<SimpleCard>().rarity = ActiveRarityB;
+                    
                 }
                 break;
             case 2:
                 if (ValidCrewB2 == false) { SwitchCardsB(); }
                 else
                 {
-                    TeamBActive.GetComponent<SimpleCard>().name = TeamACrew2.GetComponent<SimpleCard>().name;
-                    TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew2.GetComponent<SimpleCard>().agility;
-                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew2.GetComponent<SimpleCard>().brawl;
-                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew2.GetComponent<SimpleCard>().cunning;
-                    TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew2.GetComponent<SimpleCard>().idealPressure;
-                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew2.GetComponent<SimpleCard>().tribe;
-                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew2.GetComponent<SimpleCard>().rarity;
+                    TeamBActive.GetComponent<SimpleCard>().name = TeamBCrew2.GetComponent<SimpleCard>().name;
+                    TeamBActive.GetComponent<SimpleCard>().agility = TeamBCrew2.GetComponent<SimpleCard>().agility;
+                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamBCrew2.GetComponent<SimpleCard>().brawl;
+                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamBCrew2.GetComponent<SimpleCard>().cunning;
+                    TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamBCrew2.GetComponent<SimpleCard>().idealPressure;
+                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamBCrew2.GetComponent<SimpleCard>().tribe;
+                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamBCrew2.GetComponent<SimpleCard>().rarity;
 
-                    TeamBCrew2.GetComponent<SimpleCard>().name = Activename;
-                    TeamBCrew2.GetComponent<SimpleCard>().agility = Activeagility;
-                    TeamBCrew2.GetComponent<SimpleCard>().brawl = Activebrawl;
-                    TeamBCrew2.GetComponent<SimpleCard>().cunning = Activecunning;
-                    TeamBCrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
-                    TeamBCrew2.GetComponent<SimpleCard>().tribe = ActiveTribe;
-                    TeamBCrew2.GetComponent<SimpleCard>().rarity = ActiveRarity;
-                    ValidCrewB2 = false; }
+                    TeamBCrew2.GetComponent<SimpleCard>().name = ActivenameB;
+                    TeamBCrew2.GetComponent<SimpleCard>().agility = ActiveagilityB;
+                    TeamBCrew2.GetComponent<SimpleCard>().brawl = ActivebrawlB;
+                    TeamBCrew2.GetComponent<SimpleCard>().cunning = ActivecunningB;
+                    TeamBCrew2.GetComponent<SimpleCard>().idealPressure = ActiveidealPressureB;
+                    TeamBCrew2.GetComponent<SimpleCard>().tribe = ActiveTribeB;
+                    TeamBCrew2.GetComponent<SimpleCard>().rarity = ActiveRarityB;
+                    
+                }
                 break;
             case 3:
                 if (ValidCrewB3 == false) { SwitchCardsB(); }
                 else { 
-                    TeamBActive.GetComponent<SimpleCard>().name = TeamACrew3.GetComponent<SimpleCard>().name;
-                TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew3.GetComponent<SimpleCard>().agility;
-                TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew3.GetComponent<SimpleCard>().brawl;
-                TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew3.GetComponent<SimpleCard>().cunning;
-                TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew3.GetComponent<SimpleCard>().idealPressure;
-                TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew3.GetComponent<SimpleCard>().tribe;
-                TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew3.GetComponent<SimpleCard>().rarity;
+                    TeamBActive.GetComponent<SimpleCard>().name = TeamBCrew3.GetComponent<SimpleCard>().name;
+                    TeamBActive.GetComponent<SimpleCard>().agility = TeamBCrew3.GetComponent<SimpleCard>().agility;
+                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamBCrew3.GetComponent<SimpleCard>().brawl;
+                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamBCrew3.GetComponent<SimpleCard>().cunning;
+                    TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamBCrew3.GetComponent<SimpleCard>().idealPressure;
+                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamBCrew3.GetComponent<SimpleCard>().tribe;
+                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamBCrew3.GetComponent<SimpleCard>().rarity;
 
-                TeamBCrew3.GetComponent<SimpleCard>().name = Activename;
-                TeamBCrew3.GetComponent<SimpleCard>().agility = Activeagility;
-                TeamBCrew3.GetComponent<SimpleCard>().brawl = Activebrawl;
-                TeamBCrew3.GetComponent<SimpleCard>().cunning = Activecunning;
-                TeamBCrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
-                TeamBCrew3.GetComponent<SimpleCard>().tribe = ActiveTribe;
-                TeamBCrew3.GetComponent<SimpleCard>().rarity = ActiveRarity;
-                ValidCrewB3 = false;
+                    TeamBCrew3.GetComponent<SimpleCard>().name = ActivenameB;
+                    TeamBCrew3.GetComponent<SimpleCard>().agility = ActiveagilityB;
+                    TeamBCrew3.GetComponent<SimpleCard>().brawl = ActivebrawlB;
+                    TeamBCrew3.GetComponent<SimpleCard>().cunning = ActivecunningB;
+                    TeamBCrew3.GetComponent<SimpleCard>().idealPressure = ActiveidealPressureB;
+                    TeamBCrew3.GetComponent<SimpleCard>().tribe = ActiveTribeB;
+                    TeamBCrew3.GetComponent<SimpleCard>().rarity = ActiveRarityB;
+                    
                 }
                 break;
             case 4:
                 if (ValidCrewB4 == false) { SwitchCardsB(); }
                 else
                 {
-                    TeamBActive.GetComponent<SimpleCard>().name = TeamACrew4.GetComponent<SimpleCard>().name;
-                    TeamBActive.GetComponent<SimpleCard>().agility = TeamACrew4.GetComponent<SimpleCard>().agility;
-                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamACrew4.GetComponent<SimpleCard>().brawl;
-                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamACrew4.GetComponent<SimpleCard>().cunning;
-                    TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamACrew4.GetComponent<SimpleCard>().idealPressure;
-                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamACrew4.GetComponent<SimpleCard>().tribe;
-                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamACrew4.GetComponent<SimpleCard>().rarity;
+                    TeamBActive.GetComponent<SimpleCard>().name = TeamBCrew4.GetComponent<SimpleCard>().name;
+                    TeamBActive.GetComponent<SimpleCard>().agility = TeamBCrew4.GetComponent<SimpleCard>().agility;
+                    TeamBActive.GetComponent<SimpleCard>().brawl = TeamBCrew4.GetComponent<SimpleCard>().brawl;
+                    TeamBActive.GetComponent<SimpleCard>().cunning = TeamBCrew4.GetComponent<SimpleCard>().cunning;
+                    TeamBActive.GetComponent<SimpleCard>().idealPressure = TeamBCrew4.GetComponent<SimpleCard>().idealPressure;
+                    TeamBActive.GetComponent<SimpleCard>().tribe = TeamBCrew4.GetComponent<SimpleCard>().tribe;
+                    TeamBActive.GetComponent<SimpleCard>().rarity = TeamBCrew4.GetComponent<SimpleCard>().rarity;
 
-                    TeamBCrew4.GetComponent<SimpleCard>().name = Activename;
-                    TeamBCrew4.GetComponent<SimpleCard>().agility = Activeagility;
-                    TeamBCrew4.GetComponent<SimpleCard>().brawl = Activebrawl;
-                    TeamBCrew4.GetComponent<SimpleCard>().cunning = Activecunning;
-                    TeamBCrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressure;
-                    TeamBCrew4.GetComponent<SimpleCard>().tribe = ActiveTribe;
-                    TeamBCrew4.GetComponent<SimpleCard>().rarity = ActiveRarity;
-                    ValidCrewB4 = false;
-                }
+                    TeamBCrew4.GetComponent<SimpleCard>().name = ActivenameB;
+                    TeamBCrew4.GetComponent<SimpleCard>().agility = ActiveagilityB;
+                    TeamBCrew4.GetComponent<SimpleCard>().brawl = ActivebrawlB;
+                    TeamBCrew4.GetComponent<SimpleCard>().cunning = ActivecunningB;
+                    TeamBCrew4.GetComponent<SimpleCard>().idealPressure = ActiveidealPressureB;
+                    TeamBCrew4.GetComponent<SimpleCard>().tribe = ActiveTribeB;
+                    TeamBCrew4.GetComponent<SimpleCard>().rarity = ActiveRarityB;
+                    
+                    }
                 break;
+
         }
+
     }
     //---------------
 
@@ -600,6 +624,7 @@ public class TrainingMode : MonoBehaviour
         }
         teamBActiveName.GetComponent<Text>().text = TeamBActive.GetComponent<SimpleCard>().name.ToString();
         UpdateRaityB(TeamBActive);
+        UpdateChampionImage(TeamBActive);
     }
     public void UpdateAtributes()
     {
@@ -1472,7 +1497,7 @@ private void SetOceanPressure()
                 card.GetComponent<SimpleCard>().rarity = "Rare";
                 break;
             case 5:
-                card.GetComponent<SimpleCard>().name = "Rezaul the master Octopus";
+                card.GetComponent<SimpleCard>().name = "Rezaul the Master Octopus";
                 card.GetComponent<SimpleCard>().agility = 75;
                 card.GetComponent<SimpleCard>().brawl = 150;
                 card.GetComponent<SimpleCard>().cunning = 233;
@@ -1770,24 +1795,24 @@ private void SetOceanPressure()
 
     }
 
-    //Action confirmation and action Buttons 
+    //Action confirmation and action Buttons -------------------------
     public void ExecuteAction()
     {
             //Player action
             switch (ActionA)
             {
                 case 0://Do nothing
-                    Debug.Log("Do nothing");
+                    Debug.Log("Do nothing A");
                     break;
 
 
                 case 1://tribeskill
-                    Debug.Log("Action TribeSkill");
+                    Debug.Log("Action TribeSkill A");
                     break;
 
 
                 case 2://Go Donw
-                    Debug.Log("Action Go Down");
+                    Debug.Log("Action Go Down A");
                     if (PressureLevel > 1)
                     {
                         PressureLevel -= 1;
@@ -1795,7 +1820,7 @@ private void SetOceanPressure()
                     break;
 
                 case 3://Go Up
-                    Debug.Log("Action Go Up");
+                    Debug.Log("Action Go Up A");
                     if (PressureLevel < 5)
                     {
                         PressureLevel += 1;
@@ -1803,7 +1828,7 @@ private void SetOceanPressure()
                     break;
 
                 case 4://Cleaning
-                    Debug.Log("Action Clean");
+                    Debug.Log("Action Clean A");
                     if (PollutionLevel > 1)
                     {
                         PollutionLevel -= 1;
@@ -1812,7 +1837,7 @@ private void SetOceanPressure()
 
 
                 case 5://Cleanig Plus+
-                    Debug.Log("Action CleanPlus");
+                    Debug.Log("Action CleanPlus A");
                     if (PollutionLevel > 1)
                     {
                         PollutionLevel -= 3;
@@ -1823,12 +1848,6 @@ private void SetOceanPressure()
                         CleanPlus = 1;
                     }
                     break;
-
-                case 6://Switch
-                    Debug.Log("Action Switch Card");
-                    SwitchCardsA();
-                    break;
-
             }
 
             // BotAction --------------------------------------------
@@ -1902,68 +1921,85 @@ private void SetOceanPressure()
             ActionB = Random.Range(0, 7);
             if (ActionB != 0)
             { 
+            
                 while (ActionB == LastActionB)
                 {
                     ActionB = Random.Range(0, 7);
                 }
-            }
-            switch (ActionB)
+            if (Round != 1) 
             {
-                case 0://Do nothing
-                    break;
-                case 1://tribeskill
-                    Debug.Log("Action TribeSkill");
-                    break;
-
-
-                case 2://Go Donw
-                    Debug.Log("Action Go Down");
-                    if (PressureLevel > 1)
-                    {
-                        PressureLevel -= 1;
-                    }
-                    break;
-
-                case 3://Go Up
-                    Debug.Log("Action Go Up");
-                    if (PressureLevel < 5)
-                    {
-                        PressureLevel += 1;
-                    }
-                    break;
-
-                case 4://Cleaning
-                    Debug.Log("Action Clean");
-                    if (PollutionLevel > 1)
-                    {
-                        PollutionLevel -= 1;
-                    }
-                    break;
-
-
-                case 5://Cleanig Plus+
-                    Debug.Log("Action CleanPlus");
-                    if (PollutionLevel > 1)
-                    {
-                        PollutionLevel -= 3;
-                        if (PollutionLevel < 0)
-                        {
-                            PollutionLevel = 0;
-                        }
-                        CleanPlus = 1;
-                    }
-                    break;
-
-                case 6://Switch
-                    Debug.Log("Action Switch Card");
-                    SwitchCardsB();
-                    if (MatchText.active==false) 
-                    {
-                        SwitchActionB = true; 
-                    }
-                        break;
+                while (ActionB == 6)
+                {
+                    ActionB = Random.Range(0, 5);
+                }
             }
-            
+            }
+        switch (ActionB)
+        {
+            case 0://Do nothing
+                Debug.Log("Do Nothing B");
+                break;
+            case 1://tribeskill
+                Debug.Log("Action TribeSkill B");
+                break;
+
+
+            case 2://Go Donw
+                Debug.Log("Action Go Down B");
+                if (PressureLevel > 1)
+                {
+                    PressureLevel -= 1;
+                }
+                break;
+
+            case 3://Go Up
+                Debug.Log("Action Go Up B");
+                if (PressureLevel < 5)
+                {
+                    PressureLevel += 1;
+                }
+                break;
+
+            case 4://Cleaning
+                Debug.Log("Action Clean B");
+                if (PollutionLevel > 1)
+                {
+                    PollutionLevel -= 1;
+                }
+                break;
+
+
+            case 5://Cleanig Plus+
+                Debug.Log("Action CleanPlus B");
+                if (PollutionLevel > 1)
+                {
+                    PollutionLevel -= 3;
+                    if (PollutionLevel < 0)
+                    {
+                        PollutionLevel = 0;
+                    }
+                    CleanPlus = 1;
+                }
+                break;
+
+            case 6://Switch
+                if (SwitchActionB == false)
+                { 
+                    Debug.Log("Action Switch Card B");
+                if (MatchText.active == false)
+                {
+                    SwitchActionB = true;
+                }
+                SwitchCardsB();
+                break;
+                }
+                else
+                {
+                    Debug.Log("Action Switch Card B, Fail, Do Nothing");
+                    ActionB =0;
+                }
+                break;
+            }
             UpdateAtributes();
             Pollution();
             SetCurrent();
@@ -1975,7 +2011,6 @@ private void SetOceanPressure()
             GoUpButton.GetComponent<Button>().interactable = true;
             CleaButton.GetComponent<Button>().interactable = true;
             CleanPlusButton.GetComponent<Button>().interactable = true;
-            SwitchButton.GetComponent<Button>().interactable = true;
             switch (ActionA) 
                     {
                         case 1:
@@ -1993,28 +2028,21 @@ private void SetOceanPressure()
                         case 5:
                             CleanPlusButton.GetComponent<Button>().interactable = false;
                             break;
-                        case 6:
-                            SwitchButton.GetComponent<Button>().interactable = false;
-                            break;
+                           
+                            
                     }
             LastActionA = ActionA;
             LastActionB = ActionB;
             ActionA = 0;
             ActionB = 0;
-            if (SwitchActionA == true)
-            {
-                SwitchButton.GetComponent<Button>().interactable = false;
-            }
             Rounds();
             
     }
-
-
     private void Rounds()
-    {
+    {Timer = 45.5f;
         if (OnSwitch == false) { 
             MatchOverlay.SetActive(false);
-        Timer = 45.5f;
+        
         switch (Match)
         {
             case 1:
@@ -2023,18 +2051,24 @@ private void SetOceanPressure()
                     case 1:
                         if (Abig > Bbig) { RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA1.GetComponent<Image>().sprite = RoundLose; RoundB1.GetComponent<Image>().sprite = RoundWin; }
-                        Round++;
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundWin; }
+                            
+                            Round++;
                         break;
                     case 2:
                         if (Abig > Bbig) { RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA2.GetComponent<Image>().sprite = RoundLose; RoundB2.GetComponent<Image>().sprite = RoundWin; }
-                        Round++;
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundWin; }
+                            Round++;
                         break;
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundWin; }
+
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match1.GetComponent<Image>().sprite = MatchWin; }
-                        if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match1.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundB > RoundA) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match1.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundA == RoundB) { MatchText.GetComponent<Text>().text = "You Draw this match"; MatchB++; MatchA++; Match1.GetComponent<Image>().sprite = MatchWin; }
                         MatchRefresh();
                         MatchOverlay.SetActive(true);
 
@@ -2048,22 +2082,26 @@ private void SetOceanPressure()
                     case 1:
                         if (Abig > Bbig) { RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA1.GetComponent<Image>().sprite = RoundLose; RoundB1.GetComponent<Image>().sprite = RoundWin; }
-                        Round++;
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundWin; }
+                            Round++;
                         break;
                     case 2:
                         if (Abig > Bbig) { RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA2.GetComponent<Image>().sprite = RoundLose; RoundB2.GetComponent<Image>().sprite = RoundWin; }
-                        Round++;
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundWin; }
+                            Round++;
                         break;
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-
-                        MatchRefresh();
-                        MatchOverlay.SetActive(true);
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundWin; }
 
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match2.GetComponent<Image>().sprite = MatchWin; }
-                        if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match2.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundB > RoundA) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match2.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundA == RoundB) { MatchText.GetComponent<Text>().text = "You Draw this match"; MatchB++; MatchA++; Match2.GetComponent<Image>().sprite = MatchWin; }
+                            MatchRefresh();
+                        MatchOverlay.SetActive(true);
+
                         break;
                 }
                 break;
@@ -2073,23 +2111,26 @@ private void SetOceanPressure()
                     case 1:
                         if (Abig > Bbig) { RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA1.GetComponent<Image>().sprite = RoundLose; RoundB1.GetComponent<Image>().sprite = RoundWin; }
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundWin; }
                         Round++;
                         break;
                     case 2:
                         if (Abig > Bbig) { RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA2.GetComponent<Image>().sprite = RoundLose; RoundB2.GetComponent<Image>().sprite = RoundWin; }
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundWin; }
                         Round++;
                         break;
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundWin; }
+                        if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match3.GetComponent<Image>().sprite = MatchWin; }
+                        if (RoundB > RoundA) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match3.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundA == RoundB) { MatchText.GetComponent<Text>().text = "You Draw this match"; MatchB++; MatchA++; Match3.GetComponent<Image>().sprite = MatchWin; }
                         MatchRefresh();
                         MatchOverlay.SetActive(true);
 
-                        if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match3.GetComponent<Image>().sprite = MatchWin; }
-                        if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match3.GetComponent<Image>().sprite = MatchLose; }
-                        break;
+                    break;
                 }
                 break;
             case 4:
@@ -2098,23 +2139,25 @@ private void SetOceanPressure()
                     case 1:
                         if (Abig > Bbig) { RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA1.GetComponent<Image>().sprite = RoundLose; RoundB1.GetComponent<Image>().sprite = RoundWin; }
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA1.GetComponent<Image>().sprite = RoundWin; RoundB1.GetComponent<Image>().sprite = RoundWin; }
                         Round++;
                         break;
                     case 2:
                         if (Abig > Bbig) { RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA2.GetComponent<Image>().sprite = RoundLose; RoundB2.GetComponent<Image>().sprite = RoundWin; }
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA2.GetComponent<Image>().sprite = RoundWin; RoundB2.GetComponent<Image>().sprite = RoundWin; }
                         Round++;
                         break;
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-
+                        if (Bbig == Abig) { RoundB++; RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundWin; }
                         MatchRefresh();
-                        MatchOverlay.SetActive(true);
-
                         if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match4.GetComponent<Image>().sprite = MatchWin; }
-                        if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match4.GetComponent<Image>().sprite = MatchLose; }
-                        break;
+                        if (RoundB > RoundA) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match4.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundA == RoundB) { MatchText.GetComponent<Text>().text = "You Draw this match"; MatchB++; MatchA++; Match4.GetComponent<Image>().sprite = MatchWin; }
+                            MatchOverlay.SetActive(true);
+                    break;
                 }
                 break;
             case 5:
@@ -2133,12 +2176,11 @@ private void SetOceanPressure()
                     case 3:
                         if (Abig > Bbig) { RoundA++; RoundA3.GetComponent<Image>().sprite = RoundWin; RoundB3.GetComponent<Image>().sprite = RoundLose; }
                         if (Bbig > Abig) { RoundB++; RoundA3.GetComponent<Image>().sprite = RoundLose; RoundB3.GetComponent<Image>().sprite = RoundWin; }
-
+                        if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this match"; MatchA++; Match5.GetComponent<Image>().sprite = MatchWin; }
+                        if (RoundB > RoundA) { MatchText.GetComponent<Text>().text = "You Lost this match"; MatchB++; Match5.GetComponent<Image>().sprite = MatchLose; }
+                        if (RoundA == RoundB) { MatchText.GetComponent<Text>().text = "You Draw this match"; MatchB++; MatchA++; Match5.GetComponent<Image>().sprite = MatchWin; }
                         MatchRefresh();
                         MatchOverlay.SetActive(true);
-
-                        if (RoundA > RoundB) { MatchText.GetComponent<Text>().text = "You Won this Game"; MatchA++; Match5.GetComponent<Image>().sprite = MatchWin; }
-                        if (RoundA < RoundB) { MatchText.GetComponent<Text>().text = "You Lost this Game"; MatchB++; Match5.GetComponent<Image>().sprite = MatchLose; }
                         break;
                 }
                 break;
@@ -2148,69 +2190,132 @@ private void SetOceanPressure()
         PollutionLevel++;
         if (PollutionLevel >= 7) { PollutionLevel = 7; }
         }
+        UpdateImage();
     }
     private void MatchRefresh()
-    {   Round = 1;
-        Match++;
-        MatchText.SetActive(true);
-        MatchOverlay.SetActive(true);
-        if (Match == 2) { MatchCount.GetComponent<Image>().sprite = MatchCount2; }
-        if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
-        if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
-        if (Match == 5) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
-        
-        RoundA = 0;
-        RoundB = 0;
-        RoundA1.GetComponent<Image>().sprite = RoundNone;
-        RoundA2.GetComponent<Image>().sprite = RoundNone;
-        RoundA3.GetComponent<Image>().sprite = RoundNone;
-        RoundB1.GetComponent<Image>().sprite = RoundNone;
-        RoundB2.GetComponent<Image>().sprite = RoundNone;
-        RoundB3.GetComponent<Image>().sprite = RoundNone;
-        Timer = 50;
-        ActionA = 6;
-        ActionB = 6;
-        OnSwitch = true;
-        ChampionSelection.SetActive(true);
-        ExecuteAction();
-        
-        Debug.Log("Calling MatchRefresh.......");
-    }
-
-    public void ConfirmChampion()
     {
-        OnSwitch = true;
-        MatchText.SetActive(false);
-        ChampionSelection.SetActive(true);
-
-    }
-
-    public void Getchampion(int champion)
-    {if (OnSwitch == true)
+        if (Match != 5)
         {
-            PositionA = champion;
-            switch (PositionA)
+            Round = 1;
+            Match++;
+            MatchText.SetActive(true);
+            MatchOverlay.SetActive(true);
+            if (Match == 2) { MatchCount.GetComponent<Image>().sprite = MatchCount2; }
+            if (Match == 3) { MatchCount.GetComponent<Image>().sprite = MatchCount3; }
+            if (Match == 4) { MatchCount.GetComponent<Image>().sprite = MatchCount4; }
+            if (Match == 5) { MatchCount.GetComponent<Image>().sprite = MatchCount5; }
+
+            RoundA = 0;
+            RoundB = 0;
+            RoundA1.GetComponent<Image>().sprite = RoundNone;
+            RoundA2.GetComponent<Image>().sprite = RoundNone;
+            RoundA3.GetComponent<Image>().sprite = RoundNone;
+            RoundB1.GetComponent<Image>().sprite = RoundNone;
+            RoundB2.GetComponent<Image>().sprite = RoundNone;
+            RoundB3.GetComponent<Image>().sprite = RoundNone;
+            Timer = 50;
+            OnSwitch = true;
+            ChampionSelection.SetActive(true);
+            ConfirmChampion();
+            SwitchCardsB();
+
+            switch (PositionB)
             {
                 case 1:
-                    confirmation = ValidCrewA1;
+                    ValidCrewB1 = false;
                     break;
                 case 2:
-                    confirmation = ValidCrewA2;
+                    ValidCrewB2 = false;
                     break;
                 case 3:
-                    confirmation = ValidCrewA3;
+                    ValidCrewB3 = false;
                     break;
                 case 4:
-                    confirmation = ValidCrewA4;
+                    ValidCrewB4 = false;
                     break;
+
             }
-            if (confirmation == true)
-            {
-                ChampionSelection.SetActive(false);
-                OnSwitch= false;
-                SwitchActionA = true;
-            }
+            Debug.Log("Calling MatchRefresh.......");
         }
-        
+        else 
+        {
+            MatchText.SetActive(true);
+            MatchOverlay.SetActive(true);
+            if (MatchA > MatchB) { MatchText.GetComponent<Text>().text = "You Won this Batlle"; }
+            if (MatchB > MatchA) { MatchText.GetComponent<Text>().text = "You Lost this Batlle";}
+            if (MatchA == MatchA) { MatchText.GetComponent<Text>().text = "You Draw this Batlle";}
+
+        }
     }
+
+        public void ConfirmChampion()
+        {
+            OnSwitch = true;
+            MatchText.SetActive(false);
+            ChampionSelection.SetActive(true);
+
+        }
+
+        public void Getchampion(int champion)
+        { if (OnSwitch == true)
+            {
+                PositionA = champion;
+                switch (PositionA)
+                {
+                    case 1:
+                        confirmation = ValidCrewA1;
+                        break;
+                    case 2:
+                        confirmation = ValidCrewA2;
+                        break;
+                    case 3:
+                        confirmation = ValidCrewA3;
+                        break;
+                    case 4:
+                        confirmation = ValidCrewA4;
+                        break;
+                }
+                if (MatchText.activeInHierarchy)
+                {
+                    switch (PositionA)
+                    {
+                        case 1:
+                            ValidCrewA1 = false;
+                            GrayColor(TeamACrew1);
+                            break;
+                        case 2:
+                            ValidCrewA2 = false;
+                            GrayColor(TeamACrew2);
+                            break;
+                        case 3:
+                            ValidCrewA3 = false;
+                            GrayColor(TeamACrew3);
+                            break;
+                        case 4:
+                            ValidCrewA4 = false;
+                            GrayColor(TeamACrew4);
+                            break;
+                    }
+                }
+
+                if (confirmation == true)
+                {
+                    ChampionSelection.SetActive(false);
+                    OnSwitch = false;
+                    SwitchActionA = true;
+                    SwitchCardsA();
+                    UpdateImage();
+                }
+            }
+
+        }
+        private void GrayColor(GameObject champion)
+        {
+            champion.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
+        }
+        private void NormalColor(GameObject champion)
+        {
+            champion.GetComponent<Image>().color = new Color(1, 1, 1);
+        }
+    
 }

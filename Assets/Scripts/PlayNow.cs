@@ -43,7 +43,7 @@ public class PlayNow : MonoBehaviour
             ConfigJSON config = JSONHandler.ReadConfigFromJSON("config.json");
             gamemode = config.gamemode;
         }
-
+        gamemode = 1;
         switch (gamemode)
         {
             case 0:
