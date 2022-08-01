@@ -31,10 +31,8 @@ public class TeamSetItem : MonoBehaviour
         {
             completed = false;
             incomplete.SetActive(true);
-            teamName.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
-                new Vector3(140, 0, 0);
-            nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position +
-                new Vector3(140, 0, 0);
+            teamName.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position + new Vector3(140, 0, 0);
+            nameHolder.GetComponent<RectTransform>().position = incomplete.GetComponent<Transform>().position + new Vector3(140, 0, 0);
             GameObject.Find("ScriptHolder").GetComponent<OPENAndEXITGame>().SaveTeams();
         }
         if (commander != null & crew1 != null & crew2 != null & crew3 != null & crew4 != null)
