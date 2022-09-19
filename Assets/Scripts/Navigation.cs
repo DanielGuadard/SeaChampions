@@ -108,6 +108,7 @@ public class Navigation : MonoBehaviour
             case 0://QuickPlay
 
             break;
+<<<<<<< HEAD
 
             case 1://TrainigMode
                 MainWindow.SetActive(false);
@@ -118,6 +119,18 @@ public class Navigation : MonoBehaviour
 
             case 2: //Tutorial
 
+=======
+
+            case 1://TrainigMode
+                MainWindow.SetActive(false);
+                TrainingMode.SetActive(true);
+                GameObject.Find("BattleUi").SetActive(false);
+                GameObject.Find("GetReady").SetActive(true);
+                break;
+
+            case 2: //Tutorial
+
+>>>>>>> ec07000c922841ccd5b3d99020a37826fa097aaf
             break;
 
         }

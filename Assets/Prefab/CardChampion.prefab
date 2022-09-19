@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6127280831139009955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 9000526999024254829}
   m_Layer: 5
   m_Name: CardChampion
-  m_TagString: Untagged
+  m_TagString: Overlay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,7 +719,7 @@ RectTransform:
   m_GameObject: {fileID: 3341496036332111289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5801173038841799728}
   - {fileID: 6736698066608909127}
@@ -742,11 +742,11 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 547, y: 720}
-  m_Pivot: {x: 0, y: 0}
+  m_SizeDelta: {x: 547.16, y: 720}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8700366430389433807
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -805,6 +805,20 @@ MonoBehaviour:
   Pressure3: {fileID: 6298883556674403458}
   Pressure4: {fileID: 5693267519208662554}
   Pressure5: {fileID: 671122538173323672}
+  TribeIcon: {fileID: 5485347746303921546}
+  MedalIcon: {fileID: 3110330141413715306}
+  Scalefins: {fileID: 21300000, guid: a92127179a0d3f841a9a82ca16ab35b1, type: 3}
+  Seasingers: {fileID: 21300000, guid: 7d3a0b406c3e74e40b6e338d5c0bf50c, type: 3}
+  Jellies: {fileID: 21300000, guid: ce58e61ba78410a46bc2148f3b5de9c5, type: 3}
+  Clawbeasts: {fileID: 21300000, guid: 3265c14c405a8d447b9736776297bea8, type: 3}
+  Shellbearers: {fileID: 21300000, guid: bf0a9255f28a03e43a93c0a0c1ed1701, type: 3}
+  Manylimbs: {fileID: 21300000, guid: 17ce2db7327837f4189e891d635fa2a7, type: 3}
+  Roughskins: {fileID: 21300000, guid: dc0ae8ed1eb300144844344a0c04c241, type: 3}
+  Common: {fileID: 21300000, guid: d65a239324a81494a8aa1c13d2d9d3cd, type: 3}
+  Uncommon: {fileID: 21300000, guid: 35c32b0c3ddea6a4d903d9234318b503, type: 3}
+  RareVery: {fileID: 21300000, guid: b9c65262c4cc713419587dae0cec27b3, type: 3}
+  Rare: {fileID: 21300000, guid: ddbeabd97989a4346998d7261d07ad33, type: 3}
+  Legendary: {fileID: 21300000, guid: e5fb641a418d14641b79ad16c7754d78, type: 3}
   id: 0
   name: 
   image: 
@@ -816,11 +830,12 @@ MonoBehaviour:
   agility: 0
   cunning: 0
   battlePower: 0
+  Flag: {fileID: 8127893746211033371}
   JOHN_FANGO: {fileID: 21300000, guid: 0107f52eb68dfba44aa19629384528b0, type: 3}
   CAPTAIN: {fileID: 21300000, guid: cacd58053c2134b4fa78c94e8cf65187, type: 3}
   TED: {fileID: 21300000, guid: 97278c9966b479648a180db1234c16a4, type: 3}
   NENRUNG: {fileID: 21300000, guid: df3a433013003154986ee1ff4b02b60f, type: 3}
-  REZAUL: {fileID: 21300000, guid: bb4dd4a142cde4e4f8d802ffef919be9, type: 3}
+  REZAUL: {fileID: 21300000, guid: 0157513bcbb87024bbf3899d02b970e5, type: 3}
   GARRINCHA: {fileID: 21300000, guid: 009d9b31e3bdac44faefdb996ca69cd6, type: 3}
   LUKE: {fileID: 21300000, guid: bb6e3b2a2e376534abfbfa414bea1c61, type: 3}
   RAY: {fileID: 21300000, guid: 8c6843af363ff0843b91891dd24b196e, type: 3}
@@ -849,6 +864,11 @@ MonoBehaviour:
   RICHARD: {fileID: 21300000, guid: ee2669c5c56ac8249981dbc4d1fdc6f8, type: 3}
   ED: {fileID: 21300000, guid: daf22562c4c0a6e47ba9a30619d8b0f6, type: 3}
   ADAM: {fileID: 21300000, guid: 2898890dd0a54ff40a4383cdcb0c2c46, type: 3}
+  FlagBrazil: {fileID: 21300000, guid: 9399347fd2c14fd4cbed780dc0a69dba, type: 3}
+  FlagIndian: {fileID: 21300000, guid: 49bf23134ccd48d4fbdb25ad75c0edf1, type: 3}
+  FlagIndonesia: {fileID: 21300000, guid: 64a0465286d13694c9868048a196bba8, type: 3}
+  FlagUk: {fileID: 21300000, guid: c48adc909a0980a40b37f61d6cb920fd, type: 3}
+  FlagUsa: {fileID: 21300000, guid: 8f2a5b56fdff17948894681b3a2e1da1, type: 3}
   CardOffSet: {x: 0, y: 0, z: 0}
 --- !u!1 &4398365541945539486
 GameObject:
@@ -1022,7 +1042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3330725253707862425
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1401,7 +1421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3407077269111929501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1702,7 +1722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5349999397800349362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1838,7 +1858,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 99
+  m_Text: 1
 --- !u!1 &7468147712310616357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,7 +1876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6250236444313969656
 RectTransform:
   m_ObjectHideFlags: 0

@@ -224,7 +224,11 @@ public class OPENAndEXITGame : MonoBehaviour
             if (team.GetComponent<TeamSetItem>().completed)
             {
                 GameObject nameObj = team.GetComponent<TeamSetItem>().teamName;
+<<<<<<< HEAD
                 Debug.Log(nameObj.GetComponent<Text>().text);
+=======
+                //Debug.Log(nameObj.GetComponent<Text>().text);
+>>>>>>> ec07000c922841ccd5b3d99020a37826fa097aaf
                 teams[i].name = nameObj.GetComponent<Text>().text;
                 teams[i].deck = GetCards(i);
                 i++;
